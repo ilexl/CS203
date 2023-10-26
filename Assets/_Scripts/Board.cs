@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -11,14 +12,9 @@ public class Board : MonoBehaviour
     [SerializeField] GameObject BoardGridPiecePrefab;
     [SerializeField] int BoardSize;
     [SerializeField] float spacing;
-
-    void Awake()
-    {
-        CreateBoard();
-    }
     
     // creates a reusable and flexable board of any dimesions
-    void CreateBoard()
+    public void CreateBoard()
     {
         float step = 1f;
         int untilRight = 1;
@@ -79,6 +75,19 @@ public class Board : MonoBehaviour
                 0);
             b.name += " - " + realPos.ToString(); // name them just in case
             b.GetComponent<BoardPart>().realPos = realPos;
+        }
+    }
+}
+
+[CustomEditor(typeof(Board))]
+public class EDITOR_Board : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (GUILayout.Button("Create Board"))
+        {
+            ((Board)target).CreateBoard();
         }
     }
 }
