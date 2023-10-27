@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] Transform BoardParentTransform;
+    public Transform BoardParentTransform;
     [Space(10)]
     [SerializeField] Vector3 startOffset;
     [SerializeField] GameObject BoardGridPiecePrefab;
-    [SerializeField] int BoardSize;
+    public int BoardSize;
     [SerializeField] float spacing;
     
     // creates a reusable and flexable board of any dimesions

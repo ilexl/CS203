@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1441868694898635118}
   - component: {fileID: 1441868694898635116}
   - component: {fileID: 1441868694898635117}
+  - component: {fileID: 2449283278380371799}
   m_Layer: 5
   m_Name: Letter
   m_TagString: Untagged
@@ -66,6 +67,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   dropHolder: {fileID: 0}
+--- !u!114 &2449283278380371799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441868694898635119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5025c9c466617e04cbc076ef81aa3e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1441868695081748451}
+  dragDrop: {fileID: 1441868694898635117}
+  currentLetter: 0
 --- !u!1 &1441868695081748453
 GameObject:
   m_ObjectHideFlags: 0

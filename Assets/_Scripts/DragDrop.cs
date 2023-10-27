@@ -9,7 +9,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     [SerializeField] Canvas canvas;
-    [SerializeField] DropHolder dropHolder = null;
+    public DropHolder dropHolder = null;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
