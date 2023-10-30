@@ -11,6 +11,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private Vector2 actualPosition = Vector2.zero;
     [SerializeField] Canvas canvas;
     public DropHolder dropHolder = null;
+    public float movementResponsiveness = 15.0f;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -53,4 +54,14 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         return (screenPos - (Vector2)canvas.transform.position) / canvas.scaleFactor;
     }
+    public void Update()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, actualPosition, movementResponsiveness * Time.deltaTime);
+    }
+    
 }
