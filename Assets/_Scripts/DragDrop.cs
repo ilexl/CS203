@@ -11,6 +11,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private Vector2 actualPosition = Vector2.zero;
     [SerializeField] Canvas canvas;
     public DropHolder dropHolder = null;
+    private DropHolder lastDropHolder = null;
     public float movementResponsiveness = 15.0f;
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        lastDropHolder = dropHolder;
         dropHolder = null;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.75f;
@@ -49,7 +51,16 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         dropHolder = DH;
         actualPosition = DH.transform.GetComponent<RectTransform>().anchoredPosition;
     }
-    
+    //Called by other tiles that it is dragged onto
+    public void ReturnToPrevious()
+    {
+        if (lastDropHolder == null) return;
+        dropHolder = lastDropHolder;
+        actualPosition = lastDropHolder.transform.GetComponent<RectTransform>().anchoredPosition;
+    }
+
+    //Convert from game co ordinates to canvas co ordinates (IE mouse position to tile position)
+    //might be worth moving into a helper class since this should work with any canvas of any size
     private Vector2 GameToCanvas(Vector2 screenPos)
     {
         return (screenPos - (Vector2)canvas.transform.position) / canvas.scaleFactor;
