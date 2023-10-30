@@ -28,6 +28,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        rectTransform.anchoredPosition = (eventData.pressPosition - (Vector2)canvas.transform.position) / canvas.scaleFactor;
         dropHolder = null;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.75f;
