@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TileLetters : MonoBehaviour
+public class TileLetters : MonoBehaviour, IDropHandler
 {
     [SerializeField] Transform lettersParent;
 
@@ -14,5 +15,11 @@ public class TileLetters : MonoBehaviour
             allLetters.Add(t.GetComponent<TileLetter>());
         }
         return allLetters;
+    }
+
+    //Called when a tile is dropped on another tile, tell tile to go back home (IDropHandler gives this behaviour)
+    public void OnDrop(PointerEventData eventData)
+    {
+        eventData.pointerDrag.GetComponent<DragDrop>().ReturnToPrevious();
     }
 }
