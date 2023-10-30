@@ -8,6 +8,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    private Vector2 actualPosition = Vector2.zero;
     [SerializeField] Canvas canvas;
     public DropHolder dropHolder = null;
     private void Awake()
@@ -19,22 +20,23 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         }
         if(canvas == null) { Debug.LogError("No Canvas Found..."); }
+        actualPosition = rectTransform.anchoredPosition;
     }
     
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        actualPosition = GameToCanvas(eventData.position);
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition = (eventData.pressPosition - (Vector2)canvas.transform.position) / canvas.scaleFactor;
         dropHolder = null;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.75f;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
     }
@@ -44,6 +46,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public void Drop(DropHolder DH)
     {
         dropHolder = DH;
-        rectTransform.anchoredPosition = DH.transform.GetComponent<RectTransform>().anchoredPosition;
+        actualPosition = DH.transform.GetComponent<RectTransform>().anchoredPosition;
     }
 }
