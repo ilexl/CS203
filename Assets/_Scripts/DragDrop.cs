@@ -48,4 +48,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         dropHolder = DH;
         actualPosition = DH.transform.GetComponent<RectTransform>().anchoredPosition;
     }
+    
+    private Vector2 GameToCanvas(Vector2 screenPos)
+    {
+        return (screenPos - (Vector2)canvas.transform.position) / canvas.scaleFactor;
+    }
 }
