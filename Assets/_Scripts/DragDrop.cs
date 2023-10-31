@@ -29,11 +29,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public void OnDrag(PointerEventData eventData)
     {
 
-        transform.SetAsLastSibling(); //ensure it renders above all other tiles
         actualPosition = GameToCanvas(eventData.position);
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        transform.SetAsLastSibling(); //ensure it renders above all other tiles
         lastDropHolder = dropHolder;
         dropHolder = null;
         canvasGroup.blocksRaycasts = false;
