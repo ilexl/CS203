@@ -22,18 +22,17 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         }
         if(canvas == null) { Debug.LogError("No Canvas Found..."); }
-        actualPosition = rectTransform.anchoredPosition;
+        actualPosition = rectTransform.position;
     }
     
 
     public void OnDrag(PointerEventData eventData)
     {
-
-        transform.SetAsLastSibling(); //ensure it renders above all other tiles
-        actualPosition = GameToCanvas(eventData.position);
+        actualPosition = eventData.position;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        transform.SetAsLastSibling(); //ensure it renders above all other tiles
         lastDropHolder = dropHolder;
         dropHolder = null;
         canvasGroup.blocksRaycasts = false;
@@ -51,22 +50,16 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public void Drop(DropHolder DH)
     {
         dropHolder = DH;
-        actualPosition = DH.transform.GetComponent<RectTransform>().anchoredPosition;
+        actualPosition = DH.transform.GetComponent<RectTransform>().position;
     }
     //Called by other tiles that it is dragged onto
     public void ReturnToPrevious()
     {
         if (lastDropHolder == null) return;
         dropHolder = lastDropHolder;
-        actualPosition = lastDropHolder.transform.GetComponent<RectTransform>().anchoredPosition;
+        actualPosition = lastDropHolder.transform.GetComponent<RectTransform>().position;
     }
 
-    //Convert from game co ordinates to canvas co ordinates (IE mouse position to tile position)
-    //might be worth moving into a helper class since this should work with any canvas of any size
-    private Vector2 GameToCanvas(Vector2 screenPos)
-    {
-        return (screenPos - (Vector2)canvas.transform.position) / canvas.scaleFactor;
-    }
     public void Update()
     {
         Move();
@@ -74,7 +67,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     private void Move()
     {
-        rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, actualPosition, movementResponsiveness * Time.deltaTime);
+        rectTransform.position = Vector2.Lerp(rectTransform.position, actualPosition, movementResponsiveness * Time.deltaTime);
     }
     
 }
