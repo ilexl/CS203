@@ -61,12 +61,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         actualPosition = lastDropHolder.transform.GetComponent<RectTransform>().anchoredPosition;
     }
 
-    //Convert from game co ordinates to canvas co ordinates (IE mouse position to tile position)
-    //might be worth moving into a helper class since this should work with any canvas of any size
-    private Vector2 GameToCanvas(Vector2 screenPos)
-    {
-        return (screenPos - (Vector2)canvas.transform.position) / canvas.scaleFactor;
-    }
     public void Update()
     {
         Move();
