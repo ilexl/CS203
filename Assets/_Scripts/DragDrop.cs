@@ -12,7 +12,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     [SerializeField] Canvas canvas;
     public DropHolder dropHolder = null;
     private DropHolder lastDropHolder = null;
-    public float movementResponsiveness = 15.0f;
+    [SerializeField] float movementResponsiveness = 15.0f;
+    [SerializeField] Vector2 offset;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -28,7 +30,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        actualPosition = eventData.position;
+        transform.SetAsLastSibling(); //ensure it renders above all other tiles
+        actualPosition = GameToCanvas(eventData.position) - offset;
+
     }
     public void OnBeginDrag(PointerEventData eventData)
     {

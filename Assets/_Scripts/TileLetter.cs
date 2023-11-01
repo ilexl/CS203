@@ -9,6 +9,7 @@ public class TileLetter : MonoBehaviour
     [SerializeField] DragDrop dragDrop;
     public char currentLetter;
     public Vector3? currentPos = null;
+    [SerializeField] bool playable;
 
     // Update is called once per frame
     void Update()
@@ -17,4 +18,14 @@ public class TileLetter : MonoBehaviour
         if(dragDrop.dropHolder == null) { currentPos = null; }
         else { currentPos = dragDrop.dropHolder.transform.GetComponent<BoardPart>().realPos; }
     }
+
+    public void SetPlayable(bool p)
+    {
+        playable = p;
+        dragDrop.enabled = playable;
+    }
+
+    public bool GetPlayable() { return playable; }
+
+    public DragDrop GetDragDrop() { return dragDrop; }
 }
