@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     [SerializeField] Board board;
     [SerializeField] TileLetters tileLetters;
     public List<List<char>> lettersGrid;
+    [SerializeField] Words words;
 
     private void Awake()
     {
@@ -51,8 +52,42 @@ public class Game : MonoBehaviour
             Vector3 pos = (Vector3)t.currentPos;
             lettersGrid[(int)pos.y][(int)pos.x] = t.currentLetter;
         }
+    }
 
-        
+    public void Play()
+    {
+        List<string> allWords = words.ConvertCharBoardToWords(lettersGrid);
+        bool allValid = true;
+
+        // TODO add a letter count of how many letters are moveable - is this above the players max letters this round?
+        // if so confirm with player with "are you sure you want to pass"
+        // TODO create pass function
+
+        // check all words on board are valid
+        foreach (string word in allWords)
+        {
+            bool isWord = words.isWord(word);
+            if (!isWord) { allValid = false; }
+        }
+
+        Debug.Log("All words valid == " + allValid.ToString());
+
+        if (allValid)
+        {
+            // stop all letters played from moving if valid - no longer players letters as played
+            List<TileLetter> allLetters = tileLetters.GetAllLetters();
+            foreach (TileLetter t in allLetters)
+            {
+                if (t.currentPos == null) { continue; }
+                if (t.GetDragDrop().dropHolder == null) { continue; }
+                t.SetPlayable(false);
+            }
+        }
+        else
+        {
+            // exit and do NOT play this round
+            // inform user with pop up
+        }
     }
 }
 

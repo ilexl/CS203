@@ -68,7 +68,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   dropHolder: {fileID: 0}
   movementResponsiveness: 15
-  offset: {x: 0, y: 25}
+  offset: {x: 0, y: 50}
 --- !u!114 &2449283278380371799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +84,7 @@ MonoBehaviour:
   text: {fileID: 1441868695081748451}
   dragDrop: {fileID: 1441868694898635117}
   currentLetter: 0
+  playable: 0
 --- !u!1 &1441868695081748453
 GameObject:
   m_ObjectHideFlags: 0

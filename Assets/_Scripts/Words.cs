@@ -44,8 +44,7 @@ public class Words : MonoBehaviour
 
     public List<string> ConvertCharBoardToWords(List<List<char>> raw)
     {
-        ExtractStrings(raw);
-        return null;
+        return ExtractStrings(raw);
     }
 
     List<string> ExtractStrings(List<List<char>> lettersGrid)
