@@ -68,6 +68,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   dropHolder: {fileID: 0}
   movementResponsiveness: 15
+  offset: {x: 0, y: 25}
 --- !u!114 &2449283278380371799
 MonoBehaviour:
   m_ObjectHideFlags: 0
