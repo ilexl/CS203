@@ -46,6 +46,14 @@ public class Game : MonoBehaviour
     {
         List<TileLetter> allLetters = tileLetters.GetAllLetters();
 
+        // refresh board
+        for(int i = 0; i < board.BoardSize * 2; i++)
+        {
+            for (int j = 0; j < board.BoardSize * 2; j++)
+            {
+                lettersGrid[i][j] = ' ';
+            }
+        }
         foreach(TileLetter t in allLetters)
         {
             if(t.currentPos == null) { continue; }
