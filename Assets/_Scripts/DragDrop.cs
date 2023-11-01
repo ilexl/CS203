@@ -12,27 +12,23 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     [SerializeField] Canvas canvas;
     public DropHolder dropHolder = null;
     private DropHolder lastDropHolder = null;
-    [SerializeField] float movementResponsiveness = 15.0f;
-    [SerializeField] Vector2 offset;
-
+    public float movementResponsiveness = 15.0f;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        if(canvas == null)
+        if (canvas == null)
         {
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         }
-        if(canvas == null) { Debug.LogError("No Canvas Found..."); }
+        if (canvas == null) { Debug.LogError("No Canvas Found..."); }
         actualPosition = rectTransform.position;
     }
-    
+
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.SetAsLastSibling(); //ensure it renders above all other tiles
-        actualPosition = GameToCanvas(eventData.position) - offset;
-
+        actualPosition = eventData.position;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -44,7 +40,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
     }
@@ -73,5 +69,5 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         rectTransform.position = Vector2.Lerp(rectTransform.position, actualPosition, movementResponsiveness * Time.deltaTime);
     }
-    
+
 }
