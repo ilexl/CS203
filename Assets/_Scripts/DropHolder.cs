@@ -5,11 +5,21 @@ using UnityEngine.EventSystems;
 
 public class DropHolder : MonoBehaviour, IDropHandler
 {
+    [SerializeField] TileLetters tl;
+
     public void OnDrop(PointerEventData eventData)
     {
         if(eventData.pointerDrag != null)
         {
-            eventData.pointerDrag.GetComponent<DragDrop>().Drop(this);
+            if (tl.DropHolderHasLetter(this))
+            {
+                eventData.pointerDrag.GetComponent<DragDrop>().ReturnToPrevPos();
+                // do not set if this one already has a letter on it
+            }
+            else
+            {
+                eventData.pointerDrag.GetComponent<DragDrop>().Drop(this);
+            }
         }
     }
 }

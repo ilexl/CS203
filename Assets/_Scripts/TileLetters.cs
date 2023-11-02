@@ -27,11 +27,7 @@ public class TileLetters : MonoBehaviour, IDropHandler
         return allLetters;
     }
 
-    //Called when a tile is dropped on another tile, tell tile to go back home (IDropHandler gives this behaviour)
-    public void OnDrop(PointerEventData eventData)
-    {
-        eventData.pointerDrag.GetComponent<DragDrop>().ReturnToPrevious();
-    }
+    public void OnDrop(PointerEventData eventData) { }
 
     public int PlayersCurrentLetters()
     {
@@ -39,7 +35,7 @@ public class TileLetters : MonoBehaviour, IDropHandler
         foreach(Transform t in lettersParent)
         {
             TileLetter tileLetter;
-            if(t.TryGetComponent<TileLetter>(out tileLetter))
+            if(t.TryGetComponent(out tileLetter))
             {
                 if (tileLetter.GetComponent<DragDrop>().enabled)
                 {
@@ -101,4 +97,33 @@ public class TileLetters : MonoBehaviour, IDropHandler
         return c;
     }
 
+    public bool DropHolderHasLetter(DropHolder dh)
+    {
+        foreach(Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if(letter.TryGetComponent(out t))
+            {
+                if(t.GetDragDrop().dropHolder == dh)
+                {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+    public void RayCastSetAllLetters(bool set)
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                t.GetDragDrop().RayCastSet(set);
+            }
+
+        }
+    }
 }
