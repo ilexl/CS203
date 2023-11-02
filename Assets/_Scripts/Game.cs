@@ -8,6 +8,8 @@ public class Game : MonoBehaviour
     [SerializeField] TileLetters tileLetters;
     public List<List<char>> lettersGrid;
     [SerializeField] Words words;
+    [SerializeField] int startingLettersAmount;
+    public int extras = 0;
 
     private void Awake()
     {
@@ -38,7 +40,9 @@ public class Game : MonoBehaviour
                 lettersGrid[i].Add(' ');
             }
         }
-        //Debug.Log(lettersGrid);
+
+        tileLetters.ResetLettersBag();
+        tileLetters.SpawnPlayerLetters(startingLettersAmount);
     }
 
     // Update is called once per frame
@@ -75,6 +79,7 @@ public class Game : MonoBehaviour
         foreach (string word in allWords)
         {
             bool isWord = words.isWord(word);
+            //Debug.Log(word + " == " + isWord);
             if (!isWord) { allValid = false; }
         }
 
@@ -89,6 +94,8 @@ public class Game : MonoBehaviour
                 if (t.currentPos == null) { continue; }
                 if (t.GetDragDrop().dropHolder == null) { continue; }
                 t.SetPlayable(false);
+
+                tileLetters.SpawnPlayerLetters(startingLettersAmount + extras);
             }
         }
         else
