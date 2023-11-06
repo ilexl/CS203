@@ -66,8 +66,10 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         char c = RandomLetter();
         //Debug.Log((int)c);
         newLetter.GetComponentInChildren<TextMeshProUGUI>().text = c.ToString();
+        newLetter.transform.position = new Vector3(Random.Range(-10000, 10000), Random.Range(-10000, 10000), 0);
 
         newLetter.GetComponent<DragDrop>().actualPosition = RandomPosition(newLetter.transform);
+        newLetter.GetComponent<TileLetter>().SetPlayable(true);
     }
 
     public Vector2 RandomPosition(Transform newLetter)
@@ -76,8 +78,8 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         newLetter.SetParent(letterStartRect, false);
 
         Vector2 newPos = StartPosOffset;
-        //Debug.Log(newPos);
         newPos += new Vector2(Random.Range(-(rectTransform.rect.width / 2.2f) , (rectTransform.rect.width / 2.2f)),Random.Range(-(rectTransform.rect.height / 4), 0));
+        //Debug.Log(newPos);
         newLetter.SetParent(lettersParent, false);
         return newPos;
     }
@@ -139,6 +141,94 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
             if (letter.TryGetComponent(out t))
             {
                 t.GetDragDrop().RayCastSet(set);
+            }
+
+        }
+    }
+
+    public void BagPlayersLetters()
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                if (t.GetPlayable())
+                {
+                    int letterIndex = -65 + t.currentLetter;
+                    remainingLettersBag[letterIndex]++;
+                    Destroy(letter.gameObject);
+                }
+            }
+
+        }
+    }
+
+    public void Retrieve()
+    {
+        for (int i = PlayersCurrentLetters() + 1; i > 0; i--) // no idea why this makes it work but its a easy and dirty fix
+        {
+            foreach (Transform letter in lettersParent)
+            {
+            
+                TileLetter t;
+                if (letter.TryGetComponent(out t))
+                {
+                    if (t.GetPlayable())
+                    {
+                        t.GetComponent<DragDrop>().OnBeginDrag(null);
+                        t.GetComponent<DragDrop>().OnEndDrag(null);
+                        if (t.GetDragDrop().dropHolder != null)
+                        {
+                            t.ResetDropHolder();
+                        }
+                        t.GetComponent<DragDrop>().actualPosition = RandomPosition(t.transform);
+                    }
+                }
+            }
+        }
+    }
+
+    public bool PlayerHasLetter(char c)
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                if (t.GetPlayable())
+                {
+                    if(t.currentLetter == c)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
+    public string BestPossiblePlay()
+    {
+        Debug.LogWarning("Best Possible Play NOT implemented yet...");
+        return "NOT IMPLEMENTED YET";
+    }
+
+    public void RemovePlayerLetter(char c)
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                if (t.GetPlayable())
+                {
+                    if (t.currentLetter == c)
+                    {
+                        Destroy(letter.gameObject);
+                    }
+                }
             }
 
         }

@@ -19,6 +19,10 @@ public class TileLetter : MonoBehaviour
         else { currentPos = dragDrop.dropHolder.transform.GetComponent<BoardPart>().realPos; }
     }
 
+    public void ResetDropHolder()
+    {
+        dragDrop.dropHolder = null;
+    }
     public void SetPlayable(bool p)
     {
         playable = p;

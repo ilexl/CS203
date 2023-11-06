@@ -19,6 +19,8 @@ public class Words : MonoBehaviour
     
     public bool isWord(string word)
     {
+        //Debug.Log(word.Length);
+        //Debug.Log(words.Contains(word));
         return words.Contains(word);
     }
 
@@ -38,6 +40,7 @@ public class Words : MonoBehaviour
         public bool Contains(string word)
         {
             word = word.ToUpper();
+            word += ((char)13).ToString();  // i have no fucking idea but it works
             return WordArray.Contains(word);
         }
     }
