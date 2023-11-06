@@ -66,6 +66,7 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         char c = RandomLetter();
         //Debug.Log((int)c);
         newLetter.GetComponentInChildren<TextMeshProUGUI>().text = c.ToString();
+        newLetter.transform.position = new Vector3(Random.Range(-10000, 10000), Random.Range(-10000, 10000), 0);
 
         newLetter.GetComponent<DragDrop>().actualPosition = RandomPosition(newLetter.transform);
         newLetter.GetComponent<TileLetter>().SetPlayable(true);
