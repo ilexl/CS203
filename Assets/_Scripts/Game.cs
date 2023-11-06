@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Game : MonoBehaviour
 {
     [SerializeField] Board board;
@@ -10,6 +11,11 @@ public class Game : MonoBehaviour
     [SerializeField] Words words;
     [SerializeField] int startingLettersAmount;
     public int extras = 0;
+
+    public void PowerUp(string s)
+    {
+        char c = s[0];
+    }
 
     private void Awake()
     {
@@ -80,7 +86,7 @@ public class Game : MonoBehaviour
         {
             //Debug.Log(word);
             bool isWord = words.isWord(word);
-            Debug.Log(word + " == " + isWord);
+            //Debug.Log(word + " == " + isWord);
             if (!isWord) { allValid = false; }
         }
 
