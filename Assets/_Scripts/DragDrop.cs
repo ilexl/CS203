@@ -25,7 +25,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         }
         if (canvas == null) { Debug.LogError("No Canvas Found..."); }
-        actualPosition = rectTransform.position;
+        actualPosition = rectTransform.anchoredPosition;
 
         tileLettersMAIN = FindFirstObjectByType<TileLetters>();
         if(tileLettersMAIN == null) { Debug.LogError("No MAIN TileLetters Found..."); }
@@ -34,11 +34,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        actualPosition = eventData.position;
+        actualPosition += eventData.delta / canvas.scaleFactor;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startPos = rectTransform.position;
+        startPos = rectTransform.anchoredPosition;
         transform.SetAsLastSibling(); //ensure it renders above all other tiles
         lastDropHolder = dropHolder;
         dropHolder = null;
@@ -64,7 +64,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public void Drop(DropHolder DH)
     {
         dropHolder = DH;
-        actualPosition = DH.transform.GetComponent<RectTransform>().position;
+        actualPosition = DH.transform.GetComponent<RectTransform>().anchoredPosition;
     }
 
     public void Update()
@@ -74,7 +74,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     private void Move()
     {
-        rectTransform.position = Vector2.Lerp(rectTransform.position, actualPosition, movementResponsiveness * Time.deltaTime);
+        rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, actualPosition, movementResponsiveness * Time.deltaTime);
     }
 
     public void ReturnToPrevPos()
