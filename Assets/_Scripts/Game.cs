@@ -78,8 +78,9 @@ public class Game : MonoBehaviour
         // check all words on board are valid
         foreach (string word in allWords)
         {
+            //Debug.Log(word);
             bool isWord = words.isWord(word);
-            //Debug.Log(word + " == " + isWord);
+            Debug.Log(word + " == " + isWord);
             if (!isWord) { allValid = false; }
         }
 

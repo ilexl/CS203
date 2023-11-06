@@ -41,13 +41,13 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         transform.SetAsLastSibling(); //ensure it renders above all other tiles
         lastDropHolder = dropHolder;
         dropHolder = null;
-        canvasGroup.blocksRaycasts = false; // TODO Set all letters to block
+        canvasGroup.blocksRaycasts = false; 
         tileLettersMAIN.RayCastSetAllLetters(false);
         canvasGroup.alpha = 0.75f;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = true; // TODO Set all letters to unblock
+        canvasGroup.blocksRaycasts = true;
         tileLettersMAIN.RayCastSetAllLetters(true);
         canvasGroup.alpha = 1f;
     }
