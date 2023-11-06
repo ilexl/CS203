@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 
 public class Game : MonoBehaviour
@@ -11,14 +15,21 @@ public class Game : MonoBehaviour
     [SerializeField] TileLetterManager tileLetters;
     public List<List<char>> lettersGrid;
     [SerializeField] Words words;
-    [SerializeField] PopUpManager popUpManager;
+    public PopUpManager popUpManager;
     [SerializeField] Score score;
     [SerializeField] int startingLettersAmount;
+    [SerializeField] Button playButton;
     List<string> allPreviousWords;
     int pointsMultiplier = 1;
+    public bool localTurn = false;
     public void PowerUp(string s)
     {
         // TODO - BLOCKED(Multiplayer) : Y,V
+        if (!localTurn) 
+        { 
+            popUpManager.ShowPopUp(6);
+            return; 
+        }
 
         char c = s[0];
         switch (c)
@@ -183,6 +194,7 @@ public class Game : MonoBehaviour
 
         allPreviousWords = new List<string>();
         pointsMultiplier = 1;
+        LocalCanPlay(false);
 
         tileLetters.ResetLettersBag();
         tileLetters.SpawnPlayerLetters(startingLettersAmount);
@@ -266,6 +278,7 @@ public class Game : MonoBehaviour
 
                 pointsMultiplier = 1;
                 allPreviousWords = allWords;
+                LocalCanPlay(false);
             }
             else
             {
@@ -283,6 +296,7 @@ public class Game : MonoBehaviour
     public void Pass()
     {
         RefreshLetters();
+        LocalCanPlay(false);
     }
 
     private void RefreshLetters()
@@ -291,5 +305,103 @@ public class Game : MonoBehaviour
         tileLetters.SpawnPlayerLetters(startingLettersAmount);
         tileLetters.Retrieve();
     }
+
+    public void OppPlay(List<List<char>> lettersGridData, int oppPoints)
+    {
+        List<string> allWords = words.ConvertCharBoardToWords(lettersGridData);
+
+        for(int i = 0; i < lettersGridData.Count; i++)
+        {
+            for (int j = 0; j < lettersGridData[i].Count; j++)
+            {
+                if (lettersGrid[i][j] != lettersGridData[i][j])
+                {
+                    tileLetters.SpawnOppLetterOnBoard(lettersGridData[i][j], j, i);
+                }
+            }
+        }
+
+
+        bool newPlay = false;
+        foreach (string word in allWords)
+        {
+            if (!allPreviousWords.Contains(word))
+            {
+                newPlay = true;
+            }
+        }
+
+        if (newPlay)
+        {
+            // stop all letters played from moving if valid - no longer players letters as played
+            List<TileLetter> allLetters = tileLetters.GetAllLetters();
+            foreach (TileLetter t in allLetters)
+            {
+                if (t.currentPos == null) { continue; }
+                if (t.GetDragDrop().dropHolder == null) { continue; }
+                t.SetPlayable(false);
+
+            }
+            score.ChangeOppScore(oppPoints);
+
+            allPreviousWords = allWords;
+
+            // Show your turn
+            popUpManager.ShowPopUp(4);
+            LocalCanPlay(true);
+        }
+        else
+        {
+            // Show Opp passed popup
+            popUpManager.ShowPopUp(5);
+            LocalCanPlay(true);
+        }
+        
+
+    }
+
+    public void LocalCanPlay(bool play)
+    {
+        localTurn = play;
+        playButton.interactable = play;
+    }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(Game))]
+public class EDITOR_Game : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        GUILayout.Space(10);
+        Game game = (Game)target;
+
+        if(GUILayout.Button("Allow Local To Play"))
+        {
+            game.LocalCanPlay(true);
+        }
+        if(GUILayout.Button("Test"))
+        {
+            List<List<char>> test = new List<List<char>>();
+            for(int r = 0; r < 10; r++)
+            {
+                var row = new List<char>();
+                test.Add(row);
+                for(int i =0; i<10; i++)
+                {
+                    row.Add(' ');
+                }
+            }
+
+            test[0][1] = 'T';
+            test[0][2] = 'E';
+            test[0][3] = 'S';
+            test[0][4] = 'T';
+
+            game.OppPlay(test, 10);
+        }
+    }
+}
+#endif
 
