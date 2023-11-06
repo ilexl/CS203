@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
@@ -12,55 +13,114 @@ public class Game : MonoBehaviour
     [SerializeField] Words words;
     [SerializeField] PopUpManager popUpManager;
     [SerializeField] int startingLettersAmount;
-    public int extras = 0;
     List<string> allPreviousWords;
+    int pointsMultiplier = 1;
     public void PowerUp(string s)
     {
+        // TODO - BLOCKED(Multiplayer) : Y,V
+
         char c = s[0];
         switch (c)
         {
             case 'Y':
-            {
-                Debug.LogWarning("Y Power Up Not Implemented Yet!");
+                {
+                    if (tileLetters.PlayerHasLetter(c))
+                    {
+                        Debug.LogWarning("Y Power Up Not Implemented Yet!");
+                        tileLetters.RemovePlayerLetter(c);
+                    }
+                    else
+                    {
+                        popUpManager.ShowPopUp(2);
+                    }
                 break;
-            }
+                }
             case 'Q':
-            {
-                Debug.LogWarning("Q Power Up Not Implemented Yet!");
-                break;
-            }
+                {
+                    if (tileLetters.PlayerHasLetter(c))
+                    {
+                        string bestWord = tileLetters.BestPossiblePlay();
+                        string message = "The BEST word you can make is : " + bestWord;
+                        popUpManager.ShowPopUp(3, message);
+                        tileLetters.RemovePlayerLetter(c);
+                    }
+                    else
+                    {
+                        popUpManager.ShowPopUp(2);
+                    }
+                    break;
+                }
             case 'J':
-            {
-                Debug.LogWarning("J Power Up Not Implemented Yet!");
-                break;
-            }
+                {
+                    if (tileLetters.PlayerHasLetter(c))
+                    {
+                        pointsMultiplier += 2;
+                        tileLetters.RemovePlayerLetter(c);
+                    }
+                    else
+                    {
+                        popUpManager.ShowPopUp(2);
+                    }
+                    break;
+                }
             case 'V':
-            {
-                Debug.LogWarning("V Power Up Not Implemented Yet!");
-                break;
-            }
+                {
+                    if (tileLetters.PlayerHasLetter(c))
+                    {
+                        tileLetters.RemovePlayerLetter(c);
+                    }
+                    else
+                    {
+                        popUpManager.ShowPopUp(2);
+                    }
+                    Debug.LogWarning("V Power Up Not Implemented Yet!");
+                    break;
+                }
             case 'Z':
-            {
-                Debug.LogWarning("Z Power Up Not Implemented Yet!");
-                break;
-            }
+                {
+                    if (tileLetters.PlayerHasLetter(c))
+                    {
+                        tileLetters.RemovePlayerLetter(c);
+                        pointsMultiplier += 3;
+                    }
+                    else
+                    {
+                        popUpManager.ShowPopUp(2);
+                    }
+                    break;
+                }
             case 'X':
-            {
-                Debug.LogWarning("X Power Up Not Implemented Yet!");
-                break;
-            }
+                {
+                    if (tileLetters.PlayerHasLetter(c))
+                    {
+                        tileLetters.RemovePlayerLetter(c);
+                        tileLetters.SpawnPlayerLetters(startingLettersAmount);
+                    }
+                    else
+                    {
+                        popUpManager.ShowPopUp(2);
+                    }
+                    break;
+                }
             case 'P':
-            {
-                Debug.LogWarning("P Power Up Not Implemented Yet!");
-                break;
-            }
+                {
+                    if (tileLetters.PlayerHasLetter(c))
+                    {
+                        RefreshLetters();
+                    }
+                    else
+                    {
+                        popUpManager.ShowPopUp(2);
+                    }
+                    break;
+                }
             default:
-            {
-#if UNITY_EDITOR
-                Debug.LogError("No such power up - " + c);
-#endif
-                break;
-            }
+                {
+    #if UNITY_EDITOR
+                    Debug.LogError("No such power up - " + c);
+    #endif
+                    break;
+                }
 
         }
     }
@@ -96,6 +156,7 @@ public class Game : MonoBehaviour
         }
 
         allPreviousWords = new List<string>();
+        pointsMultiplier = 1;
 
         tileLetters.ResetLettersBag();
         tileLetters.SpawnPlayerLetters(startingLettersAmount);
@@ -177,6 +238,9 @@ public class Game : MonoBehaviour
                     tileLetters.SpawnPlayerLetters(startingLettersAmount);
                 }
                 allPreviousWords = allWords;
+                // TODO POINTS
+
+                pointsMultiplier = 1;
             }
             else
             {

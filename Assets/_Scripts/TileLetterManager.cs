@@ -187,4 +187,49 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
             }
         }
     }
+
+    public bool PlayerHasLetter(char c)
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                if (t.GetPlayable())
+                {
+                    if(t.currentLetter == c)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
+    public string BestPossiblePlay()
+    {
+        Debug.LogWarning("Best Possible Play NOT implemented yet...");
+        return "NOT IMPLEMENTED YET";
+    }
+
+    public void RemovePlayerLetter(char c)
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                if (t.GetPlayable())
+                {
+                    if (t.currentLetter == c)
+                    {
+                        Destroy(letter.gameObject);
+                    }
+                }
+            }
+
+        }
+    }
 }
