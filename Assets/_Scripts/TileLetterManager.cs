@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEditor;
 
-public class TileLetters : MonoBehaviour, IDropHandler
+public class TileLetterManager : MonoBehaviour, IDropHandler
 {
     [SerializeField] Transform lettersParent;
     [SerializeField] GameObject prefabLetter;
@@ -73,11 +73,11 @@ public class TileLetters : MonoBehaviour, IDropHandler
     public Vector2 RandomPosition(Transform newLetter)
     {
         RectTransform rectTransform = letterStartRect.GetComponent<RectTransform>();
-        newLetter.SetParent(letterStartRect);
-        Vector2 newPos = rectTransform.position;
-        //newPos += StartPosOffset;
+        newLetter.SetParent(letterStartRect, false);
+        Vector2 newPos = rectTransform.localPosition;
+        Debug.Log(newPos);
         //newPos += new Vector2(Random.Range(-(rectTransform.rect.width / 4) , (rectTransform.rect.width / 4)),Random.Range(-(rectTransform.rect.height / 4), 0));
-
+        newLetter.SetParent(lettersParent, false);
         return newPos;
     }
 

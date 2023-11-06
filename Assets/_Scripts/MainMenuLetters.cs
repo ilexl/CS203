@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class TitleLetters : MonoBehaviour
+public class MainMenuLetters : MonoBehaviour
 {
     [SerializeField] GameObject letterPrefab;
     [SerializeField] int amountOfLetters = 0;

@@ -14,7 +14,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private Vector2 startPos = Vector2.zero;
     private DropHolder lastDropHolder = null;
     public float movementResponsiveness = 15.0f;
-    [SerializeField] TileLetters tileLettersMAIN;
+    [SerializeField] TileLetterManager tileLettersMAIN;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         }
         if (canvas == null) { Debug.LogError("No Canvas Found..."); }
 
-        tileLettersMAIN = FindFirstObjectByType<TileLetters>();
+        tileLettersMAIN = FindFirstObjectByType<TileLetterManager>();
         if(tileLettersMAIN == null) { Debug.LogError("No MAIN TileLetters Found..."); }
     }
 

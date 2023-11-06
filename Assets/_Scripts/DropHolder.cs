@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DropHolder : MonoBehaviour, IDropHandler
 {
-    [SerializeField] TileLetters tl;
+    [SerializeField] TileLetterManager tl;
 
     public void OnDrop(PointerEventData eventData)
     {

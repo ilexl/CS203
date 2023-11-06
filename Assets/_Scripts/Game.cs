@@ -5,7 +5,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] Board board;
-    [SerializeField] TileLetters tileLetters;
+    [SerializeField] TileLetterManager tileLetters;
     public List<List<char>> lettersGrid;
     [SerializeField] Words words;
     [SerializeField] int startingLettersAmount;
@@ -24,7 +24,7 @@ public class Game : MonoBehaviour
         }
         if (tileLetters == null)
         {
-            tileLetters = gameObject.GetComponentInChildren<TileLetters>();
+            tileLetters = gameObject.GetComponentInChildren<TileLetterManager>();
         }
         if (tileLetters == null)
         {
