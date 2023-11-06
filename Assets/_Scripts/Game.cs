@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 
@@ -9,12 +10,59 @@ public class Game : MonoBehaviour
     [SerializeField] TileLetterManager tileLetters;
     public List<List<char>> lettersGrid;
     [SerializeField] Words words;
+    [SerializeField] PopUpManager popUpManager;
     [SerializeField] int startingLettersAmount;
     public int extras = 0;
-
+    List<string> allPreviousWords;
     public void PowerUp(string s)
     {
         char c = s[0];
+        switch (c)
+        {
+            case 'Y':
+            {
+                Debug.LogWarning("Y Power Up Not Implemented Yet!");
+                break;
+            }
+            case 'Q':
+            {
+                Debug.LogWarning("Q Power Up Not Implemented Yet!");
+                break;
+            }
+            case 'J':
+            {
+                Debug.LogWarning("J Power Up Not Implemented Yet!");
+                break;
+            }
+            case 'V':
+            {
+                Debug.LogWarning("V Power Up Not Implemented Yet!");
+                break;
+            }
+            case 'Z':
+            {
+                Debug.LogWarning("Z Power Up Not Implemented Yet!");
+                break;
+            }
+            case 'X':
+            {
+                Debug.LogWarning("X Power Up Not Implemented Yet!");
+                break;
+            }
+            case 'P':
+            {
+                Debug.LogWarning("P Power Up Not Implemented Yet!");
+                break;
+            }
+            default:
+            {
+#if UNITY_EDITOR
+                Debug.LogError("No such power up - " + c);
+#endif
+                break;
+            }
+
+        }
     }
 
     private void Awake()
@@ -47,8 +95,11 @@ public class Game : MonoBehaviour
             }
         }
 
+        allPreviousWords = new List<string>();
+
         tileLetters.ResetLettersBag();
         tileLetters.SpawnPlayerLetters(startingLettersAmount);
+        tileLetters.Retrieve();
     }
 
     // Update is called once per frame
@@ -82,34 +133,74 @@ public class Game : MonoBehaviour
         // TODO create pass function
 
         // check all words on board are valid
+        string lastInvalidWord = "";
         foreach (string word in allWords)
         {
             //Debug.Log(word);
             bool isWord = words.isWord(word);
             //Debug.Log(word + " == " + isWord);
-            if (!isWord) { allValid = false; }
+            if (!isWord) 
+            { 
+                allValid = false;
+                lastInvalidWord = word;
+            }
         }
 
-        Debug.Log("All words valid == " + allValid.ToString());
+        //Debug.Log("All words valid == " + allValid.ToString());
 
         if (allValid)
         {
-            // stop all letters played from moving if valid - no longer players letters as played
-            List<TileLetter> allLetters = tileLetters.GetAllLetters();
-            foreach (TileLetter t in allLetters)
+            // check if pass then contine else return
+            if(allPreviousWords.Count == 0 && allWords.Count == 0)
             {
-                if (t.currentPos == null) { continue; }
-                if (t.GetDragDrop().dropHolder == null) { continue; }
-                t.SetPlayable(false);
-
-                tileLetters.SpawnPlayerLetters(startingLettersAmount + extras);
+                // pass here
             }
+            bool newPlay = false;
+            foreach(string word in allWords)
+            {
+                if (!allPreviousWords.Contains(word))
+                {
+                    newPlay = true;
+                }
+            }
+            
+            if(newPlay)
+            {
+                // stop all letters played from moving if valid - no longer players letters as played
+                List<TileLetter> allLetters = tileLetters.GetAllLetters();
+                foreach (TileLetter t in allLetters)
+                {
+                    if (t.currentPos == null) { continue; }
+                    if (t.GetDragDrop().dropHolder == null) { continue; }
+                    t.SetPlayable(false);
+
+                    tileLetters.SpawnPlayerLetters(startingLettersAmount);
+                }
+                allPreviousWords = allWords;
+            }
+            else
+            {
+                popUpManager.ShowPopUp(1);
+            }
+
         }
         else
         {
-            // exit and do NOT play this round
-            // inform user with pop up
+            string message = "Invalid Word!\n" + lastInvalidWord;
+            popUpManager.ShowPopUp(0, message);
         }
+    }
+
+    public void Pass()
+    {
+        RefreshLetters();
+    }
+
+    private void RefreshLetters()
+    {
+        tileLetters.BagPlayersLetters();
+        tileLetters.SpawnPlayerLetters(startingLettersAmount);
+        tileLetters.Retrieve();
     }
 }
 

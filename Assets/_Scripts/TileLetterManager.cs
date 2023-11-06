@@ -145,7 +145,23 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
+    public void BagPlayersLetters()
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                if (t.GetPlayable())
+                {
+                    int letterIndex = -65 + t.currentLetter;
+                    remainingLettersBag[letterIndex]++;
+                    Destroy(letter.gameObject);
+                }
+            }
 
+        }
+    }
 
     public void Retrieve()
     {
