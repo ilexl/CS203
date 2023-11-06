@@ -14,7 +14,7 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
     [SerializeField] List<int> defaultLettersBag;
     [SerializeField] Transform letterStartRect;
     [SerializeField] Canvas canvas;
-    //[SerializeField] Vector2 StartPosOffset;
+    [SerializeField] Vector2 StartPosOffset;
 
     public void ResetLettersBag()
     {
@@ -74,9 +74,10 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
     {
         RectTransform rectTransform = letterStartRect.GetComponent<RectTransform>();
         newLetter.SetParent(letterStartRect, false);
-        Vector2 newPos = rectTransform.localPosition;
-        Debug.Log(newPos);
-        //newPos += new Vector2(Random.Range(-(rectTransform.rect.width / 4) , (rectTransform.rect.width / 4)),Random.Range(-(rectTransform.rect.height / 4), 0));
+
+        Vector2 newPos = StartPosOffset;
+        //Debug.Log(newPos);
+        newPos += new Vector2(Random.Range(-(rectTransform.rect.width / 2.2f) , (rectTransform.rect.width / 2.2f)),Random.Range(-(rectTransform.rect.height / 4), 0));
         newLetter.SetParent(lettersParent, false);
         return newPos;
     }
