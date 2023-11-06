@@ -78,6 +78,7 @@ public class Board : MonoBehaviour
         }
     }
 }
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(Board))]
 public class EDITOR_Board : Editor
@@ -91,3 +92,4 @@ public class EDITOR_Board : Editor
         }
     }
 }
+#endif
