@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
     public List<List<char>> lettersGrid;
     [SerializeField] Words words;
     [SerializeField] PopUpManager popUpManager;
+    [SerializeField] Score score;
     [SerializeField] int startingLettersAmount;
     List<string> allPreviousWords;
     int pointsMultiplier = 1;
@@ -127,7 +128,7 @@ public class Game : MonoBehaviour
 
     private void Awake()
     {
-        //Debug.Log(transform.gameObject.name);
+        #region config-chks
         if (board == null)
         {
             board = gameObject.GetComponentInChildren<Board>();
@@ -144,7 +145,32 @@ public class Game : MonoBehaviour
         {
             Debug.LogError("TileLetters not found...");
         }
-
+        if (popUpManager == null)
+        {
+            popUpManager = gameObject.GetComponentInChildren<PopUpManager>();
+        }
+        if (popUpManager == null)
+        {
+            Debug.LogError("PopUpManager not found...");
+        }
+        if (score == null)
+        {
+            score = gameObject.GetComponentInChildren<Score>();
+        }
+        if (score == null)
+        {
+            Debug.LogError("Score not found...");
+        }
+        if (words == null)
+        {
+            words = gameObject.GetComponentInChildren<Words>();
+        }
+        if (words == null)
+        {
+            Debug.LogError("Words not found...");
+        }
+        #endregion
+        
         lettersGrid = new List<List<char>>();
         for (int i = 0; i < board.BoardSize * 2; i++)
         {
@@ -161,6 +187,8 @@ public class Game : MonoBehaviour
         tileLetters.ResetLettersBag();
         tileLetters.SpawnPlayerLetters(startingLettersAmount);
         tileLetters.Retrieve();
+
+        score.Reset();
     }
 
     // Update is called once per frame
@@ -189,10 +217,6 @@ public class Game : MonoBehaviour
         List<string> allWords = words.ConvertCharBoardToWords(lettersGrid);
         bool allValid = true;
 
-        // TODO add a letter count of how many letters are moveable - is this above the players max letters this round?
-        // if so confirm with player with "are you sure you want to pass"
-        // TODO create pass function
-
         // check all words on board are valid
         string lastInvalidWord = "";
         foreach (string word in allWords)
@@ -211,11 +235,6 @@ public class Game : MonoBehaviour
 
         if (allValid)
         {
-            // check if pass then contine else return
-            if(allPreviousWords.Count == 0 && allWords.Count == 0)
-            {
-                // pass here
-            }
             bool newPlay = false;
             foreach(string word in allWords)
             {
@@ -237,10 +256,16 @@ public class Game : MonoBehaviour
 
                     tileLetters.SpawnPlayerLetters(startingLettersAmount);
                 }
-                allPreviousWords = allWords;
-                // TODO POINTS
+                foreach (string word in allWords)
+                {
+                    if (!allPreviousWords.Contains(word))
+                    {
+                        score.ChangeOwnScore(Score.CalculateBaseScore(word) * pointsMultiplier);
+                    }
+                }
 
                 pointsMultiplier = 1;
+                allPreviousWords = allWords;
             }
             else
             {

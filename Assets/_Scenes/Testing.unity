@@ -1830,6 +1830,7 @@ GameObject:
   - component: {fileID: 85333044}
   - component: {fileID: 85333046}
   - component: {fileID: 85333047}
+  - component: {fileID: 85333048}
   m_Layer: 5
   m_Name: Game
   m_TagString: Untagged
@@ -1918,6 +1919,22 @@ MonoBehaviour:
   - {fileID: 256721027}
   - {fileID: 1295780479}
   - {fileID: 1784855130}
+--- !u!114 &85333048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85333042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e116dc39bf6934fb098a35cee17b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownScoreGUI: {fileID: 2027294025}
+  oppScoreGUI: {fileID: 32372458}
+  ownScore: 0
+  oppScore: 0
 --- !u!1 &89020785
 GameObject:
   m_ObjectHideFlags: 0
