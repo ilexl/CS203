@@ -154,28 +154,28 @@ public class Words : MonoBehaviour
         bool isSingle = true;
 
         // Check above
-        if (row > 0 && word.Contains(raw[row - 1][col].ToString()))
+        if (row > 0 && raw[row - 1][col] != ' ')
         {
             char c = raw[row - 1][col];
             if(c != ' ') { isSingle = false; }
         }
 
         // Check below
-        if (row < numRows - 1 && word.Contains(raw[row + 1][col].ToString()))
+        if (row < numRows - 1 && raw[row + 1][col] != ' ')
         {
             char c = raw[row + 1][col];
             if (c != ' ') { isSingle = false; }
         }
 
         // Check left
-        if (col > 0 && word.Contains(raw[row][col - 1].ToString()))
+        if (col > 0 && raw[row][col - 1] != ' ')
         {
             char c = raw[row][col - 1];
             if (c != ' ') { isSingle = false; }
         }
 
         // Check right
-        if (col < numCols - 1 && word.Contains(raw[row][col + 1].ToString()))
+        if (col < numCols - 1 && raw[row][col + 1] != ' ')
         {
             char c = raw[row][col + 1];
             if (c != ' ') { isSingle = false; }
