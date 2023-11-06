@@ -8,7 +8,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    private Vector2 actualPosition = Vector2.zero;
+    public Vector2 actualPosition = Vector2.zero;
     [SerializeField] Canvas canvas;
     public DropHolder dropHolder = null;
     private Vector2 startPos = Vector2.zero;
@@ -25,7 +25,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         }
         if (canvas == null) { Debug.LogError("No Canvas Found..."); }
-        actualPosition = rectTransform.anchoredPosition;
 
         tileLettersMAIN = FindFirstObjectByType<TileLetters>();
         if(tileLettersMAIN == null) { Debug.LogError("No MAIN TileLetters Found..."); }

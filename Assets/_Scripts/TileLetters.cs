@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEditor;
 
 public class TileLetters : MonoBehaviour, IDropHandler
 {
@@ -11,6 +12,9 @@ public class TileLetters : MonoBehaviour, IDropHandler
     [SerializeField] Transform playerLettersBottom;
     [SerializeField] List<int> remainingLettersBag;
     [SerializeField] List<int> defaultLettersBag;
+    [SerializeField] Transform letterStartRect;
+    [SerializeField] Canvas canvas;
+    //[SerializeField] Vector2 StartPosOffset;
 
     public void ResetLettersBag()
     {
@@ -63,6 +67,18 @@ public class TileLetters : MonoBehaviour, IDropHandler
         //Debug.Log((int)c);
         newLetter.GetComponentInChildren<TextMeshProUGUI>().text = c.ToString();
 
+        newLetter.GetComponent<DragDrop>().actualPosition = RandomPosition(newLetter.transform);
+    }
+
+    public Vector2 RandomPosition(Transform newLetter)
+    {
+        RectTransform rectTransform = letterStartRect.GetComponent<RectTransform>();
+        newLetter.SetParent(letterStartRect);
+        Vector2 newPos = rectTransform.position;
+        //newPos += StartPosOffset;
+        //newPos += new Vector2(Random.Range(-(rectTransform.rect.width / 4) , (rectTransform.rect.width / 4)),Random.Range(-(rectTransform.rect.height / 4), 0));
+
+        return newPos;
     }
 
     public int RemainingLetters()
