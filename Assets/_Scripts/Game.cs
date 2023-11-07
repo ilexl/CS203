@@ -375,7 +375,7 @@ public class Game : MonoBehaviour
 
     public void GameOver(string win)
     {
-        string message = "Game Over...\n" + win + " Wins!!!";
+        string message = "Game Over...\n" + win + " Win!!!";
         popUpManager.ShowPopUp(7, message);
         Invoke(nameof(ShowMainMenu), 5);
     }
