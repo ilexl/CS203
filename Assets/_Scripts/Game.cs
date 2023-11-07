@@ -22,6 +22,8 @@ public class Game : MonoBehaviour
     List<string> allPreviousWords;
     int pointsMultiplier = 1;
     public bool localTurn = false;
+    [SerializeField] WindowManager mainWindowManager;
+    [SerializeField] Window mainMenuWindow;
     public void PowerUp(string s)
     {
         // TODO - BLOCKED(Multiplayer) : Y,V
@@ -295,13 +297,18 @@ public class Game : MonoBehaviour
 
     public void Pass()
     {
-        RefreshLetters();
         LocalCanPlay(false);
+        RefreshLetters();
     }
 
     private void RefreshLetters()
     {
         tileLetters.BagPlayersLetters();
+        Invoke(nameof(SpawnPLettersDelayed), 0.25f); // Not sure why but the letters spawn were being deleted so dirty fix with a delay...
+    }
+
+    private void SpawnPLettersDelayed()
+    {
         tileLetters.SpawnPlayerLetters(startingLettersAmount);
         tileLetters.Retrieve();
     }
@@ -365,6 +372,18 @@ public class Game : MonoBehaviour
         localTurn = play;
         playButton.interactable = play;
     }
+
+    public void GameOver(string win)
+    {
+        string message = "Game Over...\n" + win + " Wins!!!";
+        popUpManager.ShowPopUp(7, message);
+        Invoke(nameof(ShowMainMenu), 5);
+    }
+
+    void ShowMainMenu()
+    {
+        mainWindowManager.ShowWindow(mainMenuWindow);
+    }
 }
 
 #if UNITY_EDITOR
@@ -400,6 +419,10 @@ public class EDITOR_Game : Editor
             test[0][4] = 'T';
 
             game.OppPlay(test, 10);
+        }
+        if(GUILayout.Button("GameOver"))
+        {
+            game.GameOver("YOU");
         }
     }
 }
