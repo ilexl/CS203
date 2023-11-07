@@ -26,7 +26,7 @@ public class TileLetter : MonoBehaviour
     public void SetPlayable(bool p)
     {
         playable = p;
-        dragDrop.enabled = playable;
+        dragDrop.playable = playable;
     }
 
     public bool GetPlayable() { return playable; }

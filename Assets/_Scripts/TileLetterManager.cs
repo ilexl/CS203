@@ -15,6 +15,7 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
     [SerializeField] Transform letterStartRect;
     [SerializeField] Canvas canvas;
     [SerializeField] Vector2 StartPosOffset;
+    [SerializeField] Transform boardParent;
 
     public void ResetLettersBag()
     {
@@ -41,7 +42,7 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
             TileLetter tileLetter;
             if(t.TryGetComponent(out tileLetter))
             {
-                if (tileLetter.GetComponent<DragDrop>().enabled)
+                if (tileLetter.GetComponent<DragDrop>().playable)
                 {
                     count++;
                 }
@@ -146,7 +147,7 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
-    public void BagPlayersLetters()
+    public void BagPlayersLetters() 
     {
         foreach (Transform letter in lettersParent)
         {
@@ -232,5 +233,28 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
             }
 
         }
+    }
+
+    public void SpawnOppLetterOnBoard(char c, int x, int y)
+    {
+        GameObject newLetter = Instantiate(prefabLetter, lettersParent);
+        newLetter.GetComponentInChildren<TextMeshProUGUI>().text = c.ToString();
+        newLetter.transform.position = new Vector3(Random.Range(-10000, 10000), Random.Range(-10000, 10000), 0);
+        newLetter.GetComponent<DragDrop>().actualPosition = RandomPosition(newLetter.transform);
+        newLetter.GetComponent<DragDrop>().Drop(FindDropHolder(x,y));
+        newLetter.GetComponent<TileLetter>().SetPlayable(false);
+    }
+
+    private DropHolder FindDropHolder(int x, int y)
+    {
+        string contains = "(" + x + ".00, " + y + ".00, 0.00)";
+        foreach(Transform boardp in boardParent)
+        {
+            if (boardp.name.Contains(contains))
+            {
+                return boardp.GetComponent<DropHolder>();
+            }
+        }
+        return null;
     }
 }

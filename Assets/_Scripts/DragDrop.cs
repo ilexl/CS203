@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Playables;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -15,9 +16,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     private DropHolder lastDropHolder = null;
     public float movementResponsiveness = 15.0f;
     [SerializeField] TileLetterManager tileLettersMAIN;
+    public bool playable = true;
 
     private void Awake()
     {
+        playable = true;
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvas == null)
@@ -33,23 +36,32 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        actualPosition += eventData.delta / canvas.scaleFactor;
+        if (playable)
+        {
+            actualPosition += eventData.delta / canvas.scaleFactor;
+        }
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startPos = rectTransform.anchoredPosition;
-        transform.SetAsLastSibling(); //ensure it renders above all other tiles
-        lastDropHolder = dropHolder;
-        dropHolder = null;
-        canvasGroup.blocksRaycasts = false; 
-        tileLettersMAIN.RayCastSetAllLetters(false);
-        canvasGroup.alpha = 0.75f;
+        if (playable)
+        {
+            startPos = rectTransform.anchoredPosition;
+            transform.SetAsLastSibling(); //ensure it renders above all other tiles
+            lastDropHolder = dropHolder;
+            dropHolder = null;
+            canvasGroup.blocksRaycasts = false; 
+            tileLettersMAIN.RayCastSetAllLetters(false);
+            canvasGroup.alpha = 0.75f;
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = true;
-        tileLettersMAIN.RayCastSetAllLetters(true);
-        canvasGroup.alpha = 1f;
+        if (playable)
+        {
+            canvasGroup.blocksRaycasts = true;
+            tileLettersMAIN.RayCastSetAllLetters(true);
+            canvasGroup.alpha = 1f;
+        }
     }
 
     public void RayCastSet(bool set)
@@ -66,12 +78,12 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         actualPosition = DH.transform.GetComponent<RectTransform>().anchoredPosition;
     }
 
-    public void Update()
+    private void Update()
     {
         Move();
     }
 
-    private void Move()
+    void Move()
     {
         rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, actualPosition, movementResponsiveness * Time.deltaTime);
     }
