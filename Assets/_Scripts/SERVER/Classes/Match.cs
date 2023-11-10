@@ -5,13 +5,13 @@ using wfMultiplayer;
 
 namespace wfMultiplayer
 {
-    public class Lobby
+    public class Match
     {
         private List<List<char>> gameBoard;
         private List<Player> players;
         int playerTurnIndex;
 
-        public Lobby(List<List<char>> gameBoard, List<Player> players)
+        public Match(List<List<char>> gameBoard, List<Player> players)
         {
             this.gameBoard = gameBoard;
             this.players = players;
@@ -25,5 +25,6 @@ namespace wfMultiplayer
         {
             gameBoard[x][y] = c;
         }
+      
     }
 }
