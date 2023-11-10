@@ -31,3 +31,25 @@ public class MatchList : MonoBehaviour
 
     }
 
+
+    /*****************************Lobby Destruction**************************/
+    public void PlayerDisconnect(wfMultiplayer.Player player)
+    {
+        DestroyLobbyByPlayer(player);
+    }
+
+    private void DestroyLobbyByPlayer(wfMultiplayer.Player player)
+    {
+        for (int i = 0; i < matchList.Count; i++)
+        {
+            Match item = matchList[i];
+            if (item.GetPlayers().Contains(player))
+            {
+                Debug.Log($"Ending match {i}, {item}");
+                matchList.Remove(item);
+                return;
+            }
+        }
+    }
+}
+
