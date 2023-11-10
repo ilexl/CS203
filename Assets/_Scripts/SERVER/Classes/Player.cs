@@ -15,6 +15,8 @@ namespace wfMultiplayer
             this.ip = ip;
             this.username = username;
         }
+
+
     }
 }
 
