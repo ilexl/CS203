@@ -8,8 +8,17 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class MatchList : MonoBehaviour
 {
     public List<Match> matchList;
+    // Start is called before the first frame update
+    void Start()
+    {
 
-}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
     /*****************************Lobby Creation*****************************/
 
     public void CreateNewMatch(List<List<char>> gameBoard, List<wfMultiplayer.Player> players)
