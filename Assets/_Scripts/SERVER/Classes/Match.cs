@@ -25,6 +25,19 @@ namespace wfMultiplayer
         {
             gameBoard[x][y] = c;
         }
-      
+        public List<Player> GetPlayers()
+        {
+            return players;
+        }
+        public override string ToString()
+        {
+            string playerText = "[";
+            foreach (var player in players)
+            {
+                playerText += player.ToString() + ", ";
+            }
+            playerText = playerText.Substring(0, playerText.Length - 3) + "]";
+            return playerText;
+        }
     }
 }
