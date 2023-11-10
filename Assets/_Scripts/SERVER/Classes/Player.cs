@@ -16,7 +16,10 @@ namespace wfMultiplayer
             this.username = username;
         }
 
-
+        public override string ToString()
+        {
+            return "Player [" + username + ":" + ip + "]";
+        }
     }
 }
 
