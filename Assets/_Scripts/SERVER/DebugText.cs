@@ -6,7 +6,7 @@ using UnityEngine;
 public class DebugText : MonoBehaviour
 {
     // Adjust via the Inspector
-    public int maxLines = 8;
+    public int maxLines = 80;
     private Queue<string> queue = new Queue<string>();
     private string currentText = "";
 
