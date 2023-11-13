@@ -55,7 +55,7 @@ public class NetworkManager : MonoBehaviour
 
     private void PlayerLeft(object sender, ServerDisconnectedEventArgs e)
     {
-        PlayerList.DestroyPlayer(e.Client.Id);
+        Matchmaking.DestroyPlayer(e.Client.Id);
     }
     /********************************************************************************THIS IS THE SERVERSIDE VERSION DON'T BE A FOOL ************************************************************************/
 }
