@@ -7,8 +7,6 @@ using wfMultiplayer;
 public class Matchmaking : MonoBehaviour
 {
 
-    public GameObject MatchListObj;
-    private MatchList matchList;
     public static Dictionary<ushort, Player> PlayerList = new Dictionary<ushort, Player>();
 
     [MessageHandler((ushort)ClientToServerId.name)]
@@ -26,14 +24,10 @@ public class Matchmaking : MonoBehaviour
     public static void DestroyPlayer(ushort fromClientId)
     {
         Debug.Log($"{PlayerList[fromClientId]} has disconnected.");
-        Matchlist.PlayerDisconnect(Player.GetPlayerById(fromClientId));
+        MatchList.PlayerDisconnect(Player.GetPlayerById(fromClientId));
         PlayerList.Remove(fromClientId);
     }
 
-    private void Awake()
-    {
-        matchList = MatchListObj.GetComponent<MatchList>();
-    }
     private void FixedUpdate()
     {
         MatchPlayers();
@@ -57,7 +51,7 @@ public class Matchmaking : MonoBehaviour
             Debug.Log($"Matched players: {unmatchedPlayer} and {player}");
             
 
-            Match match = matchList.CreateNewMatch(new List<List<char>>(), matchPlayers);
+            Match match = MatchList.CreateNewMatch(new List<List<char>>(), matchPlayers);
 
             unmatchedPlayer.currentMatch = match;
             player.currentMatch = match;

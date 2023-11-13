@@ -20,7 +20,7 @@ public class MatchList : MonoBehaviour
     }
     /*****************************Lobby Creation*****************************/
 
-    public Match CreateNewMatch(List<List<char>> gameBoard, List<Player> players)
+    public static Match CreateNewMatch(List<List<char>> gameBoard, List<Player> players)
     {
         Match match = new Match(gameBoard, players);
         Debug.Log($"Creating match {list.Count}, {match}");
