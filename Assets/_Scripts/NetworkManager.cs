@@ -1,7 +1,13 @@
 using Riptide;
 using Riptide.Utils;
+using System;
 using UnityEngine;
 
+
+public enum ClientToServerId : ushort
+{
+    name = 1,
+}
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager _singleton;
@@ -34,7 +40,9 @@ public class NetworkManager : MonoBehaviour
     {
         RiptideLogger.Initialize(Debug.Log, Debug.Log, Debug.LogWarning, Debug.LogError, false);
         Client = new Client();
-        Client.Connect($"{ip}:{port}");
+        Client.Connected += DidConnect;
+        Client.ConnectionFailed += FailedToConnect;
+        Client.Disconnected += DidDisconnect;
     }
 
     private void FixedUpdate()
@@ -45,5 +53,25 @@ public class NetworkManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         Client.Disconnect();
+    }
+
+    public void Connect()
+    {
+        Client.Connect($"{ip}:{port}");
+    }
+
+    private void DidConnect(object sender, EventArgs e)
+    {
+        UIManager.Singleton.SendName();
+    }
+
+    private void FailedToConnect(object sender, EventArgs e)
+    {
+        UIManager.Singleton.BackToMain();
+    }
+
+    private void DidDisconnect(object sender, EventArgs e)
+    {
+        UIManager.Singleton.BackToMain();
     }
 }
