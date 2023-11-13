@@ -7,18 +7,20 @@ namespace wfMultiplayer
 {
     public class Player
     {
-        public string ip { get; set; }
-        public string username { get; set; }
 
-        public Player(string ip, string username)
+        public static Dictionary<ushort, Player> list = new Dictionary<ushort, Player>();
+        public ushort Id { get; set; }
+        public string Username { get; set; }
+
+        public Player(ushort Id, string Username)
         {
-            this.ip = ip;
-            this.username = username;
+            this.Id = Id;
+            this.Username = Username;
         }
 
         public override string ToString()
         {
-            return "Player [" + username + ":" + ip + "]";
+            return "Player [" + Username + ":" + Id + "]";
         }
     }
 }
