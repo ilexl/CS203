@@ -1,7 +1,11 @@
 using Riptide;
 using Riptide.Utils;
 using UnityEngine;
-
+/********************************************************************************THIS IS THE SERVERSIDE VERSION DON'T BE A FOOL ************************************************************************/
+public enum ClientToServerId : ushort
+{
+    name = 1,
+}
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager _singleton;
@@ -20,7 +24,7 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-
+    /********************************************************************************THIS IS THE SERVERSIDE VERSION DON'T BE A FOOL ************************************************************************/
     public Server Server { get; private set; }
 
     [SerializeField] private ushort port;
@@ -36,8 +40,9 @@ public class NetworkManager : MonoBehaviour
 
         Server = new Server();
         Server.Start(port, maxClientCount);
+        Server.ClientDisconnected += PlayerLeft;
     }
-
+    /********************************************************************************THIS IS THE SERVERSIDE VERSION DON'T BE A FOOL ************************************************************************/
     private void FixedUpdate()
     {
         Server.Update();
@@ -47,4 +52,10 @@ public class NetworkManager : MonoBehaviour
     {
         Server.Stop();
     }
+
+    private void PlayerLeft(object sender, ServerDisconnectedEventArgs e)
+    {
+        PlayerList.DestroyPlayer(e.Client.Id);
+    }
+    /********************************************************************************THIS IS THE SERVERSIDE VERSION DON'T BE A FOOL ************************************************************************/
 }
