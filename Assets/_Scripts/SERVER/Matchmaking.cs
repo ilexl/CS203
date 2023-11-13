@@ -24,7 +24,10 @@ public class Matchmaking : MonoBehaviour
     public static void DestroyPlayer(ushort fromClientId)
     {
         Debug.Log($"{PlayerList[fromClientId]} has disconnected.");
-        MatchList.PlayerDisconnect(Player.GetPlayerById(fromClientId));
+        Player player = PlayerList[fromClientId];
+        Debug.Log("Got player successfully");
+        Match match = player.currentMatch;
+        MatchList.PlayerDisconnect(match);
         PlayerList.Remove(fromClientId);
     }
 
@@ -47,15 +50,16 @@ public class Matchmaking : MonoBehaviour
 
             unmatchedPlayer.InMatch = true;
             player.InMatch = true;
-            List<Player> matchPlayers = new List<Player> { player, unmatchedPlayer };
+            List<Player> matchPlayers = new List<Player> { unmatchedPlayer, player };
 
             Debug.Log($"Matched players: {unmatchedPlayer} and {player}");
-            
+
 
             Match match = MatchList.CreateNewMatch(new List<List<char>>(), matchPlayers);
-
+            Debug.Log("Created new match successfully");
             unmatchedPlayer.currentMatch = match;
             player.currentMatch = match;
+            Debug.Log("Set new player matches successfully");
             unmatchedPlayer = null;
         }
     }

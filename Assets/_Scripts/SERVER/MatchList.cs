@@ -6,7 +6,7 @@ using wfMultiplayer;
 
 public class MatchList : MonoBehaviour
 {
-    public static List<Match> list;
+    public static List<Match> list = new List<Match>();
     // Start is called before the first frame update
     void Start()
     {
@@ -42,13 +42,21 @@ public class MatchList : MonoBehaviour
 
 
     /*****************************Lobby Destruction**************************/
-    public static void PlayerDisconnect(Player player)
+    public static void PlayerDisconnect(Match match)
     {
-        DestroyLobbyByPlayer(player);
+
+        foreach (var player in match.GetPlayers())
+        {
+            player.InMatch = false;
+            player.currentMatch = null;
+        }
+
+        DestroyLobby(match);
     }
 
     private static void DestroyLobbyByPlayer(Player player)
     {
+        Debug.Log("Destroying lobby!");
         for (int i = 0; i < list.Count; i++)
         {
             Match item = list[i];
@@ -59,6 +67,10 @@ public class MatchList : MonoBehaviour
                 return;
             }
         }
+    }
+    private static void DestroyLobby(Match match)
+    {
+        list.Remove(match);
     }
 }
 
