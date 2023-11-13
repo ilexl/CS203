@@ -6,7 +6,7 @@ using wfMultiplayer;
 
 public class MatchList : MonoBehaviour
 {
-    public static List<Match> matchList;
+    public static List<Match> list;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +20,12 @@ public class MatchList : MonoBehaviour
     }
     /*****************************Lobby Creation*****************************/
 
-    public void CreateNewMatch(List<List<char>> gameBoard, List<Player> players)
+    public Match CreateNewMatch(List<List<char>> gameBoard, List<Player> players)
     {
         Match match = new Match(gameBoard, players);
-        Debug.Log($"Creating match {matchList.Count}, {match}");
-        matchList.Add(match);
+        Debug.Log($"Creating match {list.Count}, {match}");
+        list.Add(match);
+        return match;
     }
 
     private void LogNewLobby(List<Player> players)
@@ -35,26 +36,26 @@ public class MatchList : MonoBehaviour
             playerText += player.ToString() + ", ";
         }
         playerText = playerText.Substring(0, playerText.Length - 3);
-        Debug.Log($"Creating match {matchList.Count} with players: " + playerText);
+        Debug.Log($"Creating match {list.Count} with players: " + playerText);
 
     }
 
 
     /*****************************Lobby Destruction**************************/
-    public void PlayerDisconnect(Player player)
+    public static void PlayerDisconnect(Player player)
     {
         DestroyLobbyByPlayer(player);
     }
 
-    private void DestroyLobbyByPlayer(Player player)
+    private static void DestroyLobbyByPlayer(Player player)
     {
-        for (int i = 0; i < matchList.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            Match item = matchList[i];
+            Match item = list[i];
             if (item.GetPlayers().Contains(player))
             {
                 Debug.Log($"Ending match {i}, {item}");
-                matchList.Remove(item);
+                list.Remove(item);
                 return;
             }
         }
