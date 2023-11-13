@@ -21,14 +21,14 @@ public class MatchList : MonoBehaviour
     }
     /*****************************Lobby Creation*****************************/
 
-    public void CreateNewMatch(List<List<char>> gameBoard, List<wfMultiplayer.Player> players)
+    public void CreateNewMatch(List<List<char>> gameBoard, List<Player> players)
     {
         Match match = new Match(gameBoard, players);
         Debug.Log($"Creating match {matchList.Count}, {match}");
         matchList.Add(match);
     }
 
-    private void LogNewLobby(List<wfMultiplayer.Player> players)
+    private void LogNewLobby(List<Player> players)
     {
         string playerText = "";
         foreach (var player in players)
@@ -42,12 +42,12 @@ public class MatchList : MonoBehaviour
 
 
     /*****************************Lobby Destruction**************************/
-    public void PlayerDisconnect(wfMultiplayer.Player player)
+    public void PlayerDisconnect(Player player)
     {
         DestroyLobbyByPlayer(player);
     }
 
-    private void DestroyLobbyByPlayer(wfMultiplayer.Player player)
+    private void DestroyLobbyByPlayer(Player player)
     {
         for (int i = 0; i < matchList.Count; i++)
         {
