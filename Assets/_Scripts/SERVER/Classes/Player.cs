@@ -7,12 +7,18 @@ namespace wfMultiplayer
 {
     public class Player
     {
+        public static Player GetPlayerById(ushort id)
+        {
+            return list[id];
+        }
 
         public static Dictionary<ushort, Player> list = new Dictionary<ushort, Player>();
         public ushort Id { get; set; }
         public string Username { get; set; }
 
         public bool InMatch = false;
+
+        public Match currentMatch { get; set; }
 
         public Player(ushort Id, string Username)
         {
