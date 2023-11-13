@@ -39,6 +39,7 @@ public class Matchmaking : MonoBehaviour
         foreach (var kvp in PlayerList)
         {
             Player player = kvp.Value;
+            if (player.InMatch) continue;
             if (unmatchedPlayer == null)
             {
                 unmatchedPlayer = player; continue;
