@@ -12,10 +12,13 @@ namespace wfMultiplayer
         public ushort Id { get; set; }
         public string Username { get; set; }
 
+        public bool InMatch = false;
+
         public Player(ushort Id, string Username)
         {
             this.Id = Id;
             this.Username = Username;
+            InMatch = false;
         }
 
         public override string ToString()
