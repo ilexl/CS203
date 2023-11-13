@@ -13,9 +13,11 @@ namespace wfMultiplayer
 
         public Match(List<List<char>> gameBoard, List<Player> players)
         {
+            Debug.Log("Beginning match creation process...");
             this.gameBoard = gameBoard;
             this.players = players;
             playerTurnIndex = 0;
+            Debug.Log("Match initialized.");
         }
         public List<List<char>> GetGameBoard() { return gameBoard; }
 
