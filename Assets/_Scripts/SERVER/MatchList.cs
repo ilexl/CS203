@@ -6,7 +6,7 @@ using wfMultiplayer;
 
 public class MatchList : MonoBehaviour
 {
-    public List<Match> matchList;
+    public static List<Match> matchList;
     // Start is called before the first frame update
     void Start()
     {
