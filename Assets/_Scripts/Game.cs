@@ -24,6 +24,7 @@ public class Game : MonoBehaviour
     [SerializeField] WindowManager mainWindowManager;
     [SerializeField] Window mainMenuWindow;
     [SerializeField] NetworkManager networkManager;
+    public static Game instance;
     public void PowerUp(string s)
     {
         // TODO - BLOCKED(Multiplayer) : Y,V
@@ -141,6 +142,8 @@ public class Game : MonoBehaviour
 
     private void Awake()
     {
+        instance = GameObject.FindAnyObjectByType<Game>();
+
         #region config-chks
         if (board == null)
         {
