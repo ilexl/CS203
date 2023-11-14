@@ -1,52 +1,42 @@
-
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
-public class DebugText : MonoBehaviour
+namespace DebugStuff
 {
-    // Adjust via the Inspector
-    public int maxLines = 80;
-    private Queue<string> queue = new Queue<string>();
-    private string currentText = "";
-
-    void OnEnable()
+    public class DebugText : MonoBehaviour
     {
-        Application.logMessageReceivedThreaded += HandleLog;
-    }
+        //#if !UNITY_EDITOR
+        static string myLog = "";
+        private string output;
+        private string stack;
 
-    void OnDisable()
-    {
-        Application.logMessageReceivedThreaded -= HandleLog;
-    }
-
-    void HandleLog(string logString, string stackTrace, LogType type)
-    {
-        // Delete oldest message
-        if (queue.Count >= maxLines) queue.Dequeue();
-
-        queue.Enqueue(logString);
-
-        var builder = new StringBuilder();
-        foreach (string st in queue)
+        void OnEnable()
         {
-            builder.Append(st).Append("\n");
+            Application.logMessageReceived += Log;
         }
 
-        currentText = builder.ToString();
-    }
+        void OnDisable()
+        {
+            Application.logMessageReceived -= Log;
+        }
 
-    void OnGUI()
-    {
-        GUI.Label(
-           new Rect(
-               0,                   // x, left offset
-               0,                   // y, bottom offset
-               Screen.width,        // width
-               Screen.height        // height
-           ),
-           currentText,             // the display text
-           GUI.skin.textArea        // use a multi-line text area
-        );
+        public void Log(string logString, string stackTrace, LogType type)
+        {
+            output = logString;
+            stack = stackTrace;
+            myLog = myLog + "\n" + output;
+            if (myLog.Length > 5000)
+            {
+                myLog = myLog.Substring(1000, 5000);
+            }
+        }
+
+        void OnGUI()
+        {
+            //if (!Application.isEditor) //Do not display in editor ( or you can use the UNITY_EDITOR macro to also disable the rest)
+            {
+                myLog = GUI.TextArea(new Rect(10, 10, Screen.width - 10, Screen.height - 10), myLog);
+            }
+        }
+        //#endif
     }
 }
