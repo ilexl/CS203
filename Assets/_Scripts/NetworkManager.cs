@@ -80,5 +80,6 @@ public class NetworkManager : MonoBehaviour
     private void DidDisconnect(object sender, EventArgs e)
     {
         // Popup and to main menu
+        UIManager.Singleton.PlayerDisconnect();
     }
 }
