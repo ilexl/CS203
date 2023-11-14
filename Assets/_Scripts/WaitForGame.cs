@@ -59,8 +59,8 @@ public class WaitForGame : MonoBehaviour
         bool DoWeStart = message.GetBool();
         Debug.Log($"Started match with player [{otherPlayerUsername}:{otherPlayerId}]. ");
         string nextLine = "You are ";
-        string nextLine2 = DoWeStart ? "" : "not";
-        nextLine += nextLine2 + " starting!";
+        string nextLine2 = DoWeStart ? "" : "not ";
+        nextLine += nextLine2 + "starting!";
         Debug.Log(nextLine);
         waitForGame.GameReady();
         waitForGame.GameMain.LocalCanPlay(DoWeStart);
