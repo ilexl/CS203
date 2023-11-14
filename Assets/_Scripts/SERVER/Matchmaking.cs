@@ -31,16 +31,19 @@ public class Matchmaking : MonoBehaviour
 
     [MessageHandler((ushort)ClientToServerId.sendTurn)]
 
-    private static void HandleTurnRecieved(ushort fromClientId, Message message)
+    private static void HandleTurnRecieved(ushort fromClientId, Message _message)
     {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.recieveBoardState);
+        message.AddString(_message.GetString());
+        message.AddInt(_message.GetInt());
         //get the match that the player is in
         Match match = PlayerList[fromClientId].currentMatch;
-        Debug.Log(message.GetString());
+        Debug.Log(_message.GetString());
         foreach (var player in match.GetPlayers())
         {
             if (player.Id !=  fromClientId)
             {
-                NetworkManager.Singleton.Server.Send(message, fromClientId);
+                NetworkManager.Singleton.Server.Send(message, player.Id);
             }
         }
     }

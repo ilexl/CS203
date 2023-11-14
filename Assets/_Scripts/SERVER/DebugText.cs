@@ -4,6 +4,8 @@ namespace DebugStuff
 {
     public class DebugText : MonoBehaviour
     {
+
+        private int maxLength = 3000;
         //#if !UNITY_EDITOR
         static string myLog = "";
         private string output;
@@ -24,9 +26,9 @@ namespace DebugStuff
             output = logString;
             stack = stackTrace;
             myLog = myLog + "\n" + output;
-            if (myLog.Length > 5000)
+            if (myLog.Length > maxLength)
             {
-                myLog = myLog.Substring(1000, 5000);
+                myLog = "";
             }
         }
 

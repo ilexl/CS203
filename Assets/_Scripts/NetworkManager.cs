@@ -113,10 +113,12 @@ public class NetworkManager : MonoBehaviour
 
         for (int i = 0; i < Game.Singleton.board.BoardSize * 2; i++)
         {
+            List<char> row = new List<char>();
             for (int j = 0; j < Game.Singleton.board.BoardSize * 2; j++)
             {
-                boardP[i][j] = ' ';
+                row.Add(' ');
             }
+            boardP.Add(row);
         }
 
         List<string> temp = boardRAW.Split('\n').ToList();
