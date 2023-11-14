@@ -7,25 +7,25 @@ namespace wfMultiplayer
 {
     public class Match
     {
-        private List<List<char>> gameBoard;
+        private Board gameBoard;
         private List<Player> players;
         int playerTurnIndex;
 
         public Match(List<List<char>> gameBoard, List<Player> players)
         {
             Debug.Log("Beginning match creation process...");
-            this.gameBoard = gameBoard;
+            this.gameBoard = new Board(gameBoard);
             this.players = players;
             playerTurnIndex = 0;
             Debug.Log("Match initialized.");
         }
-        public List<List<char>> GetGameBoard() { return gameBoard; }
+        public Board GetGameBoard() { return gameBoard; }
 
-        public char GetGameBoardItem(int x, int y) { return gameBoard[x][y]; }
+        public char GetGameBoardItem(int x, int y) { return gameBoard.boardChars[x][y]; }
 
         public void SetGameBoardItem(int x, int y, char c)
         {
-            gameBoard[x][y] = c;
+            gameBoard.boardChars[x][y] = c;
         }
         public List<Player> GetPlayers()
         {
