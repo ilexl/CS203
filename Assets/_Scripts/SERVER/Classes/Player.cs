@@ -5,6 +5,14 @@ using UnityEngine;
 
 namespace wfMultiplayer
 {
+
+
+    public enum PlayerStatus
+    {
+        Idle = 1,
+        Searching = 2,
+        InMatch = 3,
+    }
     public class Player
     {
         public static Player GetPlayerById(ushort id)
@@ -16,7 +24,7 @@ namespace wfMultiplayer
         public ushort Id { get; set; }
         public string Username { get; set; }
 
-        public bool InMatch = false;
+        public PlayerStatus status { get; set; }
 
         public Match currentMatch { get; set; }
 
@@ -24,7 +32,7 @@ namespace wfMultiplayer
         {
             this.Id = Id;
             this.Username = Username;
-            InMatch = false;
+            status = PlayerStatus.Idle;
         }
 
         public override string ToString()

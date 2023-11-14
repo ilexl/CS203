@@ -21,6 +21,14 @@ public class Matchmaking : MonoBehaviour
         Debug.Log($"{newPlayer} has connected, awaiting match.");
     }
 
+    [MessageHandler((ushort)ClientToServerId.searchForMatch)]
+
+    private static void SetPlayerToSearchForMatch(ushort fromClientId, Message message)
+    {
+        Debug.Log($"Player {PlayerList[fromClientId]} is now searching for a match.");
+        PlayerList[fromClientId].status = PlayerStatus.Searching;
+    }
+
     public static void DestroyPlayer(ushort fromClientId)
     {
         Debug.Log($"{PlayerList[fromClientId]} has disconnected.");
@@ -42,14 +50,14 @@ public class Matchmaking : MonoBehaviour
         foreach (var kvp in PlayerList)
         {
             Player player = kvp.Value;
-            if (player.InMatch) continue;
+            if (player.status != PlayerStatus.Searching) continue;
             if (unmatchedPlayer == null)
             {
                 unmatchedPlayer = player; continue;
             }
 
-            unmatchedPlayer.InMatch = true;
-            player.InMatch = true;
+            unmatchedPlayer.status = PlayerStatus.InMatch;
+            player.status = PlayerStatus.InMatch;
             List<Player> matchPlayers = new List<Player> { unmatchedPlayer, player };
 
             Debug.Log($"Matched players: {unmatchedPlayer} and {player}");

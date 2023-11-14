@@ -47,8 +47,8 @@ public class MatchList : MonoBehaviour
 
         foreach (var player in match.GetPlayers())
         {
-            Debug.Log($"{player} is now searching for match");
-            player.InMatch = false;
+            Debug.Log($"{player} is now set to idle");
+            player.status = PlayerStatus.Idle;
             player.currentMatch = null;
         }
 

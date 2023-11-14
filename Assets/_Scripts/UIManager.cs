@@ -41,6 +41,16 @@ public class UIManager : MonoBehaviour
         NetworkManager.Singleton.Connect();
     }
 
+    public void SearchClicked()
+    {
+        SendSearchStatus();
+    }
+
+    private void SendSearchStatus()
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.searchForMatch);
+        NetworkManager.Singleton.Client.Send(message);
+    }
     public void ConnectionFailed()
     {
         usernameField.interactable = true;
