@@ -30,6 +30,7 @@ public class Matchmaking : MonoBehaviour
     }
 
     [MessageHandler((ushort)ClientToServerId.sendTurn)]
+
     private static void HandleTurnRecieved(ushort fromClientId, Message message)
     {
         //get the match that the player is in
