@@ -6,6 +6,11 @@ public enum ClientToServerId : ushort
 {
     name = 1,
 }
+
+public enum ServerToClientId : ushort
+{
+    gameStarted = 1,
+}
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager _singleton;
