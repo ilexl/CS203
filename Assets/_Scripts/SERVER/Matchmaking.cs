@@ -68,22 +68,26 @@ public class Matchmaking : MonoBehaviour
 
     private void SendStartGameToAllPlayers(List<Player> matchPlayers)
     {
+        bool startingPlayerAlreadyAssigned = false;
         foreach (var player in matchPlayers)
         {
             foreach (var otherPlayer in matchPlayers)
             {
-                if (otherPlayer ==  player) continue;
-                SendStartGame(player, otherPlayer);
+                if (otherPlayer == player) continue;
+                bool startingTurn = false ? startingPlayerAlreadyAssigned : true;
+                SendStartGame(player, otherPlayer, startingTurn);
             }
+            startingPlayerAlreadyAssigned = true;
         }
     }
-    private void SendStartGame(Player player, Player otherPlayer)
+    private void SendStartGame(Player player, Player otherPlayer, bool startingTurn)
     {
         Debug.Log($"Telling player {player} to start match with {otherPlayer}.");
 
         Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.gameStarted);
         message.AddUShort(otherPlayer.Id);
         message.AddString(otherPlayer.Username);
+        message.AddBool(startingTurn);
         NetworkManager.Singleton.Server.Send(message, player.Id);
     }
 }
