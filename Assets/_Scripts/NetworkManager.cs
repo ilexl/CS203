@@ -95,7 +95,10 @@ public class NetworkManager : MonoBehaviour
 
     public void ClientPlays(List<List<char>> board, int score)
     {
-        // WILL NEEDS TO SEND THIS DATA TO THE SERVER/OPPENENT
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendTurn);
+        message.AddString(CompileBoard(board));
+        message.AddInt(score);
+        Singleton.Client.Send(message);
     }
 
     [SerializeField] Game game;
