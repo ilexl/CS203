@@ -66,6 +66,11 @@ public class NetworkManager : MonoBehaviour
         Client.Connect($"{ip}:{port}");
     }
 
+    public void Disconnect()
+    {
+        Client.Disconnect();
+    }
+
     private void DidConnect(object sender, EventArgs e)
     {
         UIManager.Singleton.SendName();
