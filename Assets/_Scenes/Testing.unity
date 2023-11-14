@@ -28943,6 +28943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bc2a884f84d0149ad08c6796d8e7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameMain: {fileID: 0}
   windowManagerMAIN: {fileID: 1310670310}
   game: {fileID: 85333046}
   mainMenu: {fileID: 468010537}
@@ -32757,6 +32758,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1342528404}
         m_TargetAssemblyTypeName: WaitForGame, WriteFight
+        m_MethodName: Disconnect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1310670311}
+        m_TargetAssemblyTypeName: UIManager, WriteFight
         m_MethodName: Disconnect
         m_Mode: 1
         m_Arguments:
@@ -37010,6 +37023,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 468010537}
           m_ObjectArgumentAssemblyTypeName: Window, WriteFight
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2069261596}
+        m_TargetAssemblyTypeName: PopUp, WriteFight
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -43640,7 +43665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2032933221
 RectTransform:
   m_ObjectHideFlags: 0
