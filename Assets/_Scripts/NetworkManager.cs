@@ -9,11 +9,13 @@ public enum ClientToServerId : ushort
 {
     name = 1,
     searchForMatch = 2,
+    sendTurn = 3,
 }
 
 public enum ServerToClientId : ushort
 {
     gameStarted = 1,
+    recieveTurn = 2,
     opponentDisconnected = 5,
 }
 public class NetworkManager : MonoBehaviour
