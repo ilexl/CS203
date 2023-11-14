@@ -101,7 +101,6 @@ public class NetworkManager : MonoBehaviour
         Singleton.Client.Send(message);
     }
 
-    [SerializeField] Game game;
 
     // WILL NEEDS TO USE THIS WHEN RECIEVING DATA FROM SERVER
     [MessageHandler((ushort)ServerToClientId.recieveBoardState)]
@@ -112,9 +111,9 @@ public class NetworkManager : MonoBehaviour
 
         List<List<char>> boardP = new List<List<char>>();
 
-        for (int i = 0; i < game.board.BoardSize * 2; i++)
+        for (int i = 0; i < Game.instance.board.BoardSize * 2; i++)
         {
-            for (int j = 0; j < game.board.BoardSize * 2; j++)
+            for (int j = 0; j < Game.instance.board.BoardSize * 2; j++)
             {
                 boardP[i][j] = ' ';
             }
@@ -129,7 +128,7 @@ public class NetworkManager : MonoBehaviour
             }
         }
 
-        game.OppPlay(boardP, score);
+        Game.instance.OppPlay(boardP, score);
     }
     [MessageHandler((ushort)ServerToClientId.opponentDisconnected)]
     public static void OpponentDisconnect(Message message)
