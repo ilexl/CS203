@@ -2,6 +2,7 @@ using Riptide;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +46,11 @@ public class UIManager : MonoBehaviour
     public void SearchClicked()
     {
         SendSearchStatus();
+    }
+
+    public void Disconnect()
+    {
+        NetworkManager.Singleton.Disconnect();
     }
 
     private void SendSearchStatus()

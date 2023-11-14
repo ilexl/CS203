@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaitForGame : MonoBehaviour
 {
     [SerializeField] static WaitForGame waitForGame;
+    [SerializeField] Game GameMain;
 
     [Space(10)]
 
@@ -62,6 +63,7 @@ public class WaitForGame : MonoBehaviour
         nextLine += nextLine2 + " starting!";
         Debug.Log(nextLine);
         waitForGame.GameReady();
+        waitForGame.GameMain.LocalCanPlay(DoWeStart);
     }
 }
 
