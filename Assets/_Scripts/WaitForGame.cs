@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class WaitForGame : MonoBehaviour
 {
+    [SerializeField] static WaitForGame waitForGame;
+
+    [Space(10)]
+
     [SerializeField] WindowManager windowManagerMAIN;
     [SerializeField] Window game;
     [SerializeField] Window mainMenu;
@@ -15,6 +19,15 @@ public class WaitForGame : MonoBehaviour
     [SerializeField] Window searchingForMatch;
     [SerializeField] Window matchFound;
     [SerializeField] Window waitingForServer;
+
+    private void Awake()
+    {
+        if (waitForGame == null)
+        {
+            waitForGame = FindAnyObjectByType<WaitForGame>();
+        }
+    }
+
     public void GameReady()
     {
         windowManagerMAIN.ShowWindow(game);
@@ -38,7 +51,7 @@ public class WaitForGame : MonoBehaviour
 
     [MessageHandler((ushort)ServerToClientId.gameStarted)]
 
-    private void RecieveGameStartCall(Message message)
+    private static void RecieveGameStartCall(Message message)
     {
         ushort otherPlayerId = message.GetUShort();
         string otherPlayerUsername = message.GetString();
@@ -48,7 +61,7 @@ public class WaitForGame : MonoBehaviour
         string nextLine2 = DoWeStart ? "" : "not";
         nextLine += nextLine2 + " starting!";
         Debug.Log(nextLine);
-        GameReady();
+        waitForGame.GameReady();
     }
 }
 
