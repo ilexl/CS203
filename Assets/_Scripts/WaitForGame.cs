@@ -20,7 +20,6 @@ public class WaitForGame : MonoBehaviour
     [SerializeField] Window searchingForMatch;
     [SerializeField] Window matchFound;
     [SerializeField] Window waitingForServer;
-
     private void Awake()
     {
         if (waitForGame == null)

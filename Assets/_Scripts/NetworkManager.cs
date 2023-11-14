@@ -104,16 +104,16 @@ public class NetworkManager : MonoBehaviour
 
     // WILL NEEDS TO USE THIS WHEN RECIEVING DATA FROM SERVER
     [MessageHandler((ushort)ServerToClientId.recieveBoardState)]
-    public void OppenentPlays(Message message)
+    public static void OppenentPlays(Message message)
     {
         string boardRAW = message.GetString();
         int score = message.GetInt();
 
         List<List<char>> boardP = new List<List<char>>();
 
-        for (int i = 0; i < Game.instance.board.BoardSize * 2; i++)
+        for (int i = 0; i < Game.Singleton.board.BoardSize * 2; i++)
         {
-            for (int j = 0; j < Game.instance.board.BoardSize * 2; j++)
+            for (int j = 0; j < Game.Singleton.board.BoardSize * 2; j++)
             {
                 boardP[i][j] = ' ';
             }
@@ -128,16 +128,17 @@ public class NetworkManager : MonoBehaviour
             }
         }
 
-        Game.instance.OppPlay(boardP, score);
+        Game.Singleton.OppPlay(boardP, score);
     }
     [MessageHandler((ushort)ServerToClientId.opponentDisconnected)]
     public static void OpponentDisconnect(Message message)
     {
         //alex stuff
-        Debug.Log("yes.");
+        Game.Singleton.LocalCanPlay(false);
+        Game.Singleton.popUpManager.ShowPopUp(8);
     }
 
-    private string CompileBoard(List<List<char>> board)
+    private static string CompileBoard(List<List<char>> board)
     {
         string output = "";
         foreach (var row in board)

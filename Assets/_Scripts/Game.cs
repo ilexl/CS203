@@ -24,14 +24,30 @@ public class Game : MonoBehaviour
     [SerializeField] WindowManager mainWindowManager;
     [SerializeField] Window mainMenuWindow;
     [SerializeField] NetworkManager networkManager;
-    public static Game instance;
+    
+
+    private static Game _singleton;
+    public static Game Singleton
+    {
+        get => _singleton;
+        private set
+        {
+            if (_singleton == null)
+                _singleton = value;
+            else if (_singleton != value)
+            {
+                Debug.Log($"{nameof(Game)} instance already exists, destroying duplicate!");
+                Destroy(value);
+            }
+        }
+    }
     public void PowerUp(string s)
     {
         // TODO - BLOCKED(Multiplayer) : Y,V
-        if (!localTurn) 
-        { 
+        if (!localTurn)
+        {
             popUpManager.ShowPopUp(6);
-            return; 
+            return;
         }
 
         char c = s[0];
@@ -48,7 +64,7 @@ public class Game : MonoBehaviour
                     {
                         popUpManager.ShowPopUp(2);
                     }
-                break;
+                    break;
                 }
             case 'Q':
                 {
@@ -131,19 +147,19 @@ public class Game : MonoBehaviour
                 }
             default:
                 {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                     Debug.LogError("No such power up - " + c);
-    #endif
+#endif
                     break;
                 }
 
         }
     }
-
     private void Awake()
     {
-        instance = GameObject.FindAnyObjectByType<Game>();
 
+
+        Singleton = this;
         #region config-chks
         if (board == null)
         {
