@@ -18,6 +18,7 @@ namespace wfMultiplayer
             this.players = players;
             playerTurnIndex = 0;
             Debug.Log("Match initialized.");
+            Debug.Log(this.gameBoard);
         }
         public Board GetGameBoard() { return gameBoard; }
 
@@ -31,6 +32,7 @@ namespace wfMultiplayer
         {
             return players;
         }
+
         public override string ToString()
         {
             string playerText = "[";
