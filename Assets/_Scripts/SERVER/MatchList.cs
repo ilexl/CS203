@@ -44,15 +44,18 @@ public class MatchList : MonoBehaviour
     /*****************************Lobby Destruction**************************/
     public static void PlayerDisconnect(Match match)
     {
-
-        foreach (var player in match.GetPlayers())
+        if (match != null)
         {
-            Debug.Log($"{player} is now set to idle");
-            player.status = PlayerStatus.Idle;
-            player.currentMatch = null;
-        }
+            foreach (var player in match.GetPlayers())
+            {
+                Debug.Log($"{player} is now set to idle");
+                player.status = PlayerStatus.Idle;
+                player.currentMatch = null;
+            }
 
-        DestroyLobby(match);
+            DestroyLobby(match);
+        }
+        
     }
 
     private static void DestroyLobbyByPlayer(Player player)

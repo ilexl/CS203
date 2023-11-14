@@ -35,7 +35,10 @@ public class Matchmaking : MonoBehaviour
         Player player = PlayerList[fromClientId];
         Match match = player.currentMatch;
         MatchList.PlayerDisconnect(match);
-        PlayerList.Remove(fromClientId);
+        if (PlayerList.ContainsKey(fromClientId))
+        {
+            PlayerList.Remove(fromClientId);
+        }
     }
 
     private void FixedUpdate()
