@@ -4,12 +4,36 @@ using UnityEngine;
 
 public class WaitForGame : MonoBehaviour
 {
-    [SerializeField] WindowManager windowManager;
+    [SerializeField] WindowManager windowManagerMAIN;
     [SerializeField] Window game;
     [SerializeField] Window mainMenu;
+
+    [Space(10)]
+
+    [SerializeField] WindowManager WaitForGameWindows;
+    [SerializeField] Window searchForMatch;
+    [SerializeField] Window searchingForMatch;
+    [SerializeField] Window matchFound;
+    [SerializeField] Window waitingForServer;
     public void GameReady()
     {
-        windowManager.ShowWindow(game);
+        windowManagerMAIN.ShowWindow(game);
+    }
+
+    public void SearchForMatch()
+    {
+        WaitForGameWindows.ShowWindow(searchingForMatch);
+    }
+
+    public void Disconnect()
+    {
+        windowManagerMAIN.ShowWindow(mainMenu);
+        // disconnect from server
+    }
+
+    public void MatchFound()
+    {
+        WaitForGameWindows.ShowWindow(matchFound);
     }
 }
 

@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PopUpManager connectPopUpManager;
     [SerializeField] private WindowManager windowManager;
     [SerializeField] private Window WaitingForGame;
+    [SerializeField] private Window MultiplayerConnect;
     [SerializeField] private Window Game;
 
     private void Awake()
@@ -57,5 +58,11 @@ public class UIManager : MonoBehaviour
         Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.name);
         message.AddString(usernameField.text);
         NetworkManager.Singleton.Client.Send(message);
+    }
+
+    public void PlayerDisconnect()
+    {
+        windowManager.ShowWindow(MultiplayerConnect);
+        connectPopUpManager.ShowPopUp(1);
     }
 } 
