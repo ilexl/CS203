@@ -7,6 +7,12 @@ using UnityEngine;
 public enum ClientToServerId : ushort
 {
     name = 1,
+    searchForMatch = 2,
+}
+
+public enum ServerToClientId : ushort
+{
+    gameStarted = 1,
 }
 public class NetworkManager : MonoBehaviour
 {
