@@ -1,3 +1,4 @@
+using Riptide;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,10 +45,14 @@ public class MatchList : MonoBehaviour
     /*****************************Lobby Destruction**************************/
     public static void PlayerDisconnect(Match match)
     {
+        Debug.Log("Destroying match!");
         if (match != null)
         {
             foreach (var player in match.GetPlayers())
             {
+
+                Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.opponentDisconnected);
+                NetworkManager.Singleton.Server.Send(message, player.Id);
                 Debug.Log($"{player} is now set to idle");
                 player.status = PlayerStatus.Idle;
                 player.currentMatch = null;
