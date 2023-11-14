@@ -2214,7 +2214,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1310670310}
         m_TargetAssemblyTypeName: UIManager, WriteFight
-        m_MethodName: ConnectClicked
+        m_MethodName: SearchClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
