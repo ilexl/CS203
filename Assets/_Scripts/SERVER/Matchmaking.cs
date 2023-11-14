@@ -73,15 +73,17 @@ public class Matchmaking : MonoBehaviour
             foreach (var otherPlayer in matchPlayers)
             {
                 if (otherPlayer ==  player) continue;
-                SendStartGame(player.Id, player.Username, otherPlayer.Id, otherPlayer.Username);
+                SendStartGame(player, otherPlayer);
             }
         }
     }
-    private void SendStartGame(ushort ID, string Username, ushort OtherID, string OtherUsername)
+    private void SendStartGame(Player player, Player otherPlayer)
     {
+        Debug.Log($"Telling player {player} to start match with {otherPlayer}.");
+
         Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.gameStarted);
-        message.AddUShort(OtherID);
-        message.AddString(OtherUsername);
-        NetworkManager.Singleton.Server.Send(message, ID);
+        message.AddUShort(otherPlayer.Id);
+        message.AddString(otherPlayer.Username);
+        NetworkManager.Singleton.Server.Send(message, player.Id);
     }
 }
