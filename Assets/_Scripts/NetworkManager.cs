@@ -1,6 +1,7 @@
 using Riptide;
 using Riptide.Utils;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -86,5 +87,16 @@ public class NetworkManager : MonoBehaviour
     {
         // Popup and to main menu
         UIManager.Singleton.PlayerDisconnect();
+    }
+
+    public void ClientPlays(List<List<char>> board, int score)
+    {
+
+    }
+
+    [SerializeField] Game game;
+    public void OppenentPlays(List<List<char>> board, int score)
+    {
+        game.OppPlay(board, score);
     }
 }

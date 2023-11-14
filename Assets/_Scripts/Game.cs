@@ -23,6 +23,7 @@ public class Game : MonoBehaviour
     public bool localTurn = false;
     [SerializeField] WindowManager mainWindowManager;
     [SerializeField] Window mainMenuWindow;
+    [SerializeField] NetworkManager networkManager;
     public void PowerUp(string s)
     {
         // TODO - BLOCKED(Multiplayer) : Y,V
@@ -269,17 +270,22 @@ public class Game : MonoBehaviour
 
                     tileLetters.SpawnPlayerLetters(startingLettersAmount);
                 }
+                int scoreToAdd = 0;
                 foreach (string word in allWords)
                 {
                     if (!allPreviousWords.Contains(word))
                     {
-                        score.ChangeOwnScore(Score.CalculateBaseScore(word) * pointsMultiplier);
+                        scoreToAdd += Score.CalculateBaseScore(word) * pointsMultiplier;
                     }
                 }
+                score.ChangeOwnScore(scoreToAdd);
 
                 pointsMultiplier = 1;
                 allPreviousWords = allWords;
                 LocalCanPlay(false);
+
+                // Play here - server code
+                networkManager.ClientPlays(lettersGrid, scoreToAdd);
             }
             else
             {
@@ -298,6 +304,8 @@ public class Game : MonoBehaviour
     {
         LocalCanPlay(false);
         RefreshLetters();
+
+        networkManager.ClientPlays(lettersGrid, 0);
     }
 
     private void RefreshLetters()
