@@ -102,4 +102,12 @@ public class NetworkManager : MonoBehaviour
     {
         game.OppPlay(board, score);
     }
+    [MessageHandler((ushort)ServerToClientId.opponentDisconnected)]
+    public void OpponentDisconnect(Message message)
+    {
+        //alex stuff
+        Debug.Log("yes.");
+        game.LocalCanPlay(false);
+        game.popUpManager.ShowPopUp(8);
+    }
 }
