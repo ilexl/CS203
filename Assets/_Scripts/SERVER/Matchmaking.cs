@@ -33,7 +33,6 @@ public class Matchmaking : MonoBehaviour
     {
         Debug.Log($"{PlayerList[fromClientId]} has disconnected.");
         Player player = PlayerList[fromClientId];
-        Debug.Log("Got player successfully");
         Match match = player.currentMatch;
         MatchList.PlayerDisconnect(match);
         PlayerList.Remove(fromClientId);

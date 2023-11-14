@@ -71,7 +71,11 @@ public class MatchList : MonoBehaviour
     }
     private static void DestroyLobby(Match match)
     {
-        list.Remove(match);
+
+        if (list.Contains(match))
+        {
+            list.Remove(match);
+        }
     }
 }
 
