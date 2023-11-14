@@ -29,6 +29,21 @@ public class Matchmaking : MonoBehaviour
         PlayerList[fromClientId].status = PlayerStatus.Searching;
     }
 
+    [MessageHandler((ushort)ClientToServerId.sendTurn)]
+    private static void HandleTurnRecieved(ushort fromClientId, Message message)
+    {
+        //get the match that the player is in
+        Match match = PlayerList[fromClientId].currentMatch;
+        Debug.Log(message.GetString());
+        foreach (var player in match.GetPlayers())
+        {
+            if (player.Id !=  fromClientId)
+            {
+                NetworkManager.Singleton.Server.Send(message, fromClientId);
+            }
+        }
+    }
+
     public static void DestroyPlayer(ushort fromClientId)
     {
         Debug.Log($"{PlayerList[fromClientId]} has disconnected.");
