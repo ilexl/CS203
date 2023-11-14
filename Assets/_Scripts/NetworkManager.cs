@@ -104,9 +104,32 @@ public class NetworkManager : MonoBehaviour
     [SerializeField] Game game;
 
     // WILL NEEDS TO USE THIS WHEN RECIEVING DATA FROM SERVER
-    public void OppenentPlays(List<List<char>> board, int score)
+    [MessageHandler((ushort)ServerToClientId.recieveBoardState)]
+    public void OppenentPlays(Message message)
     {
-        game.OppPlay(board, score);
+        string boardRAW = message.GetString();
+        int score = message.GetInt();
+
+        List<List<char>> boardP = new List<List<char>>();
+
+        for (int i = 0; i < game.board.BoardSize * 2; i++)
+        {
+            for (int j = 0; j < game.board.BoardSize * 2; j++)
+            {
+                boardP[i][j] = ' ';
+            }
+        }
+
+        List<string> temp = boardRAW.Split('\n').ToList();
+        for (int i = 0; i < temp.Count; i++)
+        {
+            for (int j = 0; j < temp[i].Count(); j++)
+            {
+                boardP[i][j] = temp[i][j];
+            }
+        }
+
+        game.OppPlay(boardP, score);
     }
     [MessageHandler((ushort)ServerToClientId.opponentDisconnected)]
     public static void OpponentDisconnect(Message message)
