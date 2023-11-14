@@ -137,4 +137,20 @@ public class NetworkManager : MonoBehaviour
         //alex stuff
         Debug.Log("yes.");
     }
+
+    private string CompileBoard(List<List<char>> board)
+    {
+        string output = "";
+        foreach (var row in board)
+        {
+            foreach (char  c in row)
+            {
+                output += c;
+            }
+            output += "\n";
+        }
+        return output;
+    }
 }
+
+
