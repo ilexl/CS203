@@ -28943,7 +28943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bc2a884f84d0149ad08c6796d8e7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameMain: {fileID: 0}
+  GameMain: {fileID: 85333045}
   windowManagerMAIN: {fileID: 1310670310}
   game: {fileID: 85333046}
   mainMenu: {fileID: 468010537}
