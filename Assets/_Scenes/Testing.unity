@@ -26925,7 +26925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa93ef9dfe9209499e4fe058de162de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 192.168.1.77
+  ip: 219.89.18.156
   port: 7777
 --- !u!4 &1249484439
 Transform:
@@ -28943,7 +28943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bc2a884f84d0149ad08c6796d8e7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windowManagerMAIN: {fileID: 0}
+  windowManagerMAIN: {fileID: 1310670310}
   game: {fileID: 85333046}
   mainMenu: {fileID: 468010537}
   WaitForGameWindows: {fileID: 1342528405}
