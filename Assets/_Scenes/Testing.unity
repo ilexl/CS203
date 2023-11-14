@@ -27232,7 +27232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa93ef9dfe9209499e4fe058de162de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 192.168.1.77
+  ip: 219.89.18.156
   port: 7777
   game: {fileID: 85333045}
 --- !u!4 &1249484439
