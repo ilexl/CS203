@@ -24,8 +24,11 @@ public class UIManager : MonoBehaviour
     }
 
     [Header("Connect")]
-    [SerializeField] private GameObject connectUI;
     [SerializeField] private TMP_InputField usernameField;
+    [SerializeField] private PopUpManager connectPopUpManager;
+    [SerializeField] private WindowManager windowManager;
+    [SerializeField] private Window WaitingForGame;
+    [SerializeField] private Window Game;
 
     private void Awake()
     {
@@ -35,14 +38,18 @@ public class UIManager : MonoBehaviour
     public void ConnectClicked()
     {
         usernameField.interactable = false;
-        connectUI.SetActive(false);
         NetworkManager.Singleton.Connect();
     }
 
-    public void BackToMain()
+    public void ConnectionFailed()
     {
         usernameField.interactable = true;
-        connectUI.SetActive(true);
+        connectPopUpManager.ShowPopUp(0);
+    }
+
+    public void ConnectionSucceeded()
+    {
+        windowManager.ShowWindow(WaitingForGame);
     }
 
     public void SendName()

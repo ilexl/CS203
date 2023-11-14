@@ -63,15 +63,16 @@ public class NetworkManager : MonoBehaviour
     private void DidConnect(object sender, EventArgs e)
     {
         UIManager.Singleton.SendName();
+        UIManager.Singleton.ConnectionSucceeded();
     }
 
     private void FailedToConnect(object sender, EventArgs e)
     {
-        UIManager.Singleton.BackToMain();
+        UIManager.Singleton.ConnectionFailed();
     }
 
     private void DidDisconnect(object sender, EventArgs e)
     {
-        UIManager.Singleton.BackToMain();
+        // Popup and to main menu
     }
 }
