@@ -17,12 +17,14 @@ namespace wfMultiplayer
             string Output = "";
             foreach (List<char> row in boardChars)
             {
+                Output += "\n";
                 foreach (char c in row)
                 {
                     Output += $"[{c}]";
                 }
-                Output += "\n";
+                
             }
+            Output += "\n";
             return Output;
         }
     }
