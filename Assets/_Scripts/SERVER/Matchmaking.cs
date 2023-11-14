@@ -59,8 +59,29 @@ public class Matchmaking : MonoBehaviour
             Debug.Log("Created new match successfully");
             unmatchedPlayer.currentMatch = match;
             player.currentMatch = match;
+            SendStartGameToAllPlayers(matchPlayers);
             Debug.Log("Set new player matches successfully");
             unmatchedPlayer = null;
         }
+    }
+
+
+    private void SendStartGameToAllPlayers(List<Player> matchPlayers)
+    {
+        foreach (var player in matchPlayers)
+        {
+            foreach (var otherPlayer in matchPlayers)
+            {
+                if (otherPlayer ==  player) continue;
+                SendStartGame(player.Id, player.Username, otherPlayer.Id, otherPlayer.Username);
+            }
+        }
+    }
+    private void SendStartGame(ushort ID, string Username, ushort OtherID, string OtherUsername)
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.gameStarted);
+        message.AddUShort(OtherID);
+        message.AddString(OtherUsername);
+        NetworkManager.Singleton.Server.Send(message, ID);
     }
 }
