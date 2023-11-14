@@ -10,7 +10,7 @@ using UnityEditor;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] Board board;
+    public Board board;
     [SerializeField] TileLetterManager tileLetters;
     public List<List<char>> lettersGrid;
     [SerializeField] Words words;
