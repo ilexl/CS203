@@ -82,7 +82,7 @@ public class Matchmaking : MonoBehaviour
             foreach (var otherPlayer in matchPlayers)
             {
                 if (otherPlayer == player) continue;
-                bool startingTurn = false ? startingPlayerAlreadyAssigned : true;
+                bool startingTurn = startingPlayerAlreadyAssigned ? false : true;
                 SendStartGame(player, otherPlayer, startingTurn);
             }
             startingPlayerAlreadyAssigned = true;
