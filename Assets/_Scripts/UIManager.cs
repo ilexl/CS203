@@ -77,4 +77,20 @@ public class UIManager : MonoBehaviour
         windowManager.ShowWindow(MultiplayerConnect);
         connectPopUpManager.ShowPopUp(1);
     }
+
+    public void SendChatMessage(string message)
+    {
+        // Will To send message here
+
+        // Alex creates message under here for GUI to display
+        ChatManager.Singleton.Message(message, ChatManager.SentBy.Player);
+    }
+
+    public void RecieveChatMessage(string message)
+    {
+        // Will to call this function when recieving a message
+
+        // Alex creates message under here for GUI to display
+        ChatManager.Singleton.Message(message, ChatManager.SentBy.Opponent);
+    }
 } 
