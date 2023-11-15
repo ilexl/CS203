@@ -78,9 +78,10 @@ public class UIManager : MonoBehaviour
         connectPopUpManager.ShowPopUp(1);
     }
 
+    // THIS IS IN THE UI MANAGER CLASS (:
     public void SendChatMessage(string message)
     {
-        // Will To send message here
+        // Will To send message here to the other player from the server
 
         // Alex creates message under here for GUI to display
         ChatManager.Singleton.Message(message, ChatManager.SentBy.Player);
@@ -88,7 +89,7 @@ public class UIManager : MonoBehaviour
 
     public void RecieveChatMessage(string message)
     {
-        // Will to call this function when recieving a message
+        // Will to call this function when recieving a message from the server/other player
 
         // Alex creates message under here for GUI to display
         ChatManager.Singleton.Message(message, ChatManager.SentBy.Opponent);

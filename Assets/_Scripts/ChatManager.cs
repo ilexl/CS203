@@ -14,6 +14,8 @@ public class ChatManager : MonoBehaviour
     [SerializeField] GameObject playerChatPrefab;
     [SerializeField] GameObject opponentChatPrefab;
     [SerializeField] Transform parent;
+    [SerializeField] Transform typeToChatHolder;
+    [SerializeField] TMP_InputField blank;
     public static ChatManager Singleton
     {
         get => _singleton;
@@ -56,8 +58,22 @@ public class ChatManager : MonoBehaviour
 
     public void SendMessageTMPro(TMP_InputField inputField)
     {
+        if(inputField.text == null || inputField.text == string.Empty || inputField.text == "" ) { return; }
         UIManager.Singleton.SendChatMessage(inputField.text);
-        inputField.text = string.Empty;
+        inputField.gameObject.SetActive(false);
+        GameObject newChatInput = Instantiate(blank.gameObject, typeToChatHolder);
+        newChatInput.SetActive(true);
+
+        foreach (Transform child in inputField.transform)
+        {
+            foreach (Transform child2 in child.transform)
+            {
+                Destroy (child2.gameObject);
+            }
+            Destroy(child.gameObject);
+        }
+        Destroy(inputField.gameObject);
+
     }
 
     public void Message(string message, SentBy sentBy)
