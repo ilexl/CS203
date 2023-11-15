@@ -177,13 +177,14 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
                 {
                     if (t.GetPlayable())
                     {
-                        t.GetComponent<DragDrop>().OnBeginDrag(null);
-                        t.GetComponent<DragDrop>().OnEndDrag(null);
-                        if (t.GetDragDrop().dropHolder != null)
+                        DragDrop dd = t.GetDragDrop();
+                        dd.OnBeginDrag(null);
+                        dd.OnEndDrag(null);
+                        if (dd.dropHolder != null)
                         {
                             t.ResetDropHolder();
                         }
-                        t.GetComponent<DragDrop>().actualPosition = RandomPosition(t.transform);
+                        dd.actualPosition = RandomPosition(t.transform);
                     }
                 }
             }
@@ -232,6 +233,18 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
                 }
             }
 
+        }
+    }
+
+    public void DestroyAllLetters()
+    {
+        foreach (Transform letter in lettersParent)
+        {
+            TileLetter t;
+            if (letter.TryGetComponent(out t))
+            {
+                Destroy(letter.gameObject);
+            }
         }
     }
 

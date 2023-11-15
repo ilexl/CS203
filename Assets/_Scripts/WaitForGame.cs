@@ -61,6 +61,7 @@ public class WaitForGame : MonoBehaviour
         string nextLine2 = DoWeStart ? "" : "not ";
         nextLine += nextLine2 + "starting!";
         Debug.Log(nextLine);
+        Game.Singleton.NewGame();
         waitForGame.GameReady();
         waitForGame.GameMain.LocalCanPlay(DoWeStart);
     }

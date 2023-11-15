@@ -24,6 +24,7 @@ public class Game : MonoBehaviour
     [SerializeField] WindowManager mainWindowManager;
     [SerializeField] Window mainMenuWindow;
     [SerializeField] NetworkManager networkManager;
+    public bool isOnline = false;
     
 
     private static Game _singleton;
@@ -202,7 +203,15 @@ public class Game : MonoBehaviour
             Debug.LogError("Words not found...");
         }
         #endregion
-        
+
+        NewGame();
+    }
+
+    public void NewGame()
+    {
+        tileLetters.DestroyAllLetters();
+
+
         lettersGrid = new List<List<char>>();
         for (int i = 0; i < board.BoardSize * 2; i++)
         {
@@ -216,12 +225,19 @@ public class Game : MonoBehaviour
         allPreviousWords = new List<string>();
         pointsMultiplier = 1;
         LocalCanPlay(false);
-
+         
         tileLetters.ResetLettersBag();
-        tileLetters.SpawnPlayerLetters(startingLettersAmount);
-        tileLetters.Retrieve();
+
+        Invoke(nameof(NewLetters), 0.1f); // Why the fuck this work makes ZERO SENSE
 
         score.Reset();
+    }
+
+    private void NewLetters()
+    {
+        // UNITY being a %$&! ... - Do not remove this code
+        tileLetters.SpawnPlayerLetters(startingLettersAmount);
+        Invoke(nameof(tileLetters.Retrieve), 0.1f);
     }
 
     // Update is called once per frame
