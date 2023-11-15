@@ -25,16 +25,16 @@ public class Window : MonoBehaviour
     /// <summary>
     /// Shows or Hides window
     /// </summary>
-    /// <param name="active">determines if window shown</param>
+    /// <param sendName="active">determines if window shown</param>
     public void SetActive(bool active)
     {
         gameObject.SetActive(active);
     }
 
     /// <summary>
-    /// Gets the transforms name from UNITY_EDITOR
+    /// Gets the transforms sendName from UNITY_EDITOR
     /// </summary>
-    /// <returns>(string) transform name of window</returns>
+    /// <returns>(string) transform sendName of window</returns>
     public string GetName()
     {
         return transform.name;

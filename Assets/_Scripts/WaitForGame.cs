@@ -49,7 +49,7 @@ public class WaitForGame : MonoBehaviour
         WaitForGameWindows.ShowWindow(matchFound);
     }
 
-    [MessageHandler((ushort)ServerToClientId.gameStarted)]
+    [MessageHandler((ushort)ServerToClientId.recieveGameStarted)]
 
     private static void RecieveGameStartCall(Message message)
     {

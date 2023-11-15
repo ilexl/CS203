@@ -9,7 +9,7 @@ public class Matchmaking : MonoBehaviour
 
     public static Dictionary<ushort, Player> PlayerList = new Dictionary<ushort, Player>();
 
-    [MessageHandler((ushort)ClientToServerId.name)]
+    [MessageHandler((ushort)ClientToServerId.recieveNameFromClient)]
 
     private static void NewPlayer(ushort fromClientId, Message message)
     {
@@ -21,7 +21,7 @@ public class Matchmaking : MonoBehaviour
         Debug.Log($"{newPlayer} has connected, awaiting match.");
     }
 
-    [MessageHandler((ushort)ClientToServerId.searchForMatch)]
+    [MessageHandler((ushort)ClientToServerId.recieveSearchForMatch)]
 
     private static void SetPlayerToSearchForMatch(ushort fromClientId, Message message)
     {
@@ -29,11 +29,11 @@ public class Matchmaking : MonoBehaviour
         PlayerList[fromClientId].status = PlayerStatus.Searching;
     }
 
-    [MessageHandler((ushort)ClientToServerId.sendTurn)]
+    [MessageHandler((ushort)ClientToServerId.recieveTurnFromClient)]
 
     private static void HandleTurnRecieved(ushort fromClientId, Message _message)
     {
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.recieveBoardState);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendBoardStateToClient);
         message.AddString(_message.GetString());
         message.AddInt(_message.GetInt());
         //get the match that the player is in
@@ -113,7 +113,7 @@ public class Matchmaking : MonoBehaviour
     {
         Debug.Log($"Telling player {player} to start match with {otherPlayer}.");
 
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.gameStarted);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendGameStarted);
         message.AddUShort(otherPlayer.Id);
         message.AddString(otherPlayer.Username);
         message.AddBool(startingTurn);

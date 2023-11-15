@@ -51,7 +51,7 @@ public class MatchList : MonoBehaviour
             foreach (var player in match.GetPlayers())
             {
 
-                Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.opponentDisconnected);
+                Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendOpponentDisconnect);
                 NetworkManager.Singleton.Server.Send(message, player.Id);
                 Debug.Log($"{player} is now set to idle");
                 player.status = PlayerStatus.Idle;

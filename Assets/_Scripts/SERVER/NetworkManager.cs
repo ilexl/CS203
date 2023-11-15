@@ -4,16 +4,18 @@ using UnityEngine;
 /********************************************************************************THIS IS THE SERVERSIDE VERSION DON'T BE A FOOL ************************************************************************/
 public enum ClientToServerId : ushort
 {
-    name = 1,
-    searchForMatch = 2,
-    sendTurn = 3,
+    recieveNameFromClient = 1,
+    recieveSearchForMatch = 2,
+    recieveTurnFromClient = 3,
+    recieveChat = 4,
 }
 
 public enum ServerToClientId : ushort
 {
-    gameStarted = 1,
-    recieveBoardState = 2,
-    opponentDisconnected = 5,
+    sendGameStarted = 1,
+    sendBoardStateToClient = 2,
+    sendChat = 4,
+    sendOpponentDisconnect = 5,
 }
 public class NetworkManager : MonoBehaviour
 {

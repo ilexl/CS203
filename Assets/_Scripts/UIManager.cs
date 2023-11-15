@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
 
     private void SendSearchStatus()
     {
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.searchForMatch);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendSearchForMatch);
         NetworkManager.Singleton.Client.Send(message);
     }
     public void ConnectionFailed()
@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
 
     public void SendName()
     {
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.name);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendName);
         message.AddString(usernameField.text);
         NetworkManager.Singleton.Client.Send(message);
     }
