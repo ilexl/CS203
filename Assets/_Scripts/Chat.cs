@@ -11,6 +11,23 @@ public class Chat : MonoBehaviour
     [SerializeField] RectTransform chatHeight;
     [SerializeField] private float speed = 10f;
 
+
+    private static Chat _singleton;
+    public static Chat Singleton
+    {
+        get => _singleton;
+        private set
+        {
+            if (_singleton == null)
+                _singleton = value;
+            else if (_singleton != value)
+            {
+                Debug.Log($"{nameof(Chat)} instance already exists, destroying duplicate!");
+                Destroy(value);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -63,5 +80,10 @@ public class Chat : MonoBehaviour
     public void SetText(string text)
     {
         chatTxt.text = text;
+    }
+
+    private void Awake()
+    {
+        Singleton = this;
     }
 }
