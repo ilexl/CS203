@@ -24,7 +24,7 @@ public class Game : MonoBehaviour
     [SerializeField] WindowManager mainWindowManager;
     [SerializeField] Window mainMenuWindow;
     [SerializeField] NetworkManager networkManager;
-    public bool isOnline = false;
+    public bool isMultiplayer = false;
     
 
     private static Game _singleton;
@@ -209,6 +209,7 @@ public class Game : MonoBehaviour
 
     public void NewGame()
     {
+        isMultiplayer = false;
         tileLetters.DestroyAllLetters();
 
 

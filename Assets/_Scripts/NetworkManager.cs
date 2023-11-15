@@ -146,6 +146,7 @@ public class NetworkManager : MonoBehaviour
         //alex stuff
         Game.Singleton.LocalCanPlay(false);
         Game.Singleton.popUpManager.ShowPopUp(8);
+        Game.Singleton.isMultiplayer = false;
     }
 
     private static string CompileBoard(List<List<char>> board)

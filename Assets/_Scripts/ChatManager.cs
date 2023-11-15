@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ChatManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject offlineOverlay;
 
     // Update is called once per frame
     void Update()
     {
-        
+        offlineOverlay.SetActive(!Game.Singleton.isMultiplayer);
     }
 }
