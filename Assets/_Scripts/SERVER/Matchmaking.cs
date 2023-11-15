@@ -9,7 +9,7 @@ public class Matchmaking : MonoBehaviour
 
     public static Dictionary<ushort, Player> PlayerList = new Dictionary<ushort, Player>();
 
-    [MessageHandler((ushort)ClientToServerId.name)]
+    [MessageHandler((ushort)ClientToServerId.recieveNameFromClient)]
 
     private static void NewPlayer(ushort fromClientId, Message message)
     {
@@ -21,7 +21,7 @@ public class Matchmaking : MonoBehaviour
         Debug.Log($"{newPlayer} has connected, awaiting match.");
     }
 
-    [MessageHandler((ushort)ClientToServerId.searchForMatch)]
+    [MessageHandler((ushort)ClientToServerId.recieveSearchForMatch)]
 
     private static void SetPlayerToSearchForMatch(ushort fromClientId, Message message)
     {
@@ -29,11 +29,11 @@ public class Matchmaking : MonoBehaviour
         PlayerList[fromClientId].status = PlayerStatus.Searching;
     }
 
-    [MessageHandler((ushort)ClientToServerId.sendTurn)]
+    [MessageHandler((ushort)ClientToServerId.recieveTurnFromClient)]
 
     private static void HandleTurnRecieved(ushort fromClientId, Message _message)
     {
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.recieveBoardState);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendBoardStateToClient);
         message.AddString(_message.GetString());
         message.AddInt(_message.GetInt());
         //get the match that the player is in
@@ -42,6 +42,24 @@ public class Matchmaking : MonoBehaviour
         foreach (var player in match.GetPlayers())
         {
             if (player.Id !=  fromClientId)
+            {
+                NetworkManager.Singleton.Server.Send(message, player.Id);
+            }
+        }
+    }
+    [MessageHandler((ushort)ClientToServerId.recieveChat)]
+
+    private static void RelayChat(ushort fromClientId, Message _message)
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendChat);
+        message.AddString(_message.GetString());
+
+        Match match = PlayerList[fromClientId].currentMatch;
+        Debug.Log(_message.GetString());
+
+        foreach (var player in match.GetPlayers())
+        {
+            if (player.Id != fromClientId)
             {
                 NetworkManager.Singleton.Server.Send(message, player.Id);
             }
@@ -113,7 +131,7 @@ public class Matchmaking : MonoBehaviour
     {
         Debug.Log($"Telling player {player} to start match with {otherPlayer}.");
 
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.gameStarted);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendGameStarted);
         message.AddUShort(otherPlayer.Id);
         message.AddString(otherPlayer.Username);
         message.AddBool(startingTurn);

@@ -62,7 +62,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Shows the individual window - Hides all other windows the WM manages
     /// </summary>
-    /// <param name="window">The window to show</param>
+    /// <param sendName="window">The window to show</param>
     public void ShowWindow(Window window)
     {
         foreach(Window _window in Windows)
@@ -81,7 +81,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Shows the individual window - Hides all other windows the WM manages
     /// </summary>
-    /// <param name="windowIndex">The index in windows to show</param>
+    /// <param sendName="windowIndex">The index in windows to show</param>
     public void ShowWindow(int windowIndex)
     {
         if(windowIndex >= Windows.Length)
@@ -99,7 +99,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Shows the individual window - Hides all other windows the WM manages
     /// </summary>
-    /// <param name="windowName">The transform name of the window to show</param>
+    /// <param sendName="windowName">The transform sendName of the window to show</param>
     public void ShowWindow(string windowName)
     {
         bool found = false;
@@ -125,7 +125,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Shows the individual window - Leaves all other windows the WM manages
     /// </summary>
-    /// <param name="window">The window to show</param>
+    /// <param sendName="window">The window to show</param>
     public void ShowOnly(Window window)
     {
         foreach (Window _window in Windows)
@@ -140,7 +140,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Shows the individual window - Leaves all other windows the WM manages
     /// </summary>
-    /// <param name="windowIndex">The index in windows to show</param>
+    /// <param sendName="windowIndex">The index in windows to show</param>
     public void ShowOnly(int windowIndex)
     {
         if (windowIndex >= Windows.Length)
@@ -158,7 +158,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Shows the individual window - Leaves all other windows the WM manages
     /// </summary>
-    /// <param name="windowName">The transform name of the window to show</param>
+    /// <param sendName="windowName">The transform sendName of the window to show</param>
     public void ShowOnly(string windowName)
     {
         bool found = false;
@@ -196,7 +196,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Hides the individual window - Leaves all other windows the WM manages
     /// </summary>
-    /// <param name="window">The window to hide</param>
+    /// <param sendName="window">The window to hide</param>
     public void HideOnly(Window window)
     {
         foreach (Window _window in Windows)
@@ -211,7 +211,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Hides the individual window - Leaves all other windows the WM manages
     /// </summary>
-    /// <param name="windowIndex">The index in windows to Hide</param>
+    /// <param sendName="windowIndex">The index in windows to Hide</param>
     public void HideOnly(int windowIndex)
     {
         if (windowIndex >= Windows.Length)
@@ -229,7 +229,7 @@ public class WindowManager : MonoBehaviour
     /// <summary>
     /// Hides the individual window - Leaves all other windows the WM manages
     /// </summary>
-    /// <param name="windowName">The transform name of the window to Hide</param>
+    /// <param sendName="windowName">The transform sendName of the window to Hide</param>
     public void HideOnly(string windowName)
     {
         bool found = false;

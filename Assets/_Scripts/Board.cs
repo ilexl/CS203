@@ -73,7 +73,7 @@ public class Board : MonoBehaviour
             Vector3 realPos = new(((b.position - lastPiece.transform.position) / spacing).x + offset.x,
                 (offset.y - ((b.position - lastPiece.transform.position) / spacing).y),
                 0);
-            b.name += " - " + realPos.ToString(); // name them just in case
+            b.name += " - " + realPos.ToString(); // sendName them just in case
             b.GetComponent<BoardPart>().realPos = realPos;
         }
     }

@@ -11,16 +11,18 @@ using UnityEditor;
 
 public enum ClientToServerId : ushort
 {
-    name = 1,
-    searchForMatch = 2,
-    sendTurn = 3,
+    sendName = 1,
+    sendSearchForMatch = 2,
+    sendTurnToServer = 3,
+    sendChat = 4,
 }
 
 public enum ServerToClientId : ushort
 {
-    gameStarted = 1,
+    recieveGameStarted = 1,
     recieveBoardState = 2,
-    opponentDisconnected = 5,
+    recieveChat = 4,
+    recieveOpponentDisconnect = 5,
 }
 public class NetworkManager : MonoBehaviour
 {
@@ -103,7 +105,7 @@ public class NetworkManager : MonoBehaviour
 
     public void ClientPlays(List<List<char>> board, int score)
     {
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendTurn);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendTurnToServer);
         message.AddString(CompileBoard(board));
         message.AddInt(score);
         Singleton.Client.Send(message);
@@ -140,7 +142,7 @@ public class NetworkManager : MonoBehaviour
 
         Game.Singleton.OppPlay(boardP, score);
     }
-    [MessageHandler((ushort)ServerToClientId.opponentDisconnected)]
+    [MessageHandler((ushort)ServerToClientId.recieveOpponentDisconnect)]
     public static void OpponentDisconnect(Message message)
     {
         //alex stuff

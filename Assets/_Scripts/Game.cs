@@ -11,6 +11,7 @@ using UnityEditor;
 public class Game : MonoBehaviour
 {
     public Board board;
+    public string OtherPlayerUsername = "";
     [SerializeField] TileLetterManager tileLetters;
     public List<List<char>> lettersGrid;
     [SerializeField] Words words;

@@ -145,10 +145,10 @@ public class Words : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="raw"></param>
-    /// <param name="word"></param>
-    /// <param name="row"></param>
-    /// <param name="col"></param>
+    /// <param sendName="raw"></param>
+    /// <param sendName="word"></param>
+    /// <param sendName="row"></param>
+    /// <param sendName="col"></param>
     /// <returns>true if single letter else false if part of a word</returns>
     bool CheckSingle(List<List<char>> raw, string word, int row, int col)
     {

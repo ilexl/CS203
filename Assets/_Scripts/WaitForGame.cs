@@ -49,14 +49,15 @@ public class WaitForGame : MonoBehaviour
         WaitForGameWindows.ShowWindow(matchFound);
     }
 
-    [MessageHandler((ushort)ServerToClientId.gameStarted)]
+    [MessageHandler((ushort)ServerToClientId.recieveGameStarted)]
 
     private static void RecieveGameStartCall(Message message)
     {
+        
         ushort otherPlayerId = message.GetUShort();
-        string otherPlayerUsername = message.GetString();
+        Game.Singleton.OtherPlayerUsername = message.GetString();
         bool DoWeStart = message.GetBool();
-        Debug.Log($"Started match with player [{otherPlayerUsername}:{otherPlayerId}]. ");
+        Debug.Log($"Started match with player [{Game.Singleton.OtherPlayerUsername}:{otherPlayerId}]. ");
         string nextLine = "You are ";
         string nextLine2 = DoWeStart ? "" : "not ";
         nextLine += nextLine2 + "starting!";

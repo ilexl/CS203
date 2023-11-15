@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
 
     private void SendSearchStatus()
     {
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.searchForMatch);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendSearchForMatch);
         NetworkManager.Singleton.Client.Send(message);
     }
     public void ConnectionFailed()
@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
 
     public void SendName()
     {
-        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.name);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendName);
         message.AddString(usernameField.text);
         NetworkManager.Singleton.Client.Send(message);
     }
@@ -79,15 +79,24 @@ public class UIManager : MonoBehaviour
     }
 
     // THIS IS IN THE UI MANAGER CLASS (:
-    public void SendChatMessage(string message)
+    public void SendChatMessage(string chatMessage)
     {
         // Will To send message here to the other player from the server
-
-        // Alex creates message under here for GUI to display
-        ChatManager.Singleton.Message(message, ChatManager.SentBy.Player);
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendChat);
+        message.AddString(chatMessage);
+        NetworkManager.Singleton.Client.Send(message);
+        // Alex creates chatMessage under here for GUI to display
+        ChatManager.Singleton.Message(chatMessage, ChatManager.SentBy.Player);
     }
 
-    public void RecieveChatMessage(string message)
+    [MessageHandler((ushort)ServerToClientId.recieveChat)]
+
+    public static void RecieveChatMessage(Message message)
+    {
+        Singleton.UpdateChat(message.GetString());
+    }
+
+    public void UpdateChat(string message)
     {
         // Will to call this function when recieving a message from the server/other player
 
