@@ -232,6 +232,11 @@ public class Game : MonoBehaviour
         Invoke(nameof(NewLetters), 0.1f); // Why the fuck this work makes ZERO SENSE
 
         score.Reset();
+        if(ChatManager.Singleton != null)
+        {
+            ChatManager.Singleton.ClearAllMessages();
+            // Doesnt matter on start / initialisation as there are not chats in the initialisation stage ):
+        }
     }
 
     private void NewLetters()
