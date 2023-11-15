@@ -40,8 +40,13 @@ public class Words : MonoBehaviour
         public bool Contains(string word)
         {
             word = word.ToUpper();
+#if UNITY_STANDALONE_OSX
+            return WordArray.Contains(word);
+#else
             word += ((char)13).ToString();  // i have no fucking idea but it works
             return WordArray.Contains(word);
+#endif
+
         }
     }
 
