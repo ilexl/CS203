@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 
 public enum ClientToServerId : ushort
@@ -23,6 +26,11 @@ public enum ServerToClientId : ushort
 }
 public class NetworkManager : MonoBehaviour
 {
+    public void TempLocalSever()
+    {
+        ip = "192.168.1.77";
+    }
+
     private static NetworkManager _singleton;
     public static NetworkManager Singleton
     {
@@ -140,6 +148,7 @@ public class NetworkManager : MonoBehaviour
         //alex stuff
         Game.Singleton.LocalCanPlay(false);
         Game.Singleton.popUpManager.ShowPopUp(8);
+        Game.Singleton.isMultiplayer = false;
     }
 
     private static string CompileBoard(List<List<char>> board)
@@ -158,3 +167,18 @@ public class NetworkManager : MonoBehaviour
 }
 
 
+#if UNITY_EDITOR
+[CustomEditor(typeof(NetworkManager))]
+public class EDITOR_NetworkManager : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        NetworkManager nm = (NetworkManager)target;
+        if(GUILayout.Button("temp local"))
+        {
+            nm.TempLocalSever();
+        }
+    }
+}
+#endif
