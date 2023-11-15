@@ -2813,7 +2813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bc0392444a1472e9437fcecfd5c287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowOnStart: 1
+  ShowOnStart: 0
 --- !u!114 &85333047
 MonoBehaviour:
   m_ObjectHideFlags: 0
