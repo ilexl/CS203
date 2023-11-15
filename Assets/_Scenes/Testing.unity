@@ -2790,6 +2790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 146285032}
+  OtherPlayerUsername: 
   tileLetters: {fileID: 146285033}
   words: {fileID: 85333044}
   popUpManager: {fileID: 85333047}
@@ -18804,7 +18805,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 306
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
@@ -31046,7 +31047,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 306
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
