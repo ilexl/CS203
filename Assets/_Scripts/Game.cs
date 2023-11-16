@@ -422,9 +422,91 @@ public class Game : MonoBehaviour
         playButton.interactable = play;
     }
 
+    #region DrawStuff
+    public void DrawButton()
+    {
+        // prompt user to confirm draw
+        popUpManager.ShowPopUp(9);
+    }
+
+    public void DrawButtonCONFIRM()
+    {
+        popUpManager.ShowPopUp(10); // waiting for response pop up
+        playButton.interactable = false;
+    
+        // ********** SEND DRAW PROMPT TO SERVER *****************
+    }
+
+    public void AcceptDraw()
+    {
+        // button pressed saying confirm draw request
+        DrawAccepted();
+
+        // ********** SEND DRAW ACCEPTED TO SERVER *****************
+    }
+
+    public void DeclineDraw()
+    {
+        // button pressed
+        playButton.interactable = true;
+
+        // ********** SEND DRAW DECLINED TO SERVER *****************
+    }
+
+    // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    // **********************SEND*************************************
+    // **********************RECIEVE**********************************
+    // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    public void DrawRequestFromOpp()
+    {
+        // recieve draw request from opp and display prompt
+        playButton.interactable = false;
+        popUpManager.ShowPopUp(11);
+
+        // ********** RECIEVE DRAW PROMPT FROM SERVER *****************
+    }
+
+    public void DrawAccepted()
+    {
+        // this is recieved by the server/self to tell this player the draw is done
+        GameOver("Draw!");
+
+        // ********** RECIEVE DRAW ACCEPTED FROM SERVER *****************
+    }
+
+    public void DrawDeclined()
+    {
+        playButton.interactable = true;
+        popUpManager.HideAllPopUps();
+
+        // ********** RECIEVE DRAW DECLINED FROM SERVER *****************
+    }
+    #endregion
+    #region Resign/Win
+    public void ResignButton()
+    {
+        popUpManager.ShowPopUp(12);
+    }
+    public void Resign()
+    {
+        GameOver("Opponent Wins!");
+
+        // ********** SEND RESIGN TO SERVER *****************
+    }
+
+    public void Win()
+    {
+        // server will call this when opponent resigns
+        GameOver("You Win!");
+
+        // ********** RECIEVE RESIGN TO SERVER *****************
+    }
+
+    #endregion
+
     public void GameOver(string win)
     {
-        string message = "Game Over...\n" + win + " Win!!!";
+        string message = "Game Over...\n" + win;
         popUpManager.ShowPopUp(7, message);
         Invoke(nameof(ShowMainMenu), 5);
     }
