@@ -6,51 +6,34 @@ using UnityEngine.UI;
 public class MusicController : MonoBehaviour
 {
     public List<AudioClip> musicList;
-    public AudioSource soundPlayer;
-    public Button playButton;
+    public AudioSource audio;
 
-    private bool isPlaying = false;
     private int currentMusicIndex = 0;
 
     private void Start()
     {
-        playButton.onClick.AddListener(ToggleMusic);
-        soundPlayer = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
 
         if (musicList.Count > 0)
         {
-            soundPlayer.clip = musicList[currentMusicIndex];
+            audio.clip = musicList[currentMusicIndex];
+            audio.Play();
         }
     }
 
-    private void ToggleMusic()
+    public void ToggleMusic(Toggle toggle)
     {
-        if (isPlaying)
+        bool play = toggle.isOn;
+        if (play)
         {
-            soundPlayer.Pause();
+            audio.Pause();
+            audio.volume = 0.0f;
         }
         else
         {
-            soundPlayer.Play();
-        }
-
-        isPlaying = !isPlaying;
-    }
-
-    public void ChangeMusic(int index)
-    {
-        if (index >= 0 && index < musicList.Count)
-        {
-            currentMusicIndex = index;
-            soundPlayer.clip = musicList[currentMusicIndex];
-
-
-            if (isPlaying)
-            {
-                soundPlayer.Stop();
-                soundPlayer.Play();
-            }
+            audio.Play();
+            audio.volume = 1.0f;
         }
     }
-} // musicController.ChangeMusic(1); call specified music example
+}
 
