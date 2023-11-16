@@ -30,6 +30,10 @@ public class NetworkManager : MonoBehaviour
     {
         ip = "192.168.1.77";
     }
+    public void TempGlobalSever()
+    {
+        ip = "219.89.18.156";
+    }
 
     private static NetworkManager _singleton;
     public static NetworkManager Singleton
@@ -178,6 +182,10 @@ public class EDITOR_NetworkManager : Editor
         if(GUILayout.Button("temp local"))
         {
             nm.TempLocalSever();
+        }
+        if (GUILayout.Button("temp global"))
+        {
+            nm.TempGlobalSever();
         }
     }
 }

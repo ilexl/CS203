@@ -485,7 +485,7 @@ public class Game : MonoBehaviour
     #region Resign/Win
     public void ResignButton()
     {
-
+        popUpManager.ShowPopUp(12);
     }
     public void Resign()
     {
