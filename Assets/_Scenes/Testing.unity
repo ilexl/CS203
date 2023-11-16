@@ -3611,7 +3611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicList:
   - {fileID: 8300000, guid: 34fe5151422ad8d4d8b4b1e2fa79e901, type: 3}
-  audio: {fileID: 0}
+  _audio: {fileID: 0}
 --- !u!82 &103022917
 AudioSource:
   m_ObjectHideFlags: 0
@@ -37704,6 +37704,7 @@ GameObject:
   - component: {fileID: 1523946534}
   - component: {fileID: 1523946533}
   - component: {fileID: 1523946532}
+  - component: {fileID: 1523946535}
   m_Layer: 5
   m_Name: NotOwnTurn
   m_TagString: Untagged
@@ -37783,6 +37784,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523946530}
   m_CullTransparentMesh: 1
+--- !u!225 &1523946535
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523946530}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1524160900
 GameObject:
   m_ObjectHideFlags: 0
