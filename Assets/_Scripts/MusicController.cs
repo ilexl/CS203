@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class MusicController : MonoBehaviour
 {
     public List<AudioClip> musicList;
-    public AudioSource audio;
+    public AudioSource _audio;
 
     private int currentMusicIndex = 0;
 
     private void Start()
     {
-        audio = GetComponent<AudioSource>();
+        _audio = GetComponent<AudioSource>();
 
         if (musicList.Count > 0)
         {
-            audio.clip = musicList[currentMusicIndex];
-            audio.Play();
+            _audio.clip = musicList[currentMusicIndex];
+            _audio.Play();
         }
     }
 
@@ -26,13 +26,13 @@ public class MusicController : MonoBehaviour
         bool play = toggle.isOn;
         if (play)
         {
-            audio.Pause();
-            audio.volume = 0.0f;
+            _audio.Pause();
+            _audio.volume = 0.0f;
         }
         else
         {
-            audio.Play();
-            audio.volume = 1.0f;
+            _audio.Play();
+            _audio.volume = 1.0f;
         }
     }
 }

@@ -33,12 +33,17 @@ public class UIManager : MonoBehaviour
         Singleton = this;
     }
 
+    public void EnableUsernameEdit()
+    {
+        usernameField.interactable = true;
+    }
+
     public void ConnectClicked()
     {
         usernameField.interactable = false;
         NetworkManager.Singleton.Connect();
     }
-
+    
     public void SearchClicked()
     {
         SendSearchStatus();
