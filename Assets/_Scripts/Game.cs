@@ -422,37 +422,91 @@ public class Game : MonoBehaviour
         playButton.interactable = play;
     }
 
+    #region DrawStuff
     public void DrawButton()
     {
-        // send draw prompt to oppenent and wait for response
+        // prompt user to confirm draw
+        popUpManager.ShowPopUp(9);
     }
 
-    public void DrawRequestFromOpp()
+    public void DrawButtonCONFIRM()
     {
-        // recieve draw request from opp and display prompt
+        popUpManager.ShowPopUp(10); // waiting for response pop up
+        playButton.interactable = false;
+    
+        // ********** SEND DRAW PROMPT TO SERVER *****************
     }
 
-    public void Draw()
+    public void AcceptDraw()
     {
-        // if a player calls this then it has recieved a draw request and accepted the draw request
-        // this will send to the other player the draw has been accepted
+        // button pressed saying confirm draw request
+        DrawAccepted();
+
+        // ********** SEND DRAW ACCEPTED TO SERVER *****************
     }
 
     public void DeclineDraw()
     {
-        // if a player calls this then it has recieved a draw request and rejected the draw request
-        // this will send to the other player the draw has been rejected
+        // button pressed
+        playButton.interactable = true;
+
+        // ********** SEND DRAW DECLINED TO SERVER *****************
     }
 
+    // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    // **********************SEND*************************************
+    // **********************RECIEVE**********************************
+    // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    public void DrawRequestFromOpp()
+    {
+        // recieve draw request from opp and display prompt
+        playButton.interactable = false;
+        popUpManager.ShowPopUp(11);
+
+        // ********** RECIEVE DRAW PROMPT FROM SERVER *****************
+    }
+
+    public void DrawAccepted()
+    {
+        // this is recieved by the server/self to tell this player the draw is done
+        GameOver("Draw!");
+
+        // ********** RECIEVE DRAW ACCEPTED FROM SERVER *****************
+    }
+
+    public void DrawDeclined()
+    {
+        playButton.interactable = true;
+        popUpManager.HideAllPopUps();
+
+        // ********** RECIEVE DRAW DECLINED FROM SERVER *****************
+    }
+    #endregion
+    #region Resign/Win
+    public void ResignButton()
+    {
+
+    }
     public void Resign()
     {
-        GameOver("Opp");
-        // inform other player that they win and I lose (:
+        GameOver("Opponent Wins!");
+
+        // ********** SEND RESIGN TO SERVER *****************
     }
+
+    public void Win()
+    {
+        // server will call this when opponent resigns
+        GameOver("You Win!");
+
+        // ********** RECIEVE RESIGN TO SERVER *****************
+    }
+
+    #endregion
 
     public void GameOver(string win)
     {
-        string message = "Game Over...\n" + win + " Win!!!";
+        string message = "Game Over...\n" + win;
         popUpManager.ShowPopUp(7, message);
         Invoke(nameof(ShowMainMenu), 5);
     }

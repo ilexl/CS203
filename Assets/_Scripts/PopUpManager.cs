@@ -5,6 +5,14 @@ using UnityEngine;
 public class PopUpManager : MonoBehaviour
 {
     [SerializeField] PopUp[] allPopUps;
+
+    public void HideAllPopUps()
+    {
+        foreach(PopUp popUp in allPopUps)
+        {
+            popUp.Hide();
+        }
+    }
     public void ShowPopUp(PopUp popUp, string message)
     {
         popUp.NewPopUp(message);
