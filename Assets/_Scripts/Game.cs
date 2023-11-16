@@ -161,7 +161,7 @@ public class Game : MonoBehaviour
     {
 
 
-         Singleton = this;
+        Singleton = this;
         #region config-chks
         if (board == null)
         {
@@ -420,6 +420,34 @@ public class Game : MonoBehaviour
     {
         localTurn = play;
         playButton.interactable = play;
+    }
+
+    public void DrawButton()
+    {
+        // send draw prompt to oppenent and wait for response
+    }
+
+    public void DrawRequestFromOpp()
+    {
+        // recieve draw request from opp and display prompt
+    }
+
+    public void Draw()
+    {
+        // if a player calls this then it has recieved a draw request and accepted the draw request
+        // this will send to the other player the draw has been accepted
+    }
+
+    public void DeclineDraw()
+    {
+        // if a player calls this then it has recieved a draw request and rejected the draw request
+        // this will send to the other player the draw has been rejected
+    }
+
+    public void Resign()
+    {
+        GameOver("Opp");
+        // inform other player that they win and I lose (:
     }
 
     public void GameOver(string win)
