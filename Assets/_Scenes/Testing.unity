@@ -1095,6 +1095,7 @@ GameObject:
   - component: {fileID: 40579043}
   - component: {fileID: 40579042}
   - component: {fileID: 40579041}
+  - component: {fileID: 40579044}
   m_Layer: 5
   m_Name: Retrieve
   m_TagString: Untagged
@@ -1217,6 +1218,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40579039}
   m_CullTransparentMesh: 1
+--- !u!114 &40579044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40579039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &41829971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1712,7 @@ GameObject:
   - component: {fileID: 52167718}
   - component: {fileID: 52167717}
   - component: {fileID: 52167716}
+  - component: {fileID: 52167719}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -1816,6 +1847,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52167714}
   m_CullTransparentMesh: 1
+--- !u!114 &52167719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52167714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &58373017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3262,6 +3322,7 @@ GameObject:
   - component: {fileID: 92556382}
   - component: {fileID: 92556381}
   - component: {fileID: 92556380}
+  - component: {fileID: 92556383}
   m_Layer: 5
   m_Name: Connect
   m_TagString: Untagged
@@ -3396,6 +3457,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92556378}
   m_CullTransparentMesh: 1
+--- !u!114 &92556383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92556378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &103022914
 GameObject:
   m_ObjectHideFlags: 0
@@ -7756,6 +7846,7 @@ GameObject:
   - component: {fileID: 261272719}
   - component: {fileID: 261272718}
   - component: {fileID: 261272717}
+  - component: {fileID: 261272720}
   m_Layer: 5
   m_Name: mm
   m_TagString: Untagged
@@ -7902,6 +7993,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261272715}
   m_CullTransparentMesh: 1
+--- !u!114 &261272720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261272715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &270302673
 GameObject:
   m_ObjectHideFlags: 0
@@ -8454,6 +8574,7 @@ GameObject:
   - component: {fileID: 280978342}
   - component: {fileID: 280978341}
   - component: {fileID: 280978340}
+  - component: {fileID: 280978343}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -8576,6 +8697,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280978338}
   m_CullTransparentMesh: 1
+--- !u!114 &280978343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280978338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &283798017
 GameObject:
   m_ObjectHideFlags: 0
@@ -8588,6 +8738,7 @@ GameObject:
   - component: {fileID: 283798021}
   - component: {fileID: 283798020}
   - component: {fileID: 283798019}
+  - component: {fileID: 283798022}
   m_Layer: 5
   m_Name: Res_btn
   m_TagString: Untagged
@@ -8698,6 +8849,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283798017}
   m_CullTransparentMesh: 1
+--- !u!114 &283798022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283798017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &289709224
 GameObject:
   m_ObjectHideFlags: 0
@@ -10326,6 +10506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377715728}
   - component: {fileID: 377715729}
+  - component: {fileID: 377715730}
   m_Layer: 5
   m_Name: Power (5)
   m_TagString: Untagged
@@ -10412,6 +10593,35 @@ MonoBehaviour:
           m_StringArgument: Z
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &377715730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377715727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &384251906
 GameObject:
   m_ObjectHideFlags: 0
@@ -10422,6 +10632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384251907}
   - component: {fileID: 384251908}
+  - component: {fileID: 384251909}
   m_Layer: 5
   m_Name: Power (1)
   m_TagString: Untagged
@@ -10508,6 +10719,35 @@ MonoBehaviour:
           m_StringArgument: Y
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &384251909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384251906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &397080135
 GameObject:
   m_ObjectHideFlags: 0
@@ -12456,6 +12696,7 @@ GameObject:
   - component: {fileID: 511284784}
   - component: {fileID: 511284783}
   - component: {fileID: 511284782}
+  - component: {fileID: 511284785}
   m_Layer: 5
   m_Name: Draw_btn
   m_TagString: Untagged
@@ -12566,6 +12807,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511284780}
   m_CullTransparentMesh: 1
+--- !u!114 &511284785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511284780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &512713522
 GameObject:
   m_ObjectHideFlags: 0
@@ -15971,6 +16241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 692075146}
   - component: {fileID: 692075147}
+  - component: {fileID: 692075148}
   m_Layer: 5
   m_Name: Power (6)
   m_TagString: Untagged
@@ -16057,6 +16328,35 @@ MonoBehaviour:
           m_StringArgument: X
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &692075148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692075145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &693252691
 GameObject:
   m_ObjectHideFlags: 0
@@ -24293,6 +24593,7 @@ GameObject:
   - component: {fileID: 1051317786}
   - component: {fileID: 1051317785}
   - component: {fileID: 1051317784}
+  - component: {fileID: 1051317787}
   m_Layer: 5
   m_Name: Cancel_Btn
   m_TagString: Untagged
@@ -24415,6 +24716,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051317782}
   m_CullTransparentMesh: 1
+--- !u!114 &1051317787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051317782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1060468897
 GameObject:
   m_ObjectHideFlags: 0
@@ -24464,6 +24794,7 @@ GameObject:
   - component: {fileID: 1062589092}
   - component: {fileID: 1062589091}
   - component: {fileID: 1062589090}
+  - component: {fileID: 1062589093}
   m_Layer: 5
   m_Name: Try Again
   m_TagString: Untagged
@@ -24586,6 +24917,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062589088}
   m_CullTransparentMesh: 1
+--- !u!114 &1062589093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062589088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1069873580
 GameObject:
   m_ObjectHideFlags: 0
@@ -26528,6 +26888,7 @@ GameObject:
   - component: {fileID: 1170964096}
   - component: {fileID: 1170964095}
   - component: {fileID: 1170964094}
+  - component: {fileID: 1170964097}
   m_Layer: 5
   m_Name: PlayRandom
   m_TagString: Untagged
@@ -26674,6 +27035,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170964092}
   m_CullTransparentMesh: 1
+--- !u!114 &1170964097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170964092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1173506846
 GameObject:
   m_ObjectHideFlags: 0
@@ -27305,6 +27695,7 @@ GameObject:
   - component: {fileID: 1205729489}
   - component: {fileID: 1205729488}
   - component: {fileID: 1205729487}
+  - component: {fileID: 1205729490}
   m_Layer: 5
   m_Name: LeaderBoard
   m_TagString: Untagged
@@ -27415,6 +27806,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205729485}
   m_CullTransparentMesh: 1
+--- !u!114 &1205729490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205729485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1210236348
 GameObject:
   m_ObjectHideFlags: 0
@@ -27506,6 +27926,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1212132819}
   - component: {fileID: 1212132820}
+  - component: {fileID: 1212132821}
   m_Layer: 5
   m_Name: Power (2)
   m_TagString: Untagged
@@ -27592,6 +28013,35 @@ MonoBehaviour:
           m_StringArgument: Q
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1212132821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212132818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1220759946
 GameObject:
   m_ObjectHideFlags: 0
@@ -28250,6 +28700,7 @@ GameObject:
   - component: {fileID: 1241061119}
   - component: {fileID: 1241061118}
   - component: {fileID: 1241061117}
+  - component: {fileID: 1241061120}
   m_Layer: 5
   m_Name: PlayComputer
   m_TagString: Untagged
@@ -28360,6 +28811,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241061115}
   m_CullTransparentMesh: 1
+--- !u!114 &1241061120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241061115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1249484437
 GameObject:
   m_ObjectHideFlags: 0
@@ -28659,6 +29139,7 @@ GameObject:
   - component: {fileID: 1277787290}
   - component: {fileID: 1277787289}
   - component: {fileID: 1277787288}
+  - component: {fileID: 1277787291}
   m_Layer: 5
   m_Name: Skip/Play
   m_TagString: Untagged
@@ -28781,6 +29262,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277787286}
   m_CullTransparentMesh: 1
+--- !u!114 &1277787291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277787286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1280863625
 GameObject:
   m_ObjectHideFlags: 0
@@ -32523,6 +33033,7 @@ GameObject:
   - component: {fileID: 1433081154}
   - component: {fileID: 1433081153}
   - component: {fileID: 1433081152}
+  - component: {fileID: 1433081155}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -32657,6 +33168,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433081150}
   m_CullTransparentMesh: 1
+--- !u!114 &1433081155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433081150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1437317833
 GameObject:
   m_ObjectHideFlags: 0
@@ -34899,6 +35439,7 @@ GameObject:
   - component: {fileID: 1524160904}
   - component: {fileID: 1524160903}
   - component: {fileID: 1524160902}
+  - component: {fileID: 1524160905}
   m_Layer: 5
   m_Name: Disconnect
   m_TagString: Untagged
@@ -35045,6 +35586,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524160900}
   m_CullTransparentMesh: 1
+--- !u!114 &1524160905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524160900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1526370378
 GameObject:
   m_ObjectHideFlags: 0
@@ -35625,6 +36195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1565921899}
   - component: {fileID: 1565921900}
+  - component: {fileID: 1565921901}
   m_Layer: 5
   m_Name: Power (7)
   m_TagString: Untagged
@@ -35711,6 +36282,35 @@ MonoBehaviour:
           m_StringArgument: P
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1565921901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565921898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1569252915
 GameObject:
   m_ObjectHideFlags: 0
@@ -36334,6 +36934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1613472326}
   - component: {fileID: 1613472327}
+  - component: {fileID: 1613472328}
   m_Layer: 5
   m_Name: Power (4)
   m_TagString: Untagged
@@ -36420,6 +37021,35 @@ MonoBehaviour:
           m_StringArgument: V
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1613472328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613472325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1613727935
 GameObject:
   m_ObjectHideFlags: 0
@@ -37331,6 +37961,7 @@ GameObject:
   - component: {fileID: 1663983825}
   - component: {fileID: 1663983824}
   - component: {fileID: 1663983823}
+  - component: {fileID: 1663983826}
   m_Layer: 5
   m_Name: Pass_Btn
   m_TagString: Untagged
@@ -37465,6 +38096,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663983821}
   m_CullTransparentMesh: 1
+--- !u!114 &1663983826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663983821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1672746954
 GameObject:
   m_ObjectHideFlags: 0
@@ -38429,6 +39089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1708253783}
   - component: {fileID: 1708253784}
+  - component: {fileID: 1708253785}
   m_Layer: 5
   m_Name: Power (3)
   m_TagString: Untagged
@@ -38515,6 +39176,35 @@ MonoBehaviour:
           m_StringArgument: J
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1708253785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708253782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1719293330
 GameObject:
   m_ObjectHideFlags: 0
@@ -39449,6 +40139,7 @@ GameObject:
   - component: {fileID: 1751722832}
   - component: {fileID: 1751722831}
   - component: {fileID: 1751722830}
+  - component: {fileID: 1751722833}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -39583,6 +40274,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751722828}
   m_CullTransparentMesh: 1
+--- !u!114 &1751722833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751722828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1756235542
 GameObject:
   m_ObjectHideFlags: 0
@@ -48039,6 +48759,7 @@ GameObject:
   - component: {fileID: 2110405589}
   - component: {fileID: 2110405588}
   - component: {fileID: 2110405587}
+  - component: {fileID: 2110405590}
   m_Layer: 5
   m_Name: mm
   m_TagString: Untagged
@@ -48185,6 +48906,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110405585}
   m_CullTransparentMesh: 1
+--- !u!114 &2110405590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110405585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 103022918}
+          m_TargetAssemblyTypeName: SoundManager, WriteFight
+          m_MethodName: PlaySound
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2111603783
 GameObject:
   m_ObjectHideFlags: 0
