@@ -161,7 +161,7 @@ public class Game : MonoBehaviour
     {
 
 
-        Singleton = this;
+         Singleton = this;
         #region config-chks
         if (board == null)
         {
