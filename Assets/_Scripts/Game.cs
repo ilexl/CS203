@@ -491,6 +491,7 @@ public class Game : MonoBehaviour
     public static void DrawAccepted()
     {
         // this is recieved by the server/self to tell this player the draw is done
+        Singleton.popUpManager.HideAllPopUps();
         Singleton.GameOver("Draw!");
 
         // ********** RECIEVE DRAW ACCEPTED FROM SERVER *****************
