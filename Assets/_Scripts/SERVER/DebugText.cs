@@ -4,28 +4,16 @@ namespace DebugStuff
 {
     public class DebugText : MonoBehaviour
     {
-        private int maxLength = 3000;
+
+        private int maxLength = 30000;
+        //#if !UNITY_EDITOR
         static string myLog = "";
         private string output;
         private string stack;
 
-        GUIStyle errorStyle;
-        GUIStyle warningStyle;
-        GUIStyle normalStyle;
-
         void OnEnable()
         {
             Application.logMessageReceived += Log;
-
-            // Set up your styles here
-            errorStyle = new GUIStyle();
-            errorStyle.normal.textColor = Color.red;
-
-            warningStyle = new GUIStyle();
-            warningStyle.normal.textColor = Color.yellow;
-
-            normalStyle = new GUIStyle();
-            normalStyle.normal.textColor = Color.white;
         }
 
         void OnDisable()
@@ -54,7 +42,11 @@ namespace DebugStuff
 
             if (myLog.Length > maxLength)
             {
-                myLog = "";
+                // Calculate how many characters to trim from the start
+                int charactersToTrim = myLog.Length - maxLength;
+
+                // Trim characters from the start
+                myLog = myLog.Substring(charactersToTrim, myLog.Length);
             }
         }
 
