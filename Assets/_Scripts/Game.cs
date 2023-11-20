@@ -493,6 +493,8 @@ public class Game : MonoBehaviour
         GameOver("Opponent Wins!");
 
         // ********** SEND RESIGN TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendResignation);
+        NetworkManager.Singleton.Client.Send(message);
     }
     [MessageHandler((ushort)ServerToClientId.recieveResignation)]
 
