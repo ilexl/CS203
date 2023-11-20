@@ -75,6 +75,15 @@ public class Matchmaking : MonoBehaviour
         Match match = player.currentMatch;
         
         Debug.Log($"Player {player} has resigned!");
+    [MessageHandler((ushort)ClientToServerId.recieveDrawPrompt)]
+
+    private static void RelayDrawPrompt(ushort fromClientId, Message _message)
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendDrawPrompt);
+        Match match = PlayerList[fromClientId].currentMatch;
+
+        SendMessageToAllOtherPlayers(fromClientId, message, match);
+    }
         foreach (var otherPlayer in match.GetPlayers())
         {
             if (otherPlayer.Id != fromClientId)

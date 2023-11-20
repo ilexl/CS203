@@ -435,8 +435,10 @@ public class Game : MonoBehaviour
     {
         popUpManager.ShowPopUp(10); // waiting for response pop up
         playButton.interactable = false;
-    
+
         // ********** SEND DRAW PROMPT TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendDrawPrompt);
+        NetworkManager.Singleton.Client.Send(message);
     }
 
     public void AcceptDraw()
@@ -459,11 +461,13 @@ public class Game : MonoBehaviour
     // **********************SEND*************************************
     // **********************RECIEVE**********************************
     // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    public void DrawRequestFromOpp()
+    [MessageHandler((ushort)ServerToClientId.recieveDrawPrompt)]
+
+    public static void DrawRequestFromOpp(Message message)
     {
         // recieve draw request from opp and display prompt
-        playButton.interactable = false;
-        popUpManager.ShowPopUp(11);
+        Singleton.playButton.interactable = false;
+        Singleton.popUpManager.ShowPopUp(11);
 
         // ********** RECIEVE DRAW PROMPT FROM SERVER *****************
     }
