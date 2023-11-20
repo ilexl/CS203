@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
+using Riptide;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -493,11 +494,12 @@ public class Game : MonoBehaviour
 
         // ********** SEND RESIGN TO SERVER *****************
     }
+    [MessageHandler((ushort)ServerToClientId.recieveResignation)]
 
-    public void Win()
+    public static void Win()
     {
         // server will call this when opponent resigns
-        GameOver("You Win!");
+        Singleton.GameOver("You Win!");
 
         // ********** RECIEVE RESIGN TO SERVER *****************
     }

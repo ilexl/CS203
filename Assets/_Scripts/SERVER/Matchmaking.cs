@@ -65,6 +65,25 @@ public class Matchmaking : MonoBehaviour
             }
         }
     }
+    [MessageHandler((ushort)ClientToServerId.recieveResignation)]
+
+    private static void RelayResignation(ushort fromClientId, Message _message)
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendResignation);
+
+        Player player = PlayerList[fromClientId];
+        Match match = player.currentMatch;
+        
+        Debug.Log($"Player {player} has resigned!");
+        foreach (var otherPlayer in match.GetPlayers())
+        {
+            if (otherPlayer.Id != fromClientId)
+            {
+                NetworkManager.Singleton.Server.Send(message, otherPlayer.Id);
+            }
+        }
+    }
+
 
     public static void DestroyPlayer(ushort fromClientId)
     {
