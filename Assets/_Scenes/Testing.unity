@@ -2934,6 +2934,7 @@ MonoBehaviour:
   mainWindowManager: {fileID: 1310670310}
   mainMenuWindow: {fileID: 468010537}
   networkManager: {fileID: 1249484438}
+  waitforgame: {fileID: 1342528403}
   isMultiplayer: 0
 --- !u!114 &85333046
 MonoBehaviour:

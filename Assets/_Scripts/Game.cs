@@ -26,6 +26,7 @@ public class Game : MonoBehaviour
     [SerializeField] WindowManager mainWindowManager;
     [SerializeField] Window mainMenuWindow;
     [SerializeField] NetworkManager networkManager;
+    [SerializeField] Window waitforgame;
     public bool isMultiplayer = false;
     
 
@@ -512,12 +513,13 @@ public class Game : MonoBehaviour
     {
         string message = "Game Over...\n" + win;
         popUpManager.ShowPopUp(7, message);
-        Invoke(nameof(ShowMainMenu), 5);
+        WaitForGame.waitForGame.LobbyLoad();
+        Invoke(nameof(ShowLobby), 5f);
     }
 
-    void ShowMainMenu()
+    void ShowLobby()
     {
-        mainWindowManager.ShowWindow(mainMenuWindow);
+        mainWindowManager.ShowWindow(waitforgame);
     }
 }
 
