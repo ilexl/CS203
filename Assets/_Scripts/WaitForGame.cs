@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class WaitForGame : MonoBehaviour
 {
-    [SerializeField] static WaitForGame waitForGame;
+    [SerializeField] public static WaitForGame waitForGame;
+
+
+    public void LobbyLoad()
+    {
+        WaitForGameWindows.ShowWindow(searchForMatch);
+    }
     [SerializeField] Game GameMain;
 
     [Space(10)]

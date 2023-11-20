@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
+using Riptide;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -25,6 +26,7 @@ public class Game : MonoBehaviour
     [SerializeField] WindowManager mainWindowManager;
     [SerializeField] Window mainMenuWindow;
     [SerializeField] NetworkManager networkManager;
+    [SerializeField] Window waitforgame;
     public bool isMultiplayer = false;
     
 
@@ -433,8 +435,10 @@ public class Game : MonoBehaviour
     {
         popUpManager.ShowPopUp(10); // waiting for response pop up
         playButton.interactable = false;
-    
+
         // ********** SEND DRAW PROMPT TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendDrawPrompt);
+        NetworkManager.Singleton.Client.Send(message);
     }
 
     public void AcceptDraw()
@@ -443,6 +447,9 @@ public class Game : MonoBehaviour
         DrawAccepted();
 
         // ********** SEND DRAW ACCEPTED TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendDrawReply);
+        message.Add(true);
+        NetworkManager.Singleton.Client.Send(message);
     }
 
     public void DeclineDraw()
@@ -450,34 +457,50 @@ public class Game : MonoBehaviour
         // button pressed
         playButton.interactable = true;
 
+
         // ********** SEND DRAW DECLINED TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendDrawReply);
+        message.Add(false);
+        NetworkManager.Singleton.Client.Send(message);
     }
 
     // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // **********************SEND*************************************
     // **********************RECIEVE**********************************
     // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    public void DrawRequestFromOpp()
+    [MessageHandler((ushort)ServerToClientId.recieveDrawPrompt)]
+
+    public static void DrawRequestFromOpp(Message message)
     {
         // recieve draw request from opp and display prompt
-        playButton.interactable = false;
-        popUpManager.ShowPopUp(11);
+        Singleton.playButton.interactable = false;
+        Singleton.popUpManager.ShowPopUp(11);
 
         // ********** RECIEVE DRAW PROMPT FROM SERVER *****************
     }
+    [MessageHandler((ushort)ServerToClientId.recieveDrawReply)]
 
-    public void DrawAccepted()
+    public static void GetDrawResult(Message message)
+    {
+        bool result = message.GetBool();
+        if (result) DrawAccepted();
+        else DrawDeclined();
+    }
+
+
+    public static void DrawAccepted()
     {
         // this is recieved by the server/self to tell this player the draw is done
-        GameOver("Draw!");
+        Singleton.popUpManager.HideAllPopUps();
+        Singleton.GameOver("Draw!");
 
         // ********** RECIEVE DRAW ACCEPTED FROM SERVER *****************
     }
 
-    public void DrawDeclined()
+    public static void DrawDeclined()
     {
-        playButton.interactable = true;
-        popUpManager.HideAllPopUps();
+        Singleton.playButton.interactable = true;
+        Singleton.popUpManager.HideAllPopUps();
 
         // ********** RECIEVE DRAW DECLINED FROM SERVER *****************
     }
@@ -492,12 +515,15 @@ public class Game : MonoBehaviour
         GameOver("Opponent Wins!");
 
         // ********** SEND RESIGN TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendResignation);
+        NetworkManager.Singleton.Client.Send(message);
     }
+    [MessageHandler((ushort)ServerToClientId.recieveResignation)]
 
-    public void Win()
+    public static void Win(Message _message)
     {
         // server will call this when opponent resigns
-        GameOver("You Win!");
+        Singleton.GameOver("You Win!");
 
         // ********** RECIEVE RESIGN TO SERVER *****************
     }
@@ -508,12 +534,13 @@ public class Game : MonoBehaviour
     {
         string message = "Game Over...\n" + win;
         popUpManager.ShowPopUp(7, message);
-        Invoke(nameof(ShowMainMenu), 5);
+        WaitForGame.waitForGame.LobbyLoad();
+        Invoke(nameof(ShowLobby), 5f);
     }
 
-    void ShowMainMenu()
+    void ShowLobby()
     {
-        mainWindowManager.ShowWindow(mainMenuWindow);
+        mainWindowManager.ShowWindow(waitforgame);
     }
 }
 

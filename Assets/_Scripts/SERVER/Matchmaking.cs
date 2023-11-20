@@ -39,13 +39,7 @@ public class Matchmaking : MonoBehaviour
         //get the match that the player is in
         Match match = PlayerList[fromClientId].currentMatch;
         Debug.Log(_message.GetString());
-        foreach (var player in match.GetPlayers())
-        {
-            if (player.Id !=  fromClientId)
-            {
-                NetworkManager.Singleton.Server.Send(message, player.Id);
-            }
-        }
+        SendMessageToAllOtherPlayers(fromClientId, message, match);
     }
     [MessageHandler((ushort)ClientToServerId.recieveChat)]
 
@@ -57,15 +51,53 @@ public class Matchmaking : MonoBehaviour
         Match match = PlayerList[fromClientId].currentMatch;
         Debug.Log(_message.GetString());
 
-        foreach (var player in match.GetPlayers())
+        SendMessageToAllOtherPlayers(fromClientId, message, match);
+    }
+    [MessageHandler((ushort)ClientToServerId.recieveResignation)]
+
+    private static void RelayResignation(ushort fromClientId, Message _message)
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendResignation);
+
+        Player player = PlayerList[fromClientId];
+        Match match = player.currentMatch;
+        
+        Debug.Log($"Player {player} has resigned!");
+        SendMessageToAllOtherPlayers(fromClientId, message, match);
+
+
+    }
+    [MessageHandler((ushort)ClientToServerId.recieveDrawPrompt)]
+
+    private static void RelayDrawPrompt(ushort fromClientId, Message _message)
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendDrawPrompt);
+        Match match = PlayerList[fromClientId].currentMatch;
+
+        SendMessageToAllOtherPlayers(fromClientId, message, match);
+    }
+    [MessageHandler((ushort)ClientToServerId.recieveDrawReply)]
+
+    private static void RelayDrawReply(ushort fromClientId, Message _message)
+    {
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ServerToClientId.sendDrawReply);
+        message.Add(_message.GetBool());
+        Match match = PlayerList[fromClientId].currentMatch;
+
+        SendMessageToAllOtherPlayers(fromClientId, message, match);
+    }
+
+
+    private static void SendMessageToAllOtherPlayers(ushort fromClientId, Message message, Match match)
+    {
+        foreach (var otherPlayer in match.GetPlayers())
         {
-            if (player.Id != fromClientId)
+            if (otherPlayer.Id != fromClientId)
             {
-                NetworkManager.Singleton.Server.Send(message, player.Id);
+                NetworkManager.Singleton.Server.Send(message, otherPlayer.Id);
             }
         }
     }
-
     public static void DestroyPlayer(ushort fromClientId)
     {
         Debug.Log($"{PlayerList[fromClientId]} has disconnected.");
