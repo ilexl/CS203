@@ -52,7 +52,21 @@ namespace DebugStuff
 
         void OnGUI()
         {
-            myLog = GUI.TextArea(new Rect(10, 10, Screen.width - 10, Screen.height - 10), myLog, normalStyle);
+            // if (!Application.isEditor) //Do not display in editor ( or you can use the UNITY_EDITOR macro to also disable the rest)
+            {
+                // Set up the scroll view
+                Rect scrollViewRect = new Rect(10, 10, Screen.width - 30, Screen.height - 30);
+                Rect scrollContentRect = new Rect(0, 0, Screen.width - 50, Mathf.Max(0, myLog.Length * 20));
+
+                // Create the scroll view
+                Vector2 scrollPosition = GUI.BeginScrollView(scrollViewRect, Vector2.zero, scrollContentRect);
+
+                // Display the log within the scroll view
+                myLog = GUI.TextArea(new Rect(0, 0, Screen.width - 50, Mathf.Max(0, myLog.Length * 20)), myLog);
+
+                // End the scroll view
+                GUI.EndScrollView();
+            }
         }
     }
 }
