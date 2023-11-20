@@ -447,6 +447,9 @@ public class Game : MonoBehaviour
         DrawAccepted();
 
         // ********** SEND DRAW ACCEPTED TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendDrawReply);
+        message.Add(true);
+        NetworkManager.Singleton.Client.Send(message);
     }
 
     public void DeclineDraw()
@@ -454,7 +457,11 @@ public class Game : MonoBehaviour
         // button pressed
         playButton.interactable = true;
 
+
         // ********** SEND DRAW DECLINED TO SERVER *****************
+        Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendDrawReply);
+        message.Add(false);
+        NetworkManager.Singleton.Client.Send(message);
     }
 
     // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -471,19 +478,28 @@ public class Game : MonoBehaviour
 
         // ********** RECIEVE DRAW PROMPT FROM SERVER *****************
     }
+    [MessageHandler((ushort)ServerToClientId.recieveDrawReply)]
 
-    public void DrawAccepted()
+    public static void GetDrawResult(Message message)
+    {
+        bool result = message.GetBool();
+        if (result) DrawAccepted();
+        else DrawDeclined();
+    }
+
+
+    public static void DrawAccepted()
     {
         // this is recieved by the server/self to tell this player the draw is done
-        GameOver("Draw!");
+        Singleton.GameOver("Draw!");
 
         // ********** RECIEVE DRAW ACCEPTED FROM SERVER *****************
     }
 
-    public void DrawDeclined()
+    public static void DrawDeclined()
     {
-        playButton.interactable = true;
-        popUpManager.HideAllPopUps();
+        Singleton.playButton.interactable = true;
+        Singleton.popUpManager.HideAllPopUps();
 
         // ********** RECIEVE DRAW DECLINED FROM SERVER *****************
     }
