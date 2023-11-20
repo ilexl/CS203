@@ -496,7 +496,7 @@ public class Game : MonoBehaviour
     }
     [MessageHandler((ushort)ServerToClientId.recieveResignation)]
 
-    public static void Win()
+    public static void Win(Message _message)
     {
         // server will call this when opponent resigns
         Singleton.GameOver("You Win!");
