@@ -9,6 +9,8 @@ public enum ClientToServerId : ushort
     recieveTurnFromClient = 3,
     recieveChat = 4,
     recieveResignation = 5,
+    recieveDrawPrompt = 6,
+    recieveDrawReply = 7,
 }
 
 public enum ServerToClientId : ushort
@@ -18,6 +20,8 @@ public enum ServerToClientId : ushort
     sendChat = 4,
     sendOpponentDisconnect = 5,
     sendResignation = 6,
+    sendDrawPrompt = 7,
+    sendDrawReply = 8,
 }
 
 public class NetworkManager : MonoBehaviour
