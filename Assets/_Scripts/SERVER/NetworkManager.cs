@@ -8,6 +8,7 @@ public enum ClientToServerId : ushort
     recieveSearchForMatch = 2,
     recieveTurnFromClient = 3,
     recieveChat = 4,
+    recieveResignation = 5,
 }
 
 public enum ServerToClientId : ushort
@@ -16,7 +17,9 @@ public enum ServerToClientId : ushort
     sendBoardStateToClient = 2,
     sendChat = 4,
     sendOpponentDisconnect = 5,
+    sendResignation = 6,
 }
+
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager _singleton;
