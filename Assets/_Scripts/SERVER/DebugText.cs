@@ -4,16 +4,28 @@ namespace DebugStuff
 {
     public class DebugText : MonoBehaviour
     {
-
         private int maxLength = 3000;
-        //#if !UNITY_EDITOR
         static string myLog = "";
         private string output;
         private string stack;
 
+        GUIStyle errorStyle;
+        GUIStyle warningStyle;
+        GUIStyle normalStyle;
+
         void OnEnable()
         {
             Application.logMessageReceived += Log;
+
+            // Set up your styles here
+            errorStyle = new GUIStyle();
+            errorStyle.normal.textColor = Color.red;
+
+            warningStyle = new GUIStyle();
+            warningStyle.normal.textColor = Color.yellow;
+
+            normalStyle = new GUIStyle();
+            normalStyle.normal.textColor = Color.white;
         }
 
         void OnDisable()
@@ -25,7 +37,21 @@ namespace DebugStuff
         {
             output = logString;
             stack = stackTrace;
-            myLog = myLog + "\n" + output;
+            myLog = myLog + "\n";
+
+            switch (type)
+            {
+                case LogType.Error:
+                    myLog += "<color=#FF0000>" + output + "</color>";
+                    break;
+                case LogType.Warning:
+                    myLog += "<color=#FFFF00>" + output + "</color>";
+                    break;
+                default:
+                    myLog += output;
+                    break;
+            }
+
             if (myLog.Length > maxLength)
             {
                 myLog = "";
@@ -34,11 +60,7 @@ namespace DebugStuff
 
         void OnGUI()
         {
-            //if (!Application.isEditor) //Do not display in editor ( or you can use the UNITY_EDITOR macro to also disable the rest)
-            {
-                myLog = GUI.TextArea(new Rect(10, 10, Screen.width - 10, Screen.height - 10), myLog);
-            }
+            myLog = GUI.TextArea(new Rect(10, 10, Screen.width - 10, Screen.height - 10), myLog, normalStyle);
         }
-        //#endif
     }
 }
