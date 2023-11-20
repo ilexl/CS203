@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ForceAspectRatio : MonoBehaviour
 {
-    private void Start()
+    // Start is called before the first frame
+    void Start()
     {
-        
+        // this essentially sets the resolutiont to 16:9
+        // if your in the editor it messages a warning to remember to do this
 #if UNITY_EDITOR
         Debug.Log("UNITY EDITOR ENABLED - PLEASE ENSURE RESOLUTION IS 16:9");
 #else
@@ -15,7 +15,6 @@ public class ForceAspectRatio : MonoBehaviour
 
         // Set the game's resolution to match the target width and height
         Screen.SetResolution(Screen.width, targetHeight, false);
-        
 #endif
     }
 }

@@ -1,31 +1,22 @@
 using Riptide;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaitForGame : MonoBehaviour
 {
-    [SerializeField] public static WaitForGame waitForGame;
-
-
-    public void LobbyLoad()
-    {
-        WaitForGameWindows.ShowWindow(searchForMatch);
-    }
+    [SerializeField] public static WaitForGame waitForGame; // static for server interaction
+    #region local variables
     [SerializeField] Game GameMain;
-
-    [Space(10)]
-
     [SerializeField] WindowManager windowManagerMAIN;
     [SerializeField] Window game;
     [SerializeField] Window mainMenu;
-
-    [Space(10)]
-
     [SerializeField] WindowManager WaitForGameWindows;
     [SerializeField] Window searchForMatch;
     [SerializeField] Window searchingForMatch;
     [SerializeField] Window matchFound;
     [SerializeField] Window waitingForServer;
+    #endregion
+
+    // Awake is called when the script is being loaded
     private void Awake()
     {
         if (waitForGame == null)
@@ -34,26 +25,51 @@ public class WaitForGame : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// entry to lobby
+    /// </summary>
+    public void LobbyLoad()
+    {
+        WaitForGameWindows.ShowWindow(searchForMatch);
+    }
+
+    /// <summary>
+    /// sets game window open when game is ready
+    /// </summary>
     public void GameReady()
     {
         windowManagerMAIN.ShowWindow(game);
     }
 
+    /// <summary>
+    /// searches for match
+    /// </summary>
     public void SearchForMatch()
     {
         WaitForGameWindows.ShowWindow(searchingForMatch);
     }
 
+    /// <summary>
+    /// code when client disconnects from server - button included
+    /// </summary>
     public void Disconnect()
     {
         windowManagerMAIN.ShowWindow(mainMenu);
         // disconnect from server
     }
 
+    /// <summary>
+    /// waits for the game to load
+    /// </summary>
     public void MatchFound()
     {
         WaitForGameWindows.ShowWindow(matchFound);
     }
+
+    /// <summary>
+    /// game is loaded by the server
+    /// </summary>
+    /// <param name="message"></param>
 
     [MessageHandler((ushort)ServerToClientId.recieveGameStarted)]
 

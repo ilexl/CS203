@@ -2,21 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+#region using editor
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+#endregion
 
 public class Words : MonoBehaviour
 {
+    #region local variables
     [SerializeField] TextAsset WORD_LIST_RAW;
     private WordList words;
+    #endregion
 
-    // Start is called before the first frame update
+    // Awake is calle when the script is being loaded
     void Awake()
     {
         words = new WordList(WORD_LIST_RAW);
     }
     
+    /// <summary>
+    /// check if the word list contains a word
+    /// </summary>
+    /// <param name="word"></param>
+    /// <returns></returns>
     public bool isWord(string word)
     {
         //Debug.Log(word.Length);
@@ -24,9 +33,17 @@ public class Words : MonoBehaviour
         return words.Contains(word);
     }
 
+    /// <summary>
+    /// a word list with custom functionality
+    /// </summary>
     class WordList
     {
-        public readonly string[] WordArray;
+        public readonly string[] WordArray; // not to be changed
+
+        /// <summary>
+        /// ctor for word list
+        /// </summary>
+        /// <param name="wl">text asset</param>
         public WordList(TextAsset wl)
         {
             if (wl == null)
@@ -37,6 +54,12 @@ public class Words : MonoBehaviour
             WordArray = wl.text.Split("\n");
         }
 
+        /// <summary>
+        /// check if a list contains a word<br/>
+        /// mac and windows tested working
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
         public bool Contains(string word)
         {
             word = word.ToUpper();
@@ -50,11 +73,21 @@ public class Words : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// converts a board to a list of words
+    /// </summary>
+    /// <param name="raw"></param>
+    /// <returns></returns>
     public List<string> ConvertCharBoardToWords(List<List<char>> raw)
     {
         return ExtractStrings(raw);
     }
 
+    /// <summary>
+    /// extracts all strings from an array or board of letters
+    /// </summary>
+    /// <param name="lettersGrid"></param>
+    /// <returns></returns>
     List<string> ExtractStrings(List<List<char>> lettersGrid)
     {
         int numRows = lettersGrid.Count;
@@ -148,7 +181,7 @@ public class Words : MonoBehaviour
     }
     
     /// <summary>
-    /// 
+    /// checks for single letters in both x and y direction
     /// </summary>
     /// <param sendName="raw"></param>
     /// <param sendName="word"></param>
@@ -193,6 +226,10 @@ public class Words : MonoBehaviour
     }
 }
 
+
+// *******************************************
+// custom editor below - wont be in any builds
+// *******************************************
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(Words))]

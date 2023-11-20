@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+#region using editor
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+#endregion
 
 public class WindowManager : MonoBehaviour
 {
     [SerializeField] private Window[] Windows;
     [SerializeField] private bool startFeature = true;
+
     // Awake is called when the WM is loading
     private void Awake()
     {
         OnEnable();
     }
 
+    // Start is called before the first frame
     private void Start()
     {
         if (!startFeature) { return; }
@@ -265,6 +267,10 @@ public class WindowManager : MonoBehaviour
     }
 #endif
 }
+
+// *******************************************
+// custom editor below - wont be in any builds
+// *******************************************
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(WindowManager))]

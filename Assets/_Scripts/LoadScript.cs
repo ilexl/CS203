@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadScript : MonoBehaviour
 {
     [SerializeField] GameObject[] gameObjects;
-    // Start is called before the first frame update
+
+    // Awake is called when the script is 
     void Awake()
     {
+        // wakes up each sleeping object and sends it back to sleep to load it in memory
         foreach (GameObject obj in gameObjects)
         {
             if(obj.activeSelf == false)

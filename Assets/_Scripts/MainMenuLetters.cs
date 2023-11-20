@@ -3,6 +3,7 @@ using TMPro;
 
 public class MainMenuLetters : MonoBehaviour
 {
+    #region local variables
     [SerializeField] GameObject letterPrefab;
     [SerializeField] int amountOfLetters = 0;
     [SerializeField] Transform parent;
@@ -11,12 +12,14 @@ public class MainMenuLetters : MonoBehaviour
     [SerializeField] float maxOffsetx;
     [SerializeField] float maxOffsety;
     [SerializeField] bool animateLetters = true;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        #region error checking
         // Error handling
-        if(letterPrefab == null)
+        if (letterPrefab == null)
         {
             Debug.LogError("No Letter Prefab Found");
             return;
@@ -41,7 +44,10 @@ public class MainMenuLetters : MonoBehaviour
             Debug.LogError("No Canvas Found");
             return;
         }
-            // Spawn Letters
+
+        #endregion
+
+        // spawn letters
         for (int i = 0; i < amountOfLetters; i++)
         {
             GameObject letter = Instantiate(letterPrefab, parent);
@@ -50,6 +56,10 @@ public class MainMenuLetters : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// creates a psuedo random position on the canvas
+    /// </summary>
+    /// <returns>Vector3 newPosition</returns>
     Vector3 RandomPosition()
     {
         if(canvas == null)
@@ -68,6 +78,10 @@ public class MainMenuLetters : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// selects a random letter
+    /// </summary>
+    /// <returns>char random</returns>
     string RandomLetter()
     { 
         char random = (char)Random.Range(65, 91);
@@ -77,6 +91,7 @@ public class MainMenuLetters : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // animates the letters if needed [depricated]
         if (animateLetters)
         {
             foreach(Transform l in parent)

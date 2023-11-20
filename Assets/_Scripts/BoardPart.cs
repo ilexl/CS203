@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardPart : MonoBehaviour
 {
-    // This class holds data only
+    // this class holds data only
     public Vector3 realPos;
     public DropHolder dropHolder;
 
+    // Awake is called when the script is loaded
     private void Awake()
     {
-        dropHolder = GetComponent<DropHolder>();
+        dropHolder = GetComponent<DropHolder>(); // gets drop holder when loading
     }
 }

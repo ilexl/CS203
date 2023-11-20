@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
-using UnityEditor;
 
 public class TileLetterManager : MonoBehaviour, IDropHandler
 {
+    #region local variables
     [SerializeField] Transform lettersParent;
     [SerializeField] GameObject prefabLetter;
     [SerializeField] Transform playerLettersBottom;
@@ -16,12 +15,20 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
     [SerializeField] Canvas canvas;
     [SerializeField] Vector2 StartPosOffset;
     [SerializeField] Transform boardParent;
+    #endregion
 
+    /// <summary>
+    /// sets the letter bag to default for a new game
+    /// </summary>
     public void ResetLettersBag()
     {
         remainingLettersBag = defaultLettersBag;
     } 
 
+    /// <summary>
+    /// gets all the letters in a list
+    /// </summary>
+    /// <returns></returns>
     public List<TileLetter> GetAllLetters()
     {
         List<TileLetter> allLetters = new List<TileLetter>();
@@ -32,8 +39,16 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         return allLetters;
     }
 
+    /// <summary>
+    /// not used but required for drag drop functionality
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData) { }
 
+    /// <summary>
+    /// counts the current playable letters
+    /// </summary>
+    /// <returns></returns>
     public int PlayersCurrentLetters()
     {
         int count = 0;
@@ -51,6 +66,10 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         return count;
     }
 
+    /// <summary>
+    /// spawns in letters for player based on max
+    /// </summary>
+    /// <param name="most">max a player can have right now</param>
     public void SpawnPlayerLetters(int most)
     {
         int currentAmount = PlayersCurrentLetters();
@@ -61,6 +80,9 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// spawns a letter a player can move
+    /// </summary>
     private void SpawnLetter()
     {
         GameObject newLetter = Instantiate(prefabLetter, lettersParent);
@@ -73,6 +95,11 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         newLetter.GetComponent<TileLetter>().SetPlayable(true);
     }
 
+    /// <summary>
+    /// picks a ranom pos
+    /// </summary>
+    /// <param name="newLetter"></param>
+    /// <returns></returns>
     public Vector2 RandomPosition(Transform newLetter)
     {
         RectTransform rectTransform = letterStartRect.GetComponent<RectTransform>();
@@ -85,6 +112,10 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         return newPos;
     }
 
+    /// <summary>
+    /// counts the letters left in the bag
+    /// </summary>
+    /// <returns></returns>
     public int RemainingLetters()
     {
         int remainingLetters = 0;
@@ -96,6 +127,10 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         return remainingLetters;
     }
 
+    /// <summary>
+    /// picks a random letter from within the bag
+    /// </summary>
+    /// <returns></returns>
     private char RandomLetter()
     {
         int remaining = RemainingLetters();
@@ -117,6 +152,11 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         return c;
     }
 
+    /// <summary>
+    /// checks if a holder has a letter
+    /// </summary>
+    /// <param name="dh"></param>
+    /// <returns></returns>
     public bool DropHolderHasLetter(DropHolder dh)
     {
         foreach(Transform letter in lettersParent)
@@ -134,6 +174,10 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         return false;
     }
 
+    /// <summary>
+    /// sets all letters raycast block off so letter can drop on other letters without issue
+    /// </summary>
+    /// <param name="set"></param>
     public void RayCastSetAllLetters(bool set)
     {
         foreach (Transform letter in lettersParent)
@@ -147,6 +191,9 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// bags players current letters
+    /// </summary>
     public void BagPlayersLetters() 
     {
         foreach (Transform letter in lettersParent)
@@ -165,6 +212,9 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// retrieves and moves all playable letters to specified area
+    /// </summary>
     public void Retrieve()
     {
         for (int i = PlayersCurrentLetters() + 1; i > 0; i--) // no idea why this makes it work but its a easy and dirty fix
@@ -191,6 +241,11 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// check if a player has a specified letter
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     public bool PlayerHasLetter(char c)
     {
         foreach (Transform letter in lettersParent)
@@ -211,12 +266,21 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         return false;
     }
 
+    /// <summary>
+    /// picks the best work a player can make <br/>
+    /// [NOT IMPLEMENTED YET]
+    /// </summary>
+    /// <returns></returns>
     public string BestPossiblePlay()
     {
         Debug.LogWarning("Best Possible Play NOT implemented yet...");
         return "NOT IMPLEMENTED YET";
     }
 
+    /// <summary>
+    /// removes a specified letter from player
+    /// </summary>
+    /// <param name="c"></param>
     public void RemovePlayerLetter(char c)
     {
         foreach (Transform letter in lettersParent)
@@ -236,6 +300,9 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// destroys every letter
+    /// </summary>
     public void DestroyAllLetters()
     {
         foreach (Transform letter in lettersParent)
@@ -248,6 +315,12 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// spawns opponents letters on board when they play
+    /// </summary>
+    /// <param name="c"></param>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
     public void SpawnOppLetterOnBoard(char c, int x, int y)
     {
         GameObject newLetter = Instantiate(prefabLetter, lettersParent);
@@ -258,6 +331,12 @@ public class TileLetterManager : MonoBehaviour, IDropHandler
         newLetter.GetComponent<TileLetter>().SetPlayable(false);
     }
 
+    /// <summary>
+    /// finds a drop holder using coords
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
     private DropHolder FindDropHolder(int x, int y)
     {
         string contains = "(" + x + ".00, " + y + ".00, 0.00)";

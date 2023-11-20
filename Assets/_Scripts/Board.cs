@@ -1,27 +1,31 @@
+using UnityEngine;
+#region using editor
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
-using UnityEngine;
+#endregion
 
 public class Board : MonoBehaviour
 {
     public Transform BoardParentTransform;
-    [Space(10)]
+    public int BoardSize;
     [SerializeField] Vector3 startOffset;
     [SerializeField] GameObject BoardGridPiecePrefab;
-    public int BoardSize;
     [SerializeField] float spacing;
     
-    // creates a reusable and flexable board of any dimesions
+    /// <summary>
+    /// creates a reusable and flexable board of any dimensions
+    /// </summary>
     public void CreateBoard()
     {
+        #region temp_variables
         float step = 1f;
         int untilRight = 1;
         Vector3 lastPosition = startOffset;
         Vector3 lasteulerAngles = Vector3.zero;
         GameObject pivot = null;
         GameObject lastPiece = null; // bottom right
+        #endregion
 
         // spawn board in spiral
         for (int i = 0; i < (BoardSize * BoardSize * 4); i++)
@@ -29,6 +33,8 @@ public class Board : MonoBehaviour
             GameObject piece = Instantiate(BoardGridPiecePrefab, BoardParentTransform);
             piece.transform.localPosition = lastPosition;
             piece.transform.eulerAngles = lasteulerAngles;
+            
+            // math which determines if current piece should rotate
             if (untilRight == 0 && i != 0)
             {
                 piece.transform.eulerAngles += new Vector3(0, 0, 90);
@@ -45,7 +51,7 @@ public class Board : MonoBehaviour
             lastPiece = piece;
         }
 
-        // number pieces from spiral and find top left
+        // find the pivot piece of the board
         int name = 0;
         foreach (Transform b in BoardParentTransform)
         {
@@ -62,11 +68,11 @@ public class Board : MonoBehaviour
             b.name = name++.ToString();
         }
 
+        // offset the board to the center of the screen
         Vector3 offset = ((pivot.transform.position - lastPiece.transform.position) / spacing);
         offset.x *= -1;
-        Debug.Log(offset);
 
-        // give each board piece their real position
+        // give each board piece their real x,y position
         // i.e top left is 0,0 and down/right is 1,1
         foreach (Transform b in BoardParentTransform)
         {
@@ -78,6 +84,13 @@ public class Board : MonoBehaviour
         }
     }
 }
+
+
+
+// *******************************************
+// custom editor below - wont be in any builds
+// *******************************************
+
 #if UNITY_EDITOR
 
 [CustomEditor(typeof(Board))]

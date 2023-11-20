@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+#region using editor
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+#endregion
 
-
+#region network related enums
 public enum ClientToServerId : ushort
 {
     sendName = 1,
@@ -19,7 +21,6 @@ public enum ClientToServerId : ushort
     sendDrawPrompt = 6,
     sendDrawReply = 7,
 }
-
 public enum ServerToClientId : ushort
 {
     recieveGameStarted = 1,
@@ -30,8 +31,12 @@ public enum ServerToClientId : ushort
     recieveDrawPrompt = 7,
     recieveDrawReply = 8,
 }
+#endregion
+
 public class NetworkManager : MonoBehaviour
 {
+    #region temp editor functions
+    #if UNITY_EDITOR
     public void TempLocalSever()
     {
         ip = "192.168.1.77";
@@ -40,8 +45,14 @@ public class NetworkManager : MonoBehaviour
     {
         ip = "219.89.18.156";
     }
+    #endif
+    #endregion
 
     private static NetworkManager _singleton;
+
+    /// <summary>
+    /// ensures there is one of this object open at a time (destroys others)
+    /// </summary>
     public static NetworkManager Singleton
     {
         get => _singleton;
@@ -57,16 +68,23 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-
-    public Client Client { get; private set; }
-
+    #region local variables
     [SerializeField] private string ip;
     [SerializeField] private ushort port;
+    #endregion
+    
+    /// <summary>
+    /// gets the local client
+    /// </summary>
+    public Client Client { get; private set; }
+
+    // Awake is called when the script is loaded
     private void Awake()
     {
         Singleton = this;
     }
 
+    // Start is called before the first frame update
     private void Start()
     {
         RiptideLogger.Initialize(Debug.Log, Debug.Log, Debug.LogWarning, Debug.LogError, false);
@@ -76,43 +94,73 @@ public class NetworkManager : MonoBehaviour
         Client.Disconnected += DidDisconnect;
     }
 
+    // FixedUpdate is called once every fixed frame
     private void FixedUpdate()
     {
         Client.Update();
     }
 
+    /// <summary>
+    /// sends disconnect to server on quite
+    /// </summary>
     private void OnApplicationQuit()
     {
         Client.Disconnect();
     }
 
+    /// <summary>
+    /// connects to server
+    /// </summary>
     public void Connect()
     {
         Client.Connect($"{ip}:{port}");
     }
 
+    /// <summary>
+    /// disconnects from server
+    /// </summary>
     public void Disconnect()
     {
         Client.Disconnect();
     }
 
+    /// <summary>
+    /// sends name and connection state to server
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void DidConnect(object sender, EventArgs e)
     {
         UIManager.Singleton.SendName();
         UIManager.Singleton.ConnectionSucceeded();
     }
 
+    /// <summary>
+    /// informs user the server didnt connect
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void FailedToConnect(object sender, EventArgs e)
     {
         UIManager.Singleton.ConnectionFailed();
     }
-
+    
+    /// <summary>
+    /// informs client when an other user disconnects
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void DidDisconnect(object sender, EventArgs e)
     {
         // Popup and to main menu
         UIManager.Singleton.PlayerDisconnect();
     }
 
+    /// <summary>
+    /// client plays their turn - sends data to server
+    /// </summary>
+    /// <param name="board"></param>
+    /// <param name="score"></param>
     public void ClientPlays(List<List<char>> board, int score)
     {
         Message message = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.sendTurnToServer);
@@ -121,8 +169,10 @@ public class NetworkManager : MonoBehaviour
         Singleton.Client.Send(message);
     }
 
-
-    // WILL NEEDS TO USE THIS WHEN RECIEVING DATA FROM SERVER
+    /// <summary>
+    /// server calls this when recieving turn from other player
+    /// </summary>
+    /// <param name="message"></param>
     [MessageHandler((ushort)ServerToClientId.recieveBoardState)]
     public static void OppenentPlays(Message message)
     {
@@ -152,6 +202,11 @@ public class NetworkManager : MonoBehaviour
 
         Game.Singleton.OppPlay(boardP, score);
     }
+
+    /// <summary>
+    /// server calls this when opponent leaves the match in progress
+    /// </summary>
+    /// <param name="message"></param>
     [MessageHandler((ushort)ServerToClientId.recieveOpponentDisconnect)]
     public static void OpponentDisconnect(Message message)
     {
@@ -161,6 +216,11 @@ public class NetworkManager : MonoBehaviour
         Game.Singleton.isMultiplayer = false;
     }
 
+    /// <summary>
+    /// convers string from data board to a string for server
+    /// </summary>
+    /// <param name="board"></param>
+    /// <returns></returns>
     private static string CompileBoard(List<List<char>> board)
     {
         string output = "";
@@ -176,6 +236,10 @@ public class NetworkManager : MonoBehaviour
     }
 }
 
+
+// *******************************************
+// custom editor below - wont be in any builds
+// *******************************************
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(NetworkManager))]

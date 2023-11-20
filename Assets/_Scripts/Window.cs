@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Window : MonoBehaviour
@@ -7,7 +5,7 @@ public class Window : MonoBehaviour
     public bool ShowOnStart = false;
 
     /// <summary>
-    /// Shows the window
+    /// shows the window
     /// </summary>
     public void Show()
     {
@@ -15,7 +13,7 @@ public class Window : MonoBehaviour
     }
 
     /// <summary>
-    /// Hides the window
+    /// hides the window
     /// </summary>
     public void Hide()
     {
@@ -23,7 +21,7 @@ public class Window : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows or Hides window
+    /// shows or Hides window
     /// </summary>
     /// <param sendName="active">determines if window shown</param>
     public void SetActive(bool active)
@@ -32,7 +30,7 @@ public class Window : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets the transforms sendName from UNITY_EDITOR
+    /// gets the transforms sendName from UNITY_EDITOR
     /// </summary>
     /// <returns>(string) transform sendName of window</returns>
     public string GetName()

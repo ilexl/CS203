@@ -8,14 +8,14 @@ namespace wfMultiplayer
     {
         private Board gameBoard;
         private List<Player> players;
-        int playerTurnIndex;
+        //int playerTurnIndex;
 
         public Match(List<List<char>> gameBoard, List<Player> players)
         {
             Debug.Log("Beginning match creation process...");
             this.gameBoard = new Board(gameBoard);
             this.players = players;
-            playerTurnIndex = 0;
+            //playerTurnIndex = 0;
             Debug.Log("Match initialized.");
             Debug.Log(this.gameBoard);
         }

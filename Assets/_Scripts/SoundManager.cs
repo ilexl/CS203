@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] soundPrefabs;
+    [SerializeField] GameObject[] soundPrefabs; // list of sounds
+
+    /// <summary>
+    /// creates a sound which auto plays and deletes
+    /// </summary>
+    /// <param name="soundIndex"></param>
     public void PlaySound(int soundIndex)
     {
         Instantiate(soundPrefabs[soundIndex], transform);
     }
 
+    // Start is called before the first frame
     public void Start()
     {
         var names = FindObjectsOfType<Button>(includeInactive: true).ToList();

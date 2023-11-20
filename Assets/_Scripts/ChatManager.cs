@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+#region using editor
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
+#endregion
 
 public class ChatManager : MonoBehaviour
 {
+    #region local variables
     [SerializeField] GameObject offlineOverlay;
     private static ChatManager _singleton;
     [SerializeField] GameObject playerChatPrefab;
@@ -16,6 +16,11 @@ public class ChatManager : MonoBehaviour
     [SerializeField] Transform parent;
     [SerializeField] Transform typeToChatHolder;
     [SerializeField] TMP_InputField blank;
+    #endregion
+
+    /// <summary>
+    /// ensures there is one of this object open at a time (destroys others)
+    /// </summary>
     public static ChatManager Singleton
     {
         get => _singleton;
@@ -31,12 +36,16 @@ public class ChatManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// determines who the chat was sentby
+    /// </summary>
     public enum SentBy
     {
         Player, 
         Opponent,
     }
 
+    // Awake is called when the script is loaded
     private void Awake()
     {
         Singleton = this;
@@ -45,9 +54,13 @@ public class ChatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        offlineOverlay.SetActive(!Game.Singleton.isMultiplayer);
+        // check and make sure the user can chat if they are offline
+        offlineOverlay.SetActive(!Game.Singleton.isMultiplayer); 
     }
 
+    /// <summary>
+    /// removes all messages and clears the chat for a new game
+    /// </summary>
     public void ClearAllMessages()
     {
         foreach(Transform child in parent)
@@ -56,6 +69,11 @@ public class ChatManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// was supposed to clear the chat box and lose focus but jank <br/>
+    /// now deletes the chat box and replaces it with a new one
+    /// </summary>
+    /// <param name="inputField">to replace with new input field TMPro</param>
     public void SendMessageTMPro(TMP_InputField inputField)
     {
         if(inputField.text == null || inputField.text == string.Empty || inputField.text == "" ) { return; }
@@ -76,6 +94,11 @@ public class ChatManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// message to display on screen
+    /// </summary>
+    /// <param name="message">text in the message</param>
+    /// <param name="sentBy">who the message was sent by</param>
     public void Message(string message, SentBy sentBy)
     {
         if(SentBy.Player == sentBy)
@@ -95,6 +118,10 @@ public class ChatManager : MonoBehaviour
 
     }
 }
+
+// *******************************************
+// custom editor below - wont be in any builds
+// *******************************************
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(ChatManager))]
